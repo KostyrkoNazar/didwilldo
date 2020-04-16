@@ -4,7 +4,8 @@ const TodoItem=(props)=>{
 
     return (
         <div>
-            <input {...props}/>
+            <label htmlFor={props.id}>{props.name}</label>
+            <input {...props} />
         </div>
     )
 }
