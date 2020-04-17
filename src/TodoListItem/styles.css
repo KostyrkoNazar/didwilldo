@@ -1,0 +1,10 @@
+input{
+    outline: 2px solid lightgray;
+    outline-offset: 9px;
+    margin: 10px;
+}
+label{
+    margin-left: 3px;
+    outline: 2px solid lightgray;
+    padding: 4px 78px 4px 5px;
+}
