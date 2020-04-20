@@ -1,15 +1,16 @@
 import React from "react";
 import './styles.css'
 
-const TodoListItem=(props)=>{
+const TodoListItem=({title, done})=>{
 
     return(
-        <div>
-            <input type={props.type}
-                   onChange={()=>props.onChange}
-                   checked={props.checked}
+        <div className='todoListItem' >
+            <input className='todoListItemInput'
+                type='checkbox'
+                   onChange={()=>console.log('Changed')}
+                   checked={done}
             />
-            <label onChange={()=>props.handleLabelChange}>{props.title}</label>
+            <label className='todoListItemLabel'>{title}</label>
         </div>
     )
 }
