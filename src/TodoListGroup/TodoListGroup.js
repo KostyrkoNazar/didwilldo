@@ -2,26 +2,22 @@ import React,{useState} from "react";
 import TodoListItem from "../TodoListItem/TodoListItem";
 import './styles.css'
 
-function TodoListGroup(){
-    const[title, setTitle]=useState('Update Renters insurance ')
-    const[completed, setCompleted]=useState(false);
 
-    function handleLabelChange(e){
-        setTitle(e.target.title)
-    }
 
-    const handleCheckbox=(id)=>{
-        setCompleted(id)
-    }
+
+function TodoListGroup({todoList,color,created,title}){
+
+    const todoItemsList = todoList.map((item, index)=>{
+        if (item.hasOwnProperty('filtered')&& item.filtered !== false) {
+       return <TodoListItem key={index}
+                            title={item.title}
+                            done={item.done}
+                />} return null
+    })
 
     return(
         <div className={'todoListGroup'}>
-            <TodoListItem type='checkbox'
-                          title={title}
-                          checked={completed}
-                          handleLabelChange={()=>handleLabelChange}
-                          onChange={handleCheckbox}
-            />
+            {todoItemsList}
         </div>
     )
 }
