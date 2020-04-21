@@ -5,12 +5,16 @@ const TodoListItem=({title, done})=>{
 
     return(
         <div className='todoListItem' >
+            <div className='checkBoxContainer'>
             <input className='todoListItemInput'
                 type='checkbox'
                    onChange={()=>console.log('Changed')}
                    checked={done}
             />
+            </div>
+
             <label className='todoListItemLabel'>{title}</label>
+
         </div>
     )
 }
