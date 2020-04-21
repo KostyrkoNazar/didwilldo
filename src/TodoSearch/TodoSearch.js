@@ -1,14 +1,13 @@
 import React, {useState} from "react";
 
-function TodoSearch({todoArrayList,onFilteredChange,onFilterClear}) {
+function TodoSearch({onFilteredChange,onFilterClear, typeNote}) {
 
     return(
         <div className='todoSearch'>
         <input type='text'
                 name='search'
-               placeholder={'Type note...'}
-                value={''}
-                onChange={(e)=>onFilteredChange(e.target.value, todoArrayList)}
+                value={typeNote}
+                onChange={(e)=>onFilteredChange(e.target.value)}
         />
         <button type='submit' onClick={()=>onFilterClear()}>X</button>
 
