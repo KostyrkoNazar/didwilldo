@@ -17,6 +17,12 @@ function TodoListGroup({todoList,color,created,title}){
 
     return(
         <div className={'todoListGroup'}>
+            <div className='titleDateGroupContainer' style={{borderTopColor:color}}>
+            <label className='labelTitle' >{title}</label>
+            <label className='labelDate'>{created}</label>
+
+            </div>
+
             {todoItemsList}
         </div>
     )
