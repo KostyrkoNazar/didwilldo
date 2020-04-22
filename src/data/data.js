@@ -25,13 +25,13 @@ const data = [
             {
                 title: "Start working on ToDo app",
                 done: false,
-                filtered: false,
+                filtered: true,
 
             },
             {
                 title: "Text Serhii about app concept",
                 done: false,
-                filtered: false,
+                filtered: true,
 
             }
         ]
@@ -49,7 +49,7 @@ const data = [
             {
                 title: "Buy candies for kids",
                 done: true,
-                filtered: false,
+                filtered: true,
 
             }
         ]

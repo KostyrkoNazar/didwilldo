@@ -3,7 +3,6 @@
     width: 500px;
     margin:2% auto;
     flex-flow: column;
-    overflow-y: auto;
 }
 .titleDateGroupContainer{
     display: inline-flex;
@@ -15,6 +14,7 @@
 .todoListItemsInContainer{
     max-height: 200px;
     height: 100%;
+    overflow-y: auto;
 }
 .labelDate{
     align-self: center;
