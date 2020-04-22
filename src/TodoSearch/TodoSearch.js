@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 
-function TodoSearch({onFilteredChange,onFilterClear, typeNote}) {
+function TodoSearch({onFilteredChange,onFilterClear,typeNote}) {
 
     return(
         <div className='todoSearch'>
