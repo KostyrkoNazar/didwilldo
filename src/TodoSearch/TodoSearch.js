@@ -1,15 +1,17 @@
 import React from "react";
 
-function TodoSearch({todoesArrayList,onFilterClear}) {
+function TodoSearch({onClear,onChange,value}) {
 
     return(
-        <div className='todoSearch'>
+        <div className='todoListSearchTitle'>
+
         <input type='text'
                 name='search'
-                value={''}
-                onChange={(e)=>(e.target.value)}
+                value={value}
+                onChange={(e)=>onChange(e.target.value)}
         />
-        <button type='submit' onClick={()=>onFilterClear()}>X</button>
+
+        <button type='submit' onClick={onClear}>X</button>
 
         </div>
     )

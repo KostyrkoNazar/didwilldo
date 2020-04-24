@@ -1,31 +1,50 @@
-import React,{useState} from "react";
+import React, {useEffect, useState} from "react";
 import TodoListGroup from "../TodoListGroup/TodoListGroup";
 import TodoSearch from "../TodoSearch/TodoSearch";
 import data from "../data/data";
 
 function Dashboard() {
-    const [typeNote, setTypeNote]=useState([])
-    const [todoGroupArray, setTodoArray]=useState(data)
+    const [searchValue, setSearchValue] = useState('')
+    const [todoGroupArray, setTodoArray] = useState([])
+    const [isSorted, setIsSorted] = useState([])
 
-    const todoListGroup = todoGroupArray.map((obj, objIndex)=>
-            <TodoListGroup key={objIndex}
-                           color={obj.color}
-                           title={obj.title}
-                           created={obj.created}
-                           todoList={obj.todoList}/>)
+    const onClear = () => setSearchValue('');
 
-    const onFilteredChange=( searchValue)=>{
-        setTypeNote(searchValue)
+    const onChange = (str) => {
+        setSearchValue(str)
     }
+
+    const search = (searchValue, searchedArray) => {
+        return searchedArray.map((obj) => {
+            if (obj.title.startsWith(searchValue) === true) {
+                return obj;
+            }
+        })
+    }
+
+    useEffect(()=>{
+        if (searchValue.length === 0) {
+           console.log(setTodoArray(data));
+        } else {
+            const searchResult= search(searchValue, data);
+                setTodoArray(searchResult);
+         //console.log( searchResult);
+         }},[searchValue])
+
+    // if (searchValue.length === 0) {
+    //     setTodoArray(data)
+    // } else {
+    //     const searchResult= search(searchValue, data);
+    //     setTodoArray(searchResult);
+    // }
 
     return(
         <div className='dashboard'>
-            <TodoSearch onFilterClear={''}
-                        onFilteredChange={onFilteredChange}
-                        state={typeNote}
+            <TodoSearch onClear={onClear}
+                        onChange={onChange}
+                        value={searchValue}
             />
 
-            {todoListGroup}
 
         </div>
     )
