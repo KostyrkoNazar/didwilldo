@@ -24,19 +24,19 @@ function Dashboard() {
 
     useEffect(()=>{
         if (searchValue.length === 0) {
-           console.log(setTodoArray(data));
+            setTodoArray(data);
         } else {
             const searchResult= search(searchValue, data);
                 setTodoArray(searchResult);
-         //console.log( searchResult);
          }},[searchValue])
 
-    // if (searchValue.length === 0) {
-    //     setTodoArray(data)
-    // } else {
-    //     const searchResult= search(searchValue, data);
-    //     setTodoArray(searchResult);
-    // }
+
+    const todoListGroup = todoGroupArray.map((obj, objIndex)=>
+        <TodoListGroup key={objIndex}
+                       color={obj.color}
+                       title={obj.title}
+                       created={obj.created}
+                       todoList={obj.todoList}/>)
 
     return(
         <div className='dashboard'>
@@ -45,7 +45,7 @@ function Dashboard() {
                         value={searchValue}
             />
 
-
+            {todoListGroup}
         </div>
     )
 }
