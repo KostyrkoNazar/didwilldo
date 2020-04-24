@@ -15,11 +15,13 @@ function Dashboard() {
     }
 
     const search = (searchValue, searchedArray) => {
-        return searchedArray.map((obj) => {
-            if (obj.title.startsWith(searchValue) === true) {
+        searchedArray.map(obj =>{
+            if (obj.title.startsWith(searchValue)===true) {
                 return obj;
+            } else {
+                return null
             }
-        })
+        }).filter(item=>item !== null)
     }
 
     useEffect(()=>{
@@ -37,6 +39,7 @@ function Dashboard() {
                        title={obj.title}
                        created={obj.created}
                        todoList={obj.todoList}/>)
+
 
     return(
         <div className='dashboard'>
