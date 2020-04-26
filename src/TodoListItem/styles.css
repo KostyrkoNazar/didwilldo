@@ -1,7 +1,6 @@
 .todoListItem{
     width: 99%;
     height: 50px;
-    background-color: bisque;
     display: flex;
     align-items: center;
     border: 1px solid grey;

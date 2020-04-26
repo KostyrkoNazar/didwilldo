@@ -53,6 +53,60 @@ const data = [
 
             }
         ]
+    }, {
+        color: "blue",
+        title: "Work out todo's",
+        created: "16-04-2020",
+        todoList: [
+            {
+                title: "Do morning exercises",
+                done: false,
+                filtered: true,
+            },
+            {
+                title: "Do evening exercises",
+                done: true,
+                filtered: false,
+
+            }
+        ]
+    },
+    {
+        color: "red",
+        title: "reading",
+        created: "15-04-2020",
+        todoList: [
+            {
+                title: "Charles Bronson",
+                done: false,
+                filtered: true,
+
+            },
+            {
+                title: "Deadpool",
+                done: false,
+                filtered: true,
+
+            }
+        ]
+    },
+    {
+        color: "black",
+        title: "Cooking",
+        created: "12-04-2020",
+        todoList: [
+            {
+                title: "Chicken",
+                done: false,
+                filtered: false,
+            },
+            {
+                title: "Buy parsley",
+                done: true,
+                filtered: true,
+
+            }
+        ]
     }
 ];
 
