@@ -12,7 +12,37 @@ const data = [
             {
                 title: "Brush teeth",
                 done: true,
-                filtered: false,
+                filtered: true,
+
+            },{
+                title: "Do morning exercises",
+                done: false,
+                filtered: true,
+            },
+            {
+                title: "Brush teeth",
+                done: true,
+                filtered: true,
+
+            },{
+                title: "Do morning exercises",
+                done: false,
+                filtered: true,
+            },
+            {
+                title: "Brush teeth",
+                done: true,
+                filtered: true,
+
+            },{
+                title: "Do morning exercises",
+                done: false,
+                filtered: true,
+            },
+            {
+                title: "Brush teeth",
+                done: true,
+                filtered: true,
 
             }
         ]
@@ -24,6 +54,12 @@ const data = [
         todoList: [
             {
                 title: "Start working on ToDo app",
+                done: false,
+                filtered: true,
+
+            },
+            {
+                title: "Text Serhii about app concept",
                 done: false,
                 filtered: true,
 
