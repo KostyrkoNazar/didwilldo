@@ -1,7 +1,7 @@
 .todoListGroup{
     display: flex;
     width: 500px;
-    margin:2% auto;
+    margin: auto;
     flex-flow: column;
 }
 .titleDateGroupContainer{
@@ -12,8 +12,7 @@
 }
 
 .todoListItemsInContainer{
-    max-height: 200px;
-    height: 100%;
+    height: 200px;
     overflow-y: auto;
 }
 .labelDate{
