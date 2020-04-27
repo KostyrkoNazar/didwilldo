@@ -1,14 +1,13 @@
 .todoListItem{
-    width: 99%;
-    height: 50px;
     display: flex;
+    flex: 1;
+    height: 48px;
     align-items: center;
     border: 1px solid grey;
 }
 
 .todoListItemLabel{
     display: flex;
-    flex: 1;
     margin: 10px;
 }
 
