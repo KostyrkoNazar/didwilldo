@@ -14,14 +14,32 @@ function Dashboard() {
         setSearchValue(str)
     }
 
-    const search = (searchValue, searchedArray) => {
-        searchedArray.map(obj =>{
-            if (obj.title.startsWith(searchValue)===true) {
-                return obj;
-            } else {
-                return null
+    // const searchGroupByTitle = (searchValue, searchedArray) => {
+    //    return searchedArray.map(obj =>{
+    //         if (obj.title.startsWith(searchValue,0)===true) {
+    //             return obj;
+    //         }
+    //     }).filter(item=>item)
+    // }
+
+    const searchTodosByTitle = (todosList, searchTitle) => {
+        return todosList.map(todos=>{
+            const {title}=todos;
+            if (title.startsWith(searchTitle)){
+                return todos
             }
-        }).filter(item=>item !== null)
+        }).filter(item=>item!==undefined)
+    }
+
+    const search = (searchTitle, groupList) => {
+        return groupList.map(obj => {
+                const {todoList} = obj;
+                const searchResult = searchTodosByTitle(todoList, searchTitle);
+                if (searchResult.length !== 0) {
+                    const updatedGroup = {...obj, todoList: searchResult};
+                    return updatedGroup;
+                }
+            }).filter(groups => groups !== undefined)
     }
 
     useEffect(()=>{
@@ -30,6 +48,7 @@ function Dashboard() {
         } else {
             const searchResult= search(searchValue, data);
                 setTodoArray(searchResult);
+                console.log(searchResult)
          }},[searchValue])
 
 
@@ -43,12 +62,13 @@ function Dashboard() {
 
     return(
         <div className='dashboard'>
-            <TodoSearch onClear={onClear}
-                        onChange={onChange}
-                        value={searchValue}
-            />
 
-            {todoListGroup}
+                <TodoSearch onClear={onClear}
+                            onChange={onChange}
+                            value={searchValue}
+                />
+
+                {todoListGroup}
         </div>
     )
 }
