@@ -48,7 +48,6 @@ function Dashboard() {
         } else {
             const searchResult= search(searchValue, data);
                 setTodoArray(searchResult);
-                console.log(searchResult)
          }},[searchValue])
 
 
