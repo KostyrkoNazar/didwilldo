@@ -1,0 +1,28 @@
+.todoListItem{
+    display: flex;
+    flex: 1;
+    height: 48px;
+    align-items: center;
+    border: 1px solid grey;
+}
+
+.todoListItemLabel{
+    display: flex;
+    margin: 10px;
+}
+
+.checkBoxContainer {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    width: 10%;
+    border: 1px solid grey;
+}
+.todoListItemInput{
+    display: flex;
+    align-self: center;
+    height: 100%;
+    width: 40%;
+}
+
+
