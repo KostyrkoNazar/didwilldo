@@ -1,4 +1,4 @@
-.searchTodoListByTitle{
+.searchTodoListByTitle {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,12 +8,12 @@
     border: 1px solid gray;
     position: relative;
     background-color: lightgray;
-
 }
 
  .searchTodoListByTitle input {
     width: 90%;
 }
+
  .searchTodoListByTitle button {
      position: absolute;
      border: none;

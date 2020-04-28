@@ -15,41 +15,44 @@ function Dashboard() {
         setSearchValue(str)
     }
 
-    // const searchGroupByTitle = (searchValue, searchedArray) => {
-    //    return searchedArray.map(obj =>{
-    //         if (obj.title.startsWith(searchValue,0)===true) {
-    //             return obj;
-    //         }
-    //     }).filter(item=>item)
-    // }
-
     const searchTodosByTitle = (todosList, searchTitle) => {
+
         return todosList.map(todos => {
+
             const {title}=todos;
+
             if (title.startsWith(searchTitle)){
                 return todos
             }
+
         }).filter(item=>item!==undefined)
     }
 
     const search = (searchTitle, groupList) => {
+
         return groupList.map(obj => {
+
                 const {todoList} = obj;
+
                 const searchResult = searchTodosByTitle(todoList, searchTitle);
+
                 if (searchResult.length !== 0) {
                     const updatedGroup = {...obj, todoList: searchResult};
                     return updatedGroup;
                 }
-            }).filter(groups => groups !== undefined)
+
+        }).filter(groups => groups !== undefined)
     }
 
     useEffect(()=>{
+
         if (searchValue.length === 0) {
             setTodoArray(data);
         } else {
             const searchResult= search(searchValue, data);
                 setTodoArray(searchResult);
-         }},[searchValue])
+        }
+        },[searchValue])
 
 
     const todoListGroup = todoGroupArray.map((obj, objIndex)=>

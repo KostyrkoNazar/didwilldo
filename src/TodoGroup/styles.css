@@ -1,28 +1,30 @@
-.todoListGroup{
+.todoListGroup {
     display: flex;
     width: 500px;
     margin: auto;
     flex-flow: column;
 }
-.titleDateGroupContainer{
+
+.titleDateGroupContainer {
     display: inline-flex;
     justify-content: space-between;
     border-top:5px solid;
     height: 45px;
 }
 
-.todoListItemsInContainer{
+.todoListItemsInContainer {
     height: 200px;
     overflow-y: auto;
 }
-.labelDate{
+
+.labelDate {
     align-self: center;
 }
-.labelTitle{
+
+.labelTitle {
     display: flex;
     align-self: center;
     font-size: 20px;
     font-weight: bold;
-
 }
 
