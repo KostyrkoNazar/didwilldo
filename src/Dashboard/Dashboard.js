@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
-import TodoListGroup from "../TodoListGroup/TodoListGroup";
+import TodoGroup from "../TodoGroup/TodoGroup";
 import TodoSearch from "../TodoSearch/TodoSearch";
+import './styles.css'
 import data from "../data/data";
 
 function Dashboard() {
@@ -23,7 +24,7 @@ function Dashboard() {
     // }
 
     const searchTodosByTitle = (todosList, searchTitle) => {
-        return todosList.map(todos=>{
+        return todosList.map(todos => {
             const {title}=todos;
             if (title.startsWith(searchTitle)){
                 return todos
@@ -52,11 +53,11 @@ function Dashboard() {
 
 
     const todoListGroup = todoGroupArray.map((obj, objIndex)=>
-        <TodoListGroup key={objIndex}
-                       color={obj.color}
-                       title={obj.title}
-                       created={obj.created}
-                       todoList={obj.todoList}/>)
+        <TodoGroup key={objIndex}
+                   color={obj.color}
+                   title={obj.title}
+                   created={obj.created}
+                   todoList={obj.todoList}/>)
 
 
     return(

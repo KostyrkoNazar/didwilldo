@@ -1,17 +1,17 @@
 import React from "react";
-import TodoListItem from "../TodoListItem/TodoListItem";
+import TodoItem from "../TodoItem/TodoItem";
 import './styles.css'
 
 
 
 
-function TodoListGroup({todoList,color,created,title}){
+function TodoGroup({todoList,color,created,title}){
 
     const todoItemsList = todoList.map((item, index)=>{
         if (item.hasOwnProperty('filtered')&& item.filtered !== false) {
-            return <TodoListItem key={index}
-                                 title={item.title}
-                                 done={item.done}
+            return <TodoItem key={index}
+                             title={item.title}
+                             done={item.done}
             />} return null
     })
 
@@ -19,7 +19,7 @@ function TodoListGroup({todoList,color,created,title}){
         <div className={'todoListGroup'}>
             <div className='titleDateGroupContainer' style={{borderTopColor:color}}>
                 <label className='labelTitle' >{title}</label>
-                <label className='labelDate'>{created}</label>
+                 <label className='labelDate'>{created}</label>
             </div>
             <div className='todoListItemsInContainer'>
                 {todoItemsList}
@@ -29,4 +29,4 @@ function TodoListGroup({todoList,color,created,title}){
 }
 
 
-export default TodoListGroup;
+export default TodoGroup;

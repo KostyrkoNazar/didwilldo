@@ -1,7 +1,7 @@
 import React from "react";
 import './styles.css'
 
-const TodoListItem=({title, done})=>{
+const TodoItem=({title, done})=>{
 
     return(
         <div className='todoListItem' >
@@ -19,4 +19,4 @@ const TodoListItem=({title, done})=>{
     )
 }
 
-export default TodoListItem
+export default TodoItem

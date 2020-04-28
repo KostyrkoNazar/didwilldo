@@ -6,6 +6,7 @@ function TodoSearch({onClear,onChange,value}) {
         <div className='searchTodoListByTitle'>
 
                 <input type='text'
+                       placeholder='Type note...'
                        name='search'
                        value={value}
                        onChange={(e)=>onChange(e.target.value)}
