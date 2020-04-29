@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import TodoGroup from "../TodoGroup/TodoGroup";
 import TodoSearch from "../TodoSearch/TodoSearch";
+import ColorPanel from "../ColorPanel/ColorPanel";
 import './styles.css'
 import data from "../data/data";
 
@@ -8,6 +9,7 @@ function Dashboard() {
     const [searchValue, setSearchValue] = useState('')
     const [todoGroupArray, setTodoArray] = useState([])
     const [isSorted, setIsSorted] = useState([])
+    const [color, setColor] = useState('')
 
     const onClear = () => setSearchValue('');
 
@@ -62,16 +64,29 @@ function Dashboard() {
                    created={obj.created}
                    todoList={obj.todoList}/>)
 
+    const colorSet=(value)=>{
+        setColor(value)
+    }
+
 
     return(
         <div className='dashboard'>
 
+            <div className='dashboardControlPanel'>
+                <ColorPanel setColor={colorSet}/>
+            </div>
+
+            <div className='dashboardTodoSearch'>
                 <TodoSearch onClear={onClear}
                             onChange={onChange}
                             value={searchValue}
                 />
+            </div>
 
+            <div className='dashboardTodoGroup'>
                 {todoListGroup}
+            </div>
+
         </div>
     )
 }
