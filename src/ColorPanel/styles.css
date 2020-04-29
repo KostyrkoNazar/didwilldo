@@ -1,0 +1,10 @@
+.colorPanel {
+    display: flex;
+    flex-flow: row;
+}
+
+.colorPanel div {
+    height: 15px;
+    width: 15px;
+    border: 1px solid gray;
+}

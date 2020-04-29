@@ -1,4 +1,12 @@
 .dashboard {
     display: flex;
     flex-flow: column;
+    width: 700px;
+    margin: auto;
+}
+
+.dashboardControlPanel {
+    display: flex;
+    flex-flow: row;
+    width: 64px;
 }
