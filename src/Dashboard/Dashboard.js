@@ -50,8 +50,9 @@ function Dashboard() {
             if (searchValue.length === 0 ) {
                 setTodoArray(data);
             } else {
-                const searchResult= search(searchValue, data);
+                const searchResult = search(searchValue, data);
                 setTodoArray(searchResult);
+
             }
         },[searchValue, isFiltered])
 
@@ -67,12 +68,13 @@ function Dashboard() {
 
                 if (done === false) {
                     //changing filtered property of each item object
-                    item.filtered = false;
+                    const updatedItem = {...item, filtered:false}
                     //returning updated item object
-                    return {...item}
+                    console.log(updatedItem)
+                    return updatedItem
                 } else {
                     // otherwise returning initial item object
-                    return {...item}
+                    return item
                 }
             })
             // return updated todoList property of group object
@@ -80,6 +82,8 @@ function Dashboard() {
         });
 
     }
+
+    filterByDone(todoGroupArray)
 
 
     const setFiltered =(value)=> {
