@@ -3,11 +3,12 @@ import TodoGroup from "../TodoGroup/TodoGroup";
 import TodoSearch from "../TodoSearch/TodoSearch";
 import './styles.css'
 import data from "../data/data";
+import TodoFilter from "../TodoFilter/TodoFilter";
 
 function Dashboard() {
     const [searchValue, setSearchValue] = useState('')
     const [todoGroupArray, setTodoArray] = useState([])
-    const [isSorted, setIsSorted] = useState([])
+    const [isFiltered, setIsFiltered] = useState(false)
 
     const onClear = () => setSearchValue('');
 
@@ -46,13 +47,45 @@ function Dashboard() {
 
     useEffect(()=>{
 
-        if (searchValue.length === 0) {
-            setTodoArray(data);
-        } else {
-            const searchResult= search(searchValue, data);
+            if (searchValue.length === 0 ) {
+                setTodoArray(data);
+            } else {
+                const searchResult= search(searchValue, data);
                 setTodoArray(searchResult);
-        }
-        },[searchValue])
+            }
+        },[searchValue, isFiltered])
+
+
+     const filterByDone=(groupListArray)=>{
+        //returning same shape array
+        return groupListArray.map(group => {
+            const {todoList} = group;
+
+            // sortedListByDone is an updated todoList
+           const sortedListByDone = todoList.map(item => {
+                const {done} = item;
+
+                if (done === false) {
+                    //changing filtered property of each item object
+                    item.filtered = false;
+                    //returning updated item object
+                    return {...item}
+                } else {
+                    // otherwise returning initial item object
+                    return {...item}
+                }
+            })
+            // return updated todoList property of group object
+            return {...group, todoList: sortedListByDone};
+        });
+
+    }
+
+
+    const setFiltered =(value)=> {
+        setIsFiltered(!value)
+    }
+
 
 
     const todoListGroup = todoGroupArray.map((obj, objIndex)=>
@@ -65,6 +98,10 @@ function Dashboard() {
 
     return(
         <div className='dashboard'>
+
+            <TodoFilter isFiltered={isFiltered}
+                        setFiltered={setFiltered}
+            />
 
                 <TodoSearch onClear={onClear}
                             onChange={onChange}
