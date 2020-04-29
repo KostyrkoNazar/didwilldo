@@ -67,12 +67,12 @@ function Dashboard() {
 
                 if (done === false) {
                     //changing filtered property of each item object
-                    item.filtered = false;
+                    item.filtered = false; // TODO: Here you mutate original object. This can affect other parts of the App if they rely or linked to item.filtered prop. Create new object and return it.
                     //returning updated item object
                     return {...item}
                 } else {
                     // otherwise returning initial item object
-                    return {...item}
+                    return {...item} // TODO: Return original object, no need to create new one
                 }
             })
             // return updated todoList property of group object
