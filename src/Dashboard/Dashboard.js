@@ -70,7 +70,6 @@ function Dashboard() {
                     //changing filtered property of each item object
                     const updatedItem = {...item, filtered:false}
                     //returning updated item object
-                    console.log(updatedItem)
                     return updatedItem
                 } else {
                     // otherwise returning initial item object
@@ -78,6 +77,7 @@ function Dashboard() {
                 }
             })
             // return updated todoList property of group object
+            console.log({...group, todoList: sortedListByDone})
             return {...group, todoList: sortedListByDone};
         });
 
