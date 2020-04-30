@@ -5,11 +5,13 @@ import ColorPanel from "../ColorPanel/ColorPanel";
 import './styles.css'
 import data from "../data/data";
 
+const availableColors = ['yellow', 'red','green','blue'];
+
 function Dashboard() {
     const [searchValue, setSearchValue] = useState('')
     const [todoGroupArray, setTodoArray] = useState([])
     const [isSorted, setIsSorted] = useState([])
-    const [color, setColor] = useState('')
+    const [isColor, setIsColor]=useState('')
 
     const onClear = () => setSearchValue('');
 
@@ -64,8 +66,8 @@ function Dashboard() {
                    created={obj.created}
                    todoList={obj.todoList}/>)
 
-    const colorSet=(value)=>{
-        setColor(value)
+    const onSetColor=(value)=>{
+        setIsColor(value)
     }
 
 
@@ -73,7 +75,12 @@ function Dashboard() {
         <div className='dashboard'>
 
             <div className='dashboardControlPanel'>
-                <ColorPanel setColor={colorSet}/>
+                {availableColors.map((color,index)=>
+                     <ColorPanel key={index}
+                                 color={color}
+                                 setColor={onSetColor}/>
+                )}
+
             </div>
 
             <div className='dashboardTodoSearch'>
