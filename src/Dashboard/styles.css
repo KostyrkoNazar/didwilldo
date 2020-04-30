@@ -5,9 +5,13 @@
     margin: auto;
 }
 
+.dashboardTodoSearch {
+    display: flex;
+    align-self: center;
+    margin-left: 8%;
+}
+
 .dashboardControlPanel {
     display: flex;
     flex-flow: row;
-    align-self: flex-end;
-    width: 64px;
 }
