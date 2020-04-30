@@ -74,20 +74,21 @@ function Dashboard() {
     return(
         <div className='dashboard'>
 
-            <div className='dashboardControlPanel'>
-                {availableColors.map((color,index)=>
-                     <ColorPanel key={index}
-                                 color={color}
-                                 setColor={onSetColor}/>
-                )}
-
-            </div>
-
             <div className='dashboardTodoSearch'>
                 <TodoSearch onClear={onClear}
                             onChange={onChange}
                             value={searchValue}
                 />
+
+                <div className='dashboardControlPanel'>
+                    {availableColors.map((color,index)=>
+                        <ColorPanel key={index}
+                                    color={color}
+                                    setColor={onSetColor}/>
+                    )}
+
+                </div>
+
             </div>
 
             <div className='dashboardTodoGroup'>
