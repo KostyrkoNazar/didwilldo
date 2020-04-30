@@ -8,5 +8,6 @@
 .dashboardControlPanel {
     display: flex;
     flex-flow: row;
+    align-self: flex-end;
     width: 64px;
 }
