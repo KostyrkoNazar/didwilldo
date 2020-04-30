@@ -8,12 +8,7 @@ function ColorPanel({setColor,color}){
 
             <div style={{backgroundColor:color}}
                     onClick={()=>setColor(color)}/>
-           {/* {availableColors.map((colors, index)=>
-                <div key={index}
-                     onClick={() => setColor(colors)}
-                     style={{backgroundColor: colors}}/>)
-            }
-*/}
+
         </div>
     )
 }
