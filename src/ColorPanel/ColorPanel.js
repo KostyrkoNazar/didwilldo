@@ -1,18 +1,19 @@
 import React from "react";
 import './styles.css'
 
-const availableColors = ['yellow', 'red','green','blue'];
-
-function ColorPanel({setColor}){
+function ColorPanel({setColor,color}){
 
     return(
         <div className='colorPanel'>
 
-            {availableColors.map((colors, index)=>
-                <div onClick={() => setColor(colors)}
+            <div style={{backgroundColor:color}}
+                    onClick={()=>setColor(color)}/>
+           {/* {availableColors.map((colors, index)=>
+                <div key={index}
+                     onClick={() => setColor(colors)}
                      style={{backgroundColor: colors}}/>)
             }
-
+*/}
         </div>
     )
 }
