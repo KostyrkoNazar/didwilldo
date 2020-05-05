@@ -13,7 +13,8 @@
 }
 
 .todoListItemsInContainer {
-    height: 200px;
+    max-height: 200px;
+    height: 100%;
     overflow-y: auto;
 }
 
