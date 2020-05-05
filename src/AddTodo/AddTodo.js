@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import './styles.css'
 
 function AddTodo({addNewTodo,id}) {
 
@@ -12,12 +13,13 @@ function AddTodo({addNewTodo,id}) {
                 filtered: true
             }
             addNewTodo(id,item)
+            setTitle('')
         }
         event.preventDefault();
     }
 
     return(
-        <div>
+        <div className='addNewTodo'>
             <input type='text'
                    placeholder='Add new note.'
                    name='addNewNote'
