@@ -1,7 +1,7 @@
 import React from "react";
 import './styles.css'
 
-const TodoItem=({title, done})=>{
+const TodoItem=({title, done,handleChange})=>{
 
     return(
         <div className='todoListItem' >
@@ -9,8 +9,8 @@ const TodoItem=({title, done})=>{
             <div className='checkBoxContainer'>
                 <input className='todoListItemInput'
                         type='checkbox'
-                        onChange={()=>console.log('Changed')}
                         checked={done}
+                        onChange={()=>handleChange(done)}
                 />
             </div>
 
