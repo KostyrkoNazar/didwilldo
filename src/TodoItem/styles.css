@@ -18,6 +18,7 @@
     width: 10%;
     border: 1px solid grey;
 }
+
 .todoListItemInput{
     display: flex;
     align-self: center;
