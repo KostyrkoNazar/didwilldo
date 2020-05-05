@@ -2,9 +2,8 @@ import React, {useEffect, useState} from "react";
 import TodoGroup from "../TodoGroup/TodoGroup";
 import TodoSearch from "../TodoSearch/TodoSearch";
 import './styles.css'
-import data from "../data/data";
 
-function Dashboard() {
+function Dashboard({data}) {
     const [searchValue, setSearchValue] = useState('')
     const [todoGroupArray, setTodoArray] = useState([])
     const [isSorted, setIsSorted] = useState([])
@@ -14,6 +13,8 @@ function Dashboard() {
     const onChange = (str) => {
         setSearchValue(str)
     }
+
+
 
     const searchTodosByTitle = (todosList, searchTitle) => {
 
@@ -27,6 +28,8 @@ function Dashboard() {
 
         }).filter(item=>item!==undefined)
     }
+
+
 
     const search = (searchTitle, groupList) => {
 
@@ -44,6 +47,8 @@ function Dashboard() {
         }).filter(groups => groups !== undefined)
     }
 
+
+
     useEffect(()=>{
 
         if (searchValue.length === 0) {
@@ -55,12 +60,30 @@ function Dashboard() {
         },[searchValue])
 
 
-    const todoListGroup = todoGroupArray.map((obj, objIndex)=>
-        <TodoGroup key={objIndex}
+
+    const addNewTodo = (id, newTodo) => {
+
+        const updatedGroupArray = [...todoGroupArray];
+
+        const index = updatedGroupArray.findIndex((group) => group.id === id);
+
+        updatedGroupArray[index].todoList.push(newTodo);
+
+        setTodoArray(updatedGroupArray);
+    };
+
+
+
+    const todoListGroup = todoGroupArray.map((obj)=>
+        <TodoGroup key={obj.id}
                    color={obj.color}
                    title={obj.title}
                    created={obj.created}
-                   todoList={obj.todoList}/>)
+                   todoList={obj.todoList}
+                   addTodo={addNewTodo}
+                   id={obj.id}
+        />)
+
 
 
     return(
@@ -72,6 +95,7 @@ function Dashboard() {
                 />
 
                 {todoListGroup}
+
         </div>
     )
 }
