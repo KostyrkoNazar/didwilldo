@@ -3,7 +3,7 @@ import TodoItem from "../TodoItem/TodoItem";
 import AddTodo from "../AddTodo/AddTodo";
 import './styles.css'
 
-function TodoGroup({todoList,color,created,title, id, addTodo}){
+function TodoGroup({todoList, color, created, title, id, addTodo}){
 
     const [isDone, setIsDone] = useState(false)
 
@@ -18,8 +18,8 @@ function TodoGroup({todoList,color,created,title, id, addTodo}){
                              title={item.title}
                              done={isDone}
                              handleChange={handleChane}
-
-            />} return null
+            />}
+        return null
     })
 
 
@@ -40,11 +40,9 @@ function TodoGroup({todoList,color,created,title, id, addTodo}){
 
             <div>
                 <AddTodo addNewTodo={addTodo}
-                        id={id}
+                         id={id}
                 />
-
             </div>
-
 
         </div>
     )

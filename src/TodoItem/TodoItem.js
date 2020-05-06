@@ -1,7 +1,7 @@
 import React from "react";
 import './styles.css'
 
-const TodoItem=({title, done,handleChange})=>{
+const TodoItem=({title, done, handleChange})=>{
 
     return(
         <div className='todoListItem' >

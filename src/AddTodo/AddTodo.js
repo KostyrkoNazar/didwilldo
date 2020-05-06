@@ -12,9 +12,11 @@ function AddTodo({addNewTodo,id}) {
                 done: false,
                 filtered: true
             }
+
             addNewTodo(id,item)
             setTitle('')
         }
+
         event.preventDefault();
     }
 
