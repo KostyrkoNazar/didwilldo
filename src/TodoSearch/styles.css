@@ -2,9 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto;
     height: 50px;
-    width: 500px;
+    width: 400px;
     border: 1px solid gray;
     position: relative;
     background-color: lightgray;

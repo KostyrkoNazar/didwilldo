@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import TodoItem from "../TodoItem/TodoItem";
 import './styles.css'
 
-function TodoGroup({todoList,color,created,title}){
+function TodoGroup({todoList, color, created, title}){
 
     const todoItemsList = todoList.map((item, index)=>{
 
@@ -10,8 +10,11 @@ function TodoGroup({todoList,color,created,title}){
             return <TodoItem key={index}
                              title={item.title}
                              done={item.done}
-            />} return null
+            />}
+        return null
     })
+
+
 
     return(
         <div className={'todoListGroup'}>

@@ -9,8 +9,8 @@ const TodoItem=({title, done})=>{
             <div className='checkBoxContainer'>
                 <input className='todoListItemInput'
                         type='checkbox'
-                        onChange={()=>console.log('Changed')}
                         checked={done}
+                        onChange={()=>console.log('')}
                 />
             </div>
 

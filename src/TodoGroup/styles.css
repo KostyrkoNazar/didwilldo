@@ -1,7 +1,6 @@
 .todoListGroup {
     display: flex;
-    width: 500px;
-    margin: auto;
+    width: 400px;
     flex-flow: column;
 }
 
@@ -13,7 +12,8 @@
 }
 
 .todoListItemsInContainer {
-    height: 200px;
+    max-height: 200px;
+    height: 100%;
     overflow-y: auto;
 }
 

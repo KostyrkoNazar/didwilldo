@@ -1,17 +1,20 @@
 .dashboard {
     display: flex;
     flex-flow: column;
-    width: 700px;
-    margin: auto;
+    width: 100%;
+    align-items: center;
 }
 
 .dashboardTodoSearch {
     display: flex;
-    align-self: center;
-    margin-left: 8%;
 }
 
-.dashboardControlPanel {
+.dashboardColorPanel {
     display: flex;
-    flex-flow: row;
 }
+
+.dashboardHeader {
+    display: flex;
+    align-self: center;
+}
+
