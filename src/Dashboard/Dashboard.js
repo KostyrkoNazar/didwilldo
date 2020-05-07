@@ -3,7 +3,6 @@ import TodoGroup from "../TodoGroup/TodoGroup";
 import TodoSearch from "../TodoSearch/TodoSearch";
 import ColorPanel from "../ColorPanel/ColorPanel";
 import './styles.css'
-import data from "../data/data";
 import TodoFilter from "../TodoFilter/TodoFilter";
 
 function Dashboard({data}) {
@@ -59,39 +58,28 @@ function Dashboard({data}) {
 
 
      const filterByDone=(groupListArray)=>{
-        //returning same shape array
+
         return groupListArray.map(group => {
             const {todoList} = group;
 
-            // sortedListByDone is an updated todoList
            const sortedListByDone = todoList.map(item => {
                 const {done} = item;
 
                 if (done === false) {
-                    //changing filtered property of each item object
-                    const updatedItem = {...item, filtered:false}
-                    //returning updated item object
-                    return updatedItem
+                    return {...item, filtered: false}
                 } else {
-                    // otherwise returning initial item object
                     return item
                 }
             })
-            // return updated todoList property of group object
-            console.log({...group, todoList: sortedListByDone})
             return {...group, todoList: sortedListByDone};
         });
 
     }
-//checking function
-    filterByDone(todoGroupArray)
 
 
     const setFiltered =(value)=> {
         setIsFiltered(!value)
     }
-
-
 
 
     const addNewTodo = (id, newTodo) => {
@@ -160,14 +148,10 @@ function Dashboard({data}) {
                     <div className='dashboardColorPanel'>
                         <ColorPanel setColor={setColor}/>
                     </div>
-            <TodoFilter isFiltered={isFiltered}
-                        setFiltered={setFiltered}
-            />
 
-                <TodoSearch onClear={onClear}
-                            onChange={onChange}
-                            value={searchValue}
-                />
+                    <TodoFilter isFiltered={isFiltered}
+                                setFiltered={setFiltered}
+                    />
 
                 </div>
 
