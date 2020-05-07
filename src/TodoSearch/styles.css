@@ -1,21 +1,19 @@
-.searchTodoListByTitle {
+.searchTitle {
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin: auto;
     height: 50px;
-    width: 500px;
     border: 1px solid gray;
-    position: relative;
     background-color: lightgray;
+    width: 100%;
 }
 
- .searchTodoListByTitle input {
-    width: 90%;
+.searchTitle input {
+    display: flex;
+    width: 100%;
 }
 
- .searchTodoListByTitle button {
-     position: absolute;
+ .searchTitle button {
+     display: flex;
      border: none;
      outline: none;
      right: 25px;
