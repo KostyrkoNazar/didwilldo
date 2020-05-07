@@ -8,6 +8,7 @@ function AddTodo({addNewTodo,id}) {
     const createNewTodoItem=(event)=>{
         if (title.length > 0){
             const item = {
+                itemId: 1,
                 title: title,
                 done: false,
                 filtered: true

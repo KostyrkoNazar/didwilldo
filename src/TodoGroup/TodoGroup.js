@@ -1,28 +1,22 @@
-import React, {useState} from "react";
+import React from "react";
 import TodoItem from "../TodoItem/TodoItem";
 import AddTodo from "../AddTodo/AddTodo";
 import './styles.css'
 
-function TodoGroup({todoList, color, created, title, id, addTodo}){
-
-    const [isDone, setIsDone] = useState(false)
-
-    const handleChane=(done)=>{
-        setIsDone(!done)
-    }
+function TodoGroup({todoList, color, created, title, id, addTodo, handleCheckbox}){
 
     const todoItemsList = todoList.map((item, index)=>{
 
         if (item.hasOwnProperty('filtered')&& item.filtered !== false) {
             return <TodoItem key={index}
                              title={item.title}
-                             done={isDone}
-                             handleChange={handleChane}
+                             done={item.done}
+                             itemId={item.itemId}
+                             handleCheckbox={handleCheckbox}
             />}
+
         return null
     })
-
-
 
 
 
