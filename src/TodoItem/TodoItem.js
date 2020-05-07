@@ -4,17 +4,19 @@ import './styles.css'
 const TodoItem=({title, done})=>{
 
     return(
-        <div className='todoListItem' >
+        <div className='todoItem' >
 
-            <div className='checkBoxContainer'>
-                <input className='todoListItemInput'
+            <div className='checkboxContainer'>
+                <input className='todoCheckbox'
                         type='checkbox'
                         checked={done}
                         onChange={()=>console.log('')}
                 />
             </div>
 
-            <label className='todoListItemLabel'>{title}</label>
+            <div className='todoLabel'>
+                <label>{title}</label>
+            </div>
 
         </div>
     )

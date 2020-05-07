@@ -4,7 +4,7 @@ import './styles.css'
 function TodoSearch({onClear,onChange,value}) {
 
     return(
-        <div className='searchTodoListByTitle'>
+        <div className='searchTitle'>
 
                 <input type='text'
                        placeholder='Type note...'

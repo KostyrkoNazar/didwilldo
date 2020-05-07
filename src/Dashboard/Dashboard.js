@@ -8,7 +8,6 @@ import data from "../data/data";
 function Dashboard() {
     const [searchValue, setSearchValue] = useState('')
     const [todoGroupArray, setTodoArray] = useState([])
-    const [isSorted, setIsSorted] = useState([])
     const [selectedColor, setSelectedColor]=useState('')
 
     const onClear = () => setSearchValue('');
@@ -39,8 +38,7 @@ function Dashboard() {
                 const searchResult = searchTodosByTitle(todoList, searchTitle);
 
                 if (searchResult.length !== 0) {
-                    const updatedGroup = {...obj, todoList: searchResult};
-                    return updatedGroup;
+                    return {...obj, todoList: searchResult};
                 }
 
         }).filter(groups => groups !== undefined)
@@ -85,6 +83,7 @@ function Dashboard() {
                     <div className='dashboardColorPanel'>
                         <ColorPanel setColor={setColor}/>
                     </div>
+
                 </div>
 
             </div>

@@ -1,20 +1,27 @@
 .dashboard {
     display: flex;
     flex-flow: column;
-    width: 100%;
-    align-items: center;
+    max-width: 400px;
 }
 
 .dashboardTodoSearch {
     display: flex;
+    width: 100%;
 }
 
 .dashboardColorPanel {
     display: flex;
+    align-items: center;
 }
 
 .dashboardHeader {
     display: flex;
-    align-self: center;
+    width: 100%;
+}
+
+.dashboardTodoGroup {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
 }
 
