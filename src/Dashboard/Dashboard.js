@@ -3,9 +3,8 @@ import TodoGroup from "../TodoGroup/TodoGroup";
 import TodoSearch from "../TodoSearch/TodoSearch";
 import ColorPanel from "../ColorPanel/ColorPanel";
 import './styles.css'
-import data from "../data/data";
 
-function Dashboard() {
+function Dashboard({data}) {
     const [searchValue, setSearchValue] = useState('')
     const [todoGroupArray, setTodoArray] = useState([])
     const [selectedColor, setSelectedColor]=useState('')
@@ -55,12 +54,51 @@ function Dashboard() {
         },[searchValue])
 
 
-    const todoListGroup = todoGroupArray.map((obj, objIndex)=>
-        <TodoGroup key={objIndex}
+
+    const addNewTodo = (id, newTodo) => {
+
+        const updatedGroupArray = [...todoGroupArray];
+
+        const index = updatedGroupArray.findIndex((group) => group.id === id);
+
+        updatedGroupArray[index].todoList.push(newTodo);
+
+        setTodoArray(updatedGroupArray);
+    }
+
+
+    const handleCheckbox=( id)=> {
+
+        const updatedItemDoneProperty = todoGroupArray.map( groups => {
+            const {todoList} = groups;
+
+            const newTodoList = todoList.map(todo => {
+                if (todo.itemId === id) {
+                    todo.done = !todo.done
+                }
+                console.log(todo)
+                return todo
+            })
+
+            return [...todoList, ...newTodoList]
+        })
+
+        return {...todoGroupArray, ...updatedItemDoneProperty}
+    }
+
+
+    const todoListGroup = todoGroupArray.map((obj,index)=>
+        <TodoGroup key={index+obj.id}
                    color={obj.color}
                    title={obj.title}
                    created={obj.created}
-                   todoList={obj.todoList}/>)
+                   todoList={obj.todoList}
+                   addTodo={addNewTodo}
+                   id={obj.id}
+                   handleCheckbox={handleCheckbox}
+        />)
+
+
 
     const setColor=(color)=>{
         setSelectedColor(color)
@@ -91,6 +129,7 @@ function Dashboard() {
             <div className='dashboardTodoGroup'>
                 {todoListGroup}
             </div>
+
 
         </div>
     )

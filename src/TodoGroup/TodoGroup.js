@@ -1,8 +1,9 @@
 import React from "react";
 import TodoItem from "../TodoItem/TodoItem";
+import AddTodo from "../AddTodo/AddTodo";
 import './styles.css'
 
-function TodoGroup({todoList, color, created, title}){
+function TodoGroup({todoList, color, created, title, id, addTodo, handleCheckbox}){
 
     const todoItems = todoList.map((item, index)=>{
 
@@ -10,11 +11,12 @@ function TodoGroup({todoList, color, created, title}){
             return <TodoItem key={index}
                              title={item.title}
                              done={item.done}
+                             itemId={item.itemId}
+                             handleCheckbox={handleCheckbox}
             />}
+
         return null
     })
-
-
 
     return(
         <div className={'todoGroup'}>
@@ -26,6 +28,12 @@ function TodoGroup({todoList, color, created, title}){
 
             <div className='itemsContainer'>
                 {todoItems}
+            </div>
+
+            <div>
+                <AddTodo addNewTodo={addTodo}
+                         id={id}
+                />
             </div>
 
         </div>
