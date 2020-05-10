@@ -9,6 +9,7 @@ function Dashboard() {
     const [searchValue, setSearchValue] = useState('')
     const [todoGroupArray, setTodoArray] = useState([])
     const [selectedColor, setSelectedColor]=useState('')
+    const [panel, setPanel] = useState([])
 
     const onClear = () => setSearchValue('');
 
@@ -44,15 +45,45 @@ function Dashboard() {
         }).filter(groups => groups !== undefined)
     }
 
+
+    const searchGroupByColor =(searchColor, groupList)=> {
+
+        return groupList.map(group => {
+            const {color} = group;
+
+            if (searchColor === color) {
+                /*return {...group, color:searchColor}*/
+                return group
+            }
+
+        }).filter(groups => groups !== undefined)
+    }
+
+
     useEffect(()=>{
 
-        if (searchValue.length === 0) {
+        if (searchValue.length === 0 ) {
             setTodoArray(data);
         } else {
             const searchResult= search(searchValue, data);
                 setTodoArray(searchResult);
         }
+
         },[searchValue])
+
+
+    useEffect(()=>{
+        if (selectedColor.length > 0) {
+            setPanel([])
+            const updatedGroup = searchGroupByColor(selectedColor,data)
+            setTodoArray(updatedGroup)
+        } else {
+            setPanel([])
+            setTodoArray(data)
+        }
+        /*then show equivalent group by color */
+
+    }, [selectedColor])
 
 
     const todoListGroup = todoGroupArray.map((obj, objIndex)=>
@@ -62,11 +93,10 @@ function Dashboard() {
                    created={obj.created}
                    todoList={obj.todoList}/>)
 
+
     const setColor=(color)=>{
         setSelectedColor(color)
     }
-
-
 
     return(
         <div className='dashboard'>
@@ -81,7 +111,11 @@ function Dashboard() {
                     <div/>
 
                     <div className='dashboardColorPanel'>
-                        <ColorPanel setColor={setColor}/>
+                        <ColorPanel setColor = {setColor}
+                                    defaultColor = {selectedColor}
+                                    show = {setPanel}
+                                    panel = {panel}
+                        />
                     </div>
 
                 </div>
