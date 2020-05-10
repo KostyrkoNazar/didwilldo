@@ -12,7 +12,7 @@ function TodoGroup({todoList, color, created, title, id, addTodo, handleCheckbox
                              title={item.title}
                              done={item.done}
                              itemId={item.itemId}
-                             handleCheckbox={handleCheckbox}
+                             handleTodoCheckbox={(todoId, done)=>{handleCheckbox(id, todoId, done)}}
             />}
 
         return null
@@ -33,6 +33,7 @@ function TodoGroup({todoList, color, created, title, id, addTodo, handleCheckbox
             <div>
                 <AddTodo addNewTodo={addTodo}
                          id={id}
+                         nextItemId={todoItems.length}
                 />
             </div>
 
