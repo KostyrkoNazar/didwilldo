@@ -94,23 +94,18 @@ function Dashboard({data}) {
     }
 
 
-    const handleCheckbox=( id)=> {
+    const handleCheckbox=(groupId,todoId,done) => {
 
-        const updatedItemDoneProperty = todoGroupArray.map( groups => {
-            const {todoList} = groups;
+        const updatedGroupArray = [...todoGroupArray]
 
-            const newTodoList = todoList.map(todo => {
-                if (todo.itemId === id) {
-                    todo.done = !todo.done
-                }
-                console.log(todo)
-                return todo
-            })
+        const groupIndex = updatedGroupArray.findIndex((value)=> value.id === groupId)
+        const {todoList} = updatedGroupArray[groupIndex];
 
-            return [...todoList, ...newTodoList]
-        })
+         const todoIndex = todoList.findIndex((todo)=>todo.itemId === todoId )
 
-        return {...todoGroupArray, ...updatedItemDoneProperty}
+        updatedGroupArray[groupIndex].todoList[todoIndex].done = done
+
+        setTodoArray(updatedGroupArray)
     }
 
 
