@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import './styles.css'
 
-function AddTodo({addNewTodo,id}) {
+function AddTodo({addNewTodo,id,nextItemId}) {
 
     const [title, setTitle] = useState('')
 
     const createNewTodoItem=(event)=>{
         if (title.length > 0){
             const item = {
-                itemId: 1,
+                itemId: nextItemId,
                 title: title,
                 done: false,
                 filtered: true
