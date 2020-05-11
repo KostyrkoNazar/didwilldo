@@ -89,8 +89,6 @@ function Dashboard({data}) {
     }, [selectedColor])
 
 
-    const todoListGroup = todoGroupArray.map((obj, objIndex)=>
-        <TodoGroup key={objIndex}
 
     const addNewTodo = (id, newTodo) => {
 
