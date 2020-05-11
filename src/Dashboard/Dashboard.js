@@ -3,13 +3,14 @@ import TodoGroup from "../TodoGroup/TodoGroup";
 import TodoSearch from "../TodoSearch/TodoSearch";
 import ColorPanel from "../ColorPanel/ColorPanel";
 import './styles.css'
-import data from "../data/data";
+import TodoFilter from "../TodoFilter/TodoFilter";
 
-function Dashboard() {
+function Dashboard({data}) {
     const [searchValue, setSearchValue] = useState('')
     const [todoGroupArray, setTodoArray] = useState([])
     const [selectedColor, setSelectedColor]=useState('')
     const [panel, setPanel] = useState([])
+    const [isFiltered, setIsFiltered] = useState(false)
 
     const onClear = () => setSearchValue('');
 
@@ -62,15 +63,17 @@ function Dashboard() {
 
     useEffect(()=>{
 
-        if (searchValue.length === 0 ) {
+        if (searchValue.length === 0) {
             setTodoArray(data);
         } else {
             const searchResult= search(searchValue, data);
                 setTodoArray(searchResult);
         }
-
         },[searchValue])
 
+    const setFiltered =(value)=> {
+        setIsFiltered(!value)
+    }
 
     useEffect(()=>{
         if (selectedColor.length > 0) {
@@ -88,15 +91,52 @@ function Dashboard() {
 
     const todoListGroup = todoGroupArray.map((obj, objIndex)=>
         <TodoGroup key={objIndex}
+
+    const addNewTodo = (id, newTodo) => {
+
+        const updatedGroupArray = [...todoGroupArray];
+
+        const index = updatedGroupArray.findIndex((group) => group.id === id);
+
+        updatedGroupArray[index].todoList.push(newTodo);
+
+        setTodoArray(updatedGroupArray);
+    }
+
+
+    const handleCheckbox=(groupId,todoId,done) => {
+
+        const updatedGroupArray = [...todoGroupArray]
+
+        const groupIndex = updatedGroupArray.findIndex((value)=> value.id === groupId)
+        const {todoList} = updatedGroupArray[groupIndex];
+
+         const todoIndex = todoList.findIndex((todo)=>todo.itemId === todoId )
+
+        updatedGroupArray[groupIndex].todoList[todoIndex].done = done
+
+        setTodoArray(updatedGroupArray)
+    }
+
+
+    const todoListGroup = todoGroupArray.map((obj,index)=>
+        <TodoGroup key={index+obj.id}
                    color={obj.color}
                    title={obj.title}
                    created={obj.created}
-                   todoList={obj.todoList}/>)
+                   todoList={obj.todoList}
+                   addTodo={addNewTodo}
+                   id={obj.id}
+                   handleCheckbox={handleCheckbox}
+        />)
+
 
 
     const setColor=(color)=>{
         setSelectedColor(color)
     }
+
+
 
     return(
         <div className='dashboard'>
@@ -117,6 +157,10 @@ function Dashboard() {
                                     panel = {panel}
                         />
                     </div>
+
+                    <TodoFilter isFiltered={isFiltered}
+                                setFiltered={setFiltered}
+                    />
 
                 </div>
 

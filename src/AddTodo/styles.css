@@ -1,0 +1,18 @@
+.addNewTodo {
+    display: flex;
+    flex: 1;
+    height: 48px;
+    align-items: center;
+    border: 1px solid grey;
+}
+
+.addNewTodo input {
+    border: none;
+    outline: none;
+    flex: 1;
+}
+
+.addNewTodo button {
+    border: none;
+    outline: none;
+}

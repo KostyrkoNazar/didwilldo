@@ -1,16 +1,16 @@
 import React from "react";
 import './styles.css'
 
-const TodoItem=({title, done})=>{
+const TodoItem=({title, done, itemId, handleTodoCheckbox})=>{
 
     return(
         <div className='todoItem' >
 
             <div className='checkboxContainer'>
                 <input className='todoCheckbox'
-                        type='checkbox'
-                        checked={done}
-                        onChange={()=>console.log('')}
+                       type='checkbox'
+                       checked={done}
+                       onChange={()=>handleTodoCheckbox(itemId,!done)}
                 />
             </div>
 
