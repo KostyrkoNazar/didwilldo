@@ -4,12 +4,14 @@ import TodoSearch from "../TodoSearch/TodoSearch";
 import ColorPanel from "../ColorPanel/ColorPanel";
 import './styles.css'
 import TodoFilter from "../TodoFilter/TodoFilter";
+import AddGroup from "../AddGroup/AddGoup";
 
 function Dashboard({data}) {
     const [searchValue, setSearchValue] = useState('')
     const [todoGroupArray, setTodoArray] = useState([])
     const [selectedColor, setSelectedColor]=useState('')
     const [isFiltered, setIsFiltered] = useState(false)
+    const [group, setGroup] = useState([])
 
     const onClear = () => setSearchValue('');
 
@@ -126,10 +128,17 @@ function Dashboard({data}) {
         setSelectedColor(color)
     }
 
+    const addNewGroup =(newGroup)=> {
+        setGroup(newGroup)
+    }
 
 
     return(
         <div className='dashboard'>
+
+            <div className = 'addGroup'>
+                <AddGroup addNewGroup={addNewGroup}/>
+            </div>
 
             <div className='dashboardHeader'>
 
