@@ -1,19 +1,16 @@
 import React, {useState} from "react";
+import ColorPanel from "../ColorPanel/ColorPanel";
 
 const availableColors = ['yellow', 'red','green','blue','white'];
 
 function AddGroup({addNewGroup,nextGroupId}) {
 
-    const [color, setColor] = useState('')
+    const [color, setColor] = useState('white')
     const [title, setTitle] = useState('')
    // const [createdDate, setCreatedDate] = useState(Date)
-    const [isClicked, setIsClicked] = useState(false)
 
-    const chooseColor =(randomColor)=> {
-        if (isClicked === true) {
-            availableColors.find
-        }
-    }
+    const randomColor = availableColors[Math.floor(Math.random() * availableColors.length)]
+    console.log(randomColor)
 
 
     const createNewGroup =(e)=> {
@@ -28,7 +25,7 @@ function AddGroup({addNewGroup,nextGroupId}) {
             }
 
             addNewGroup(newGroup)
-            setColor('')
+            // setColor('white')
             setTitle('')
         }
 
@@ -42,22 +39,7 @@ function AddGroup({addNewGroup,nextGroupId}) {
                    value = {title}
                    onChange = {(e)=>setTitle(e.target.value)}
             />
-
-            <input type = 'color'
-                   name = 'colorPicker'
-                   value = {color}
-                   onChange = {(e)=> {
-                        if (isClicked===true) {
-                               setColor(e.target.value)
-                            //setIsClicked(false)
-                        } else {
-                            const randomColor = availableColors[Math.floor(Math.random() * availableColors.length)]
-                           console.log(randomColor)
-                            setColor(randomColor)
-                        }
-                            }
-                   }
-            />
+            <ColorPanel/>
 
             <button name='submitNewGroup'
                     onClick={createNewGroup}>Create</button>
