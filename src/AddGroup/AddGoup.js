@@ -1,27 +1,35 @@
 import React, {useState} from "react";
 
-function AddGroup({addNewGroup}) {
+const availableColors = ['yellow', 'red','green','blue','white'];
 
-    const [color, setColor] = useState('#ff0000')
+function AddGroup({addNewGroup,nextGroupId}) {
+
+    const [color, setColor] = useState('')
     const [title, setTitle] = useState('')
-    const [createdDate, setCreatedDate] = useState(Date)
+   // const [createdDate, setCreatedDate] = useState(Date)
+    const [isClicked, setIsClicked] = useState(false)
+
+    const chooseColor =(randomColor)=> {
+        if (isClicked === true) {
+            availableColors.find
+        }
+    }
 
 
     const createNewGroup =(e)=> {
-        if (title.length > 0 && color.length > 0) {
+        if (title.length > 0 ) {
 
             const newGroup = {
-                id: 1,
+                id: nextGroupId,
                 color: color,
                 title: title,
                 created: " ",
                 todoList:[]
             }
 
-            addNewGroup(title, color)
-
+            addNewGroup(newGroup)
+            setColor('')
             setTitle('')
-            setColor('#ff0000')
         }
 
         e.preventDefault();
@@ -32,19 +40,28 @@ function AddGroup({addNewGroup}) {
             <input type = 'text'
                    name = 'groupTitle'
                    value = {title}
-                   onChange = {()=>console.log('new Group title')}
+                   onChange = {(e)=>setTitle(e.target.value)}
             />
 
             <input type = 'color'
                    name = 'colorPicker'
                    value = {color}
-                   onChange = {()=>console.log(('pick new color'))}
+                   onChange = {(e)=> {
+                        if (isClicked===true) {
+                               setColor(e.target.value)
+                            //setIsClicked(false)
+                        } else {
+                            const randomColor = availableColors[Math.floor(Math.random() * availableColors.length)]
+                           console.log(randomColor)
+                            setColor(randomColor)
+                        }
+                            }
+                   }
             />
 
-            <input type = 'Create'
-                   name = 'creatGroup'
-                   onClick = {()=>createNewGroup}
-            />
+            <button name='submitNewGroup'
+                    onClick={createNewGroup}>Create</button>
+
         </div>
     )
 }

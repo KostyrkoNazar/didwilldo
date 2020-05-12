@@ -11,7 +11,7 @@ function Dashboard({data}) {
     const [todoGroupArray, setTodoArray] = useState([])
     const [selectedColor, setSelectedColor]=useState('')
     const [isFiltered, setIsFiltered] = useState(false)
-    const [group, setGroup] = useState([])
+
 
     const onClear = () => setSearchValue('');
 
@@ -129,7 +129,8 @@ function Dashboard({data}) {
     }
 
     const addNewGroup =(newGroup)=> {
-        setGroup(newGroup)
+        const updatedGroupArray = [...todoGroupArray];
+        setTodoArray([...updatedGroupArray, newGroup])
     }
 
 
@@ -137,7 +138,8 @@ function Dashboard({data}) {
         <div className='dashboard'>
 
             <div className = 'addGroup'>
-                <AddGroup addNewGroup={addNewGroup}/>
+                <AddGroup addNewGroup={addNewGroup}
+                          nextGroupId={todoGroupArray.length + 1}/>
             </div>
 
             <div className='dashboardHeader'>
