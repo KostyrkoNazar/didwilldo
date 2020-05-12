@@ -1,28 +1,26 @@
 import React, {useEffect, useState} from "react";
 import './styles.css'
 
-const availableColors = ['yellow', 'red','green','blue',''];
+const availableColors = ['yellow', 'red','green','blue', 'white'];
 
-function ColorPanel({setColor, defaultColor, show, panel}){
+function ColorPanel({setColor}){
 
-    const colorPanel = availableColors.map((color,index)=>{
-        return <div style={{backgroundColor:color}}
-                    key={index}
-                    onClick={()=>setColor(color)}
-        />
-    })
-
-
-    const colorBox = <div style={{backgroundColor: defaultColor}}
-                          onClick={()=>show(colorPanel)}
-    />
-
+    const [panelIsVisible, setPanelIsVisible] = useState(true)
+    const [selectedColor, setSelectedColor]=useState('')
 
     return(
         <div className='colorPanel'>
-            {colorBox}
+            { panelIsVisible === true ? availableColors.map((color,index)=>{
+                return <div style={{backgroundColor:color}}
+                            key={index}
+                            onClick={()=>{ setColor(color)
+                                            setSelectedColor(color)
+                                            setPanelIsVisible(false) }
+                            }
+                />
+            }) :  <div style={{backgroundColor: selectedColor}}
+                       onClick={()=>setPanelIsVisible(true)} /> }
 
-            {panel}
 
         </div>
     )

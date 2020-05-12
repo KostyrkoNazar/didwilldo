@@ -8,9 +8,8 @@ import TodoFilter from "../TodoFilter/TodoFilter";
 function Dashboard({data}) {
     const [searchValue, setSearchValue] = useState('')
     const [todoGroupArray, setTodoArray] = useState([])
-    const [selectedColor, setSelectedColor]=useState('')
-    const [panel, setPanel] = useState([])
     const [isFiltered, setIsFiltered] = useState(false)
+
 
     const onClear = () => setSearchValue('');
 
@@ -71,22 +70,10 @@ function Dashboard({data}) {
         }
         },[searchValue])
 
+
     const setFiltered =(value)=> {
         setIsFiltered(!value)
     }
-
-    useEffect(()=>{
-        if (selectedColor.length > 0) {
-            setPanel([])
-            const updatedGroup = searchGroupByColor(selectedColor,data)
-            setTodoArray(updatedGroup)
-        } else {
-            setPanel([])
-            setTodoArray(data)
-        }
-        /*then show equivalent group by color */
-
-    }, [selectedColor])
 
 
 
@@ -131,7 +118,12 @@ function Dashboard({data}) {
 
 
     const setColor=(color)=>{
-        setSelectedColor(color)
+        if (color !== 'white') {
+            const updatedGroup = searchGroupByColor(color,data)
+            setTodoArray(updatedGroup)
+        } else {
+            setTodoArray(data)
+        }
     }
 
 
@@ -150,9 +142,6 @@ function Dashboard({data}) {
 
                     <div className='dashboardColorPanel'>
                         <ColorPanel setColor = {setColor}
-                                    defaultColor = {selectedColor}
-                                    show = {setPanel}
-                                    panel = {panel}
                         />
                     </div>
 
