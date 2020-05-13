@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import ColorPanel from "../ColorPanel/ColorPanel";
 import {COLOR_LIST} from "../appConfig";
+import {getCurrentDate} from "../utils"
 
 function AddGroup({addNewGroup,nextGroupId}) {
 
     const [color, setColor] = useState('white')
     const [title, setTitle] = useState('')
-   // const [createdDate, setCreatedDate] = useState(Date)
 
     const randomColor = COLOR_LIST[Math.floor(Math.random() * COLOR_LIST.length)]
 
@@ -18,12 +18,12 @@ function AddGroup({addNewGroup,nextGroupId}) {
                 id: nextGroupId,
                 color: color === 'white' ? randomColor : color,
                 title: title,
-                created: " ",
+                created: getCurrentDate(),
                 todoList:[]
             }
 
             addNewGroup(newGroup)
-             setColor('white')
+            setColor('white')
             setTitle('')
         }
 
