@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
+import {COLOR_LIST} from "../appConfig";
 import './styles.css'
 
-const availableColors = ['yellow', 'red','green','blue',''];
 
 function ColorPanel({setColor, defaultColor, show, panel}){
 
-    const colorPanel = availableColors.map((color,index)=>{
+    const colorPanel = COLOR_LIST.map((color,index)=>{
         return <div style={{backgroundColor:color}}
                     key={index}
                     onClick={()=>setColor(color)}
@@ -16,7 +16,6 @@ function ColorPanel({setColor, defaultColor, show, panel}){
     const colorBox = <div style={{backgroundColor: defaultColor}}
                           onClick={()=>show(colorPanel)}
     />
-
 
     return(
         <div className='colorPanel'>

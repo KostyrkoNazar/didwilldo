@@ -1,4 +1,6 @@
-const data = [
+export const COLOR_LIST = ['yellow', 'red','green','blue',''];
+
+export const DEFAULT_DATA = [
     {
         id: 1,
         color: "yellow",
@@ -42,5 +44,3 @@ const data = [
         todoList:[]
     }
 ];
-
-export default data
