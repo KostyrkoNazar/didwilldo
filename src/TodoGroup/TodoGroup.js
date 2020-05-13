@@ -16,7 +16,7 @@ function TodoGroup({todoList, color, created, title, id, addTodo, handleCheckbox
             />}
 
         return null
-    })
+    });
 
     return(
         <div className={'todoGroup'}>
