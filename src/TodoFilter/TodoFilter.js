@@ -5,7 +5,7 @@ function TodoFilter({isFiltered, setFiltered}) {
         <div>
             <input type='checkbox'
                    value={isFiltered}
-                    onChange={(e)=>setFiltered(e.target.value)}
+                   onChange={(e)=>setFiltered(e.target.value)}
             />
 
             <label>Show done</label>

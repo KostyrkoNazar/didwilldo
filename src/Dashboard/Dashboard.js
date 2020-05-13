@@ -4,6 +4,7 @@ import TodoSearch from "../TodoSearch/TodoSearch";
 import ColorPanel from "../ColorPanel/ColorPanel";
 import './styles.css'
 import TodoFilter from "../TodoFilter/TodoFilter";
+import AddGroup from "../AddGroup/AddGoup";
 
 function Dashboard({data}) {
     const [searchValue, setSearchValue] = useState('')
@@ -45,36 +46,41 @@ function Dashboard({data}) {
         }).filter(groups => groups !== undefined)
     }
 
-
-    const searchGroupByColor =(searchColor, groupList)=> {
-
-        return groupList.map(group => {
-            const {color} = group;
-
-            if (searchColor === color) {
-                /*return {...group, color:searchColor}*/
-                return group
-            }
-
-        }).filter(groups => groups !== undefined)
-    }
-
-
     useEffect(()=>{
 
-        if (searchValue.length === 0) {
-            setTodoArray(data);
-        } else {
-            const searchResult= search(searchValue, data);
+            if (searchValue.length === 0 ) {
+                setTodoArray(data);
+            } else {
+                const searchResult = search(searchValue, data);
                 setTodoArray(searchResult);
-        }
-        },[searchValue])
+
+            }
+        },[searchValue, isFiltered])
+
+
+     const filterByDone=(groupListArray)=>{
+
+        return groupListArray.map(group => {
+            const {todoList} = group;
+
+           const sortedListByDone = todoList.map(item => {
+                const {done} = item;
+
+                if (done === false) {
+                    return {...item, filtered: false}
+                } else {
+                    return item
+                }
+            })
+            return {...group, todoList: sortedListByDone};
+        });
+
+    }
 
 
     const setFiltered =(value)=> {
         setIsFiltered(!value)
     }
-
 
 
     const addNewTodo = (id, newTodo) => {
@@ -115,6 +121,17 @@ function Dashboard({data}) {
                    handleCheckbox={handleCheckbox}
         />)
 
+    const searchGroupByColor =(searchColor, groupList)=> {
+
+        return groupList.map(group => {
+            const {color} = group;
+
+            if (searchColor === color) {
+                return {...group, color:searchColor}
+            }
+
+        }).filter(groups => groups !== undefined)
+    }
 
 
     const setColor=(color)=>{
@@ -124,8 +141,13 @@ function Dashboard({data}) {
         } else {
             setTodoArray(data)
         }
+
     }
 
+    const addNewGroup =(newGroup)=> {
+        const updatedGroupArray = [...todoGroupArray];
+        setTodoArray([...updatedGroupArray, newGroup])
+    }
 
 
     return(
@@ -141,8 +163,7 @@ function Dashboard({data}) {
                     <div/>
 
                     <div className='dashboardColorPanel'>
-                        <ColorPanel setColor = {setColor}
-                        />
+                        <ColorPanel setColor={setColor}/>
                     </div>
 
                     <TodoFilter isFiltered={isFiltered}
@@ -152,6 +173,9 @@ function Dashboard({data}) {
                 </div>
 
             </div>
+
+                <AddGroup addNewGroup={addNewGroup}
+                          nextGroupId={todoGroupArray.length + 1}/>
 
             <div className='dashboardTodoGroup'>
                 {todoListGroup}

@@ -1,16 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
+import {COLOR_LIST} from "../appConfig";
 import './styles.css'
-
-const availableColors = ['yellow', 'red','green','blue', 'white'];
 
 function ColorPanel({setColor}){
 
     const [panelIsVisible, setPanelIsVisible] = useState(true)
-    const [selectedColor, setSelectedColor]=useState('')
+    const [selectedColor, setSelectedColor]=useState('white')
 
     return(
         <div className='colorPanel'>
-            { panelIsVisible === true ? availableColors.map((color,index)=>{
+            { panelIsVisible === true ? COLOR_LIST.map((color,index)=>{
                 return <div style={{backgroundColor:color}}
                             key={index}
                             onClick={()=>{ setColor(color)
@@ -20,7 +19,6 @@ function ColorPanel({setColor}){
                 />
             }) :  <div style={{backgroundColor: selectedColor}}
                        onClick={()=>setPanelIsVisible(true)} /> }
-
 
         </div>
     )
