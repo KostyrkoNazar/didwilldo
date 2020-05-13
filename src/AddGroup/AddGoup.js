@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import ColorPanel from "../ColorPanel/ColorPanel";
-
-const availableColors = ['yellow', 'red','green','blue','white'];
+import {COLOR_LIST} from "../appConfig";
 
 function AddGroup({addNewGroup,nextGroupId}) {
 
@@ -9,8 +8,7 @@ function AddGroup({addNewGroup,nextGroupId}) {
     const [title, setTitle] = useState('')
    // const [createdDate, setCreatedDate] = useState(Date)
 
-    const randomColor = availableColors[Math.floor(Math.random() * availableColors.length)]
-    console.log(randomColor)
+    const randomColor = COLOR_LIST[Math.floor(Math.random() * COLOR_LIST.length)]
 
 
     const createNewGroup =(e)=> {
@@ -18,14 +16,14 @@ function AddGroup({addNewGroup,nextGroupId}) {
 
             const newGroup = {
                 id: nextGroupId,
-                color: color,
+                color: color === 'white' ? randomColor : color,
                 title: title,
                 created: " ",
                 todoList:[]
             }
 
             addNewGroup(newGroup)
-            // setColor('white')
+             setColor('white')
             setTitle('')
         }
 
@@ -39,7 +37,7 @@ function AddGroup({addNewGroup,nextGroupId}) {
                    value = {title}
                    onChange = {(e)=>setTitle(e.target.value)}
             />
-            <ColorPanel/>
+            <ColorPanel setColor={setColor}/>
 
             <button name='submitNewGroup'
                     onClick={createNewGroup}>Create</button>

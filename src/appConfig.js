@@ -1,4 +1,4 @@
-export const COLOR_LIST = ['yellow', 'red','green','blue',''];
+export const COLOR_LIST = ['yellow', 'red','green','blue','white'];
 
 export const DEFAULT_DATA = [
     {
