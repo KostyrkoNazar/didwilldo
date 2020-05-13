@@ -2,26 +2,23 @@ import React from "react";
 import {COLOR_LIST} from "../appConfig";
 import './styles.css'
 
+function ColorPanel({setColor}){
 
-function ColorPanel({setColor, defaultColor, show, panel}){
-
-    const colorPanel = COLOR_LIST.map((color,index)=>{
-        return <div style={{backgroundColor:color}}
-                    key={index}
-                    onClick={()=>setColor(color)}
-        />
-    })
-
-
-    const colorBox = <div style={{backgroundColor: defaultColor}}
-                          onClick={()=>show(colorPanel)}
-    />
+    const [panelIsVisible, setPanelIsVisible] = useState(true)
+    const [selectedColor, setSelectedColor]=useState('white')
 
     return(
         <div className='colorPanel'>
-            {colorBox}
-
-            {panel}
+            { panelIsVisible === true ? COLOR_LIST.map((color,index)=>{
+                return <div style={{backgroundColor:color}}
+                            key={index}
+                            onClick={()=>{ setColor(color)
+                                            setSelectedColor(color)
+                                            setPanelIsVisible(false) }
+                            }
+                />
+            }) :  <div style={{backgroundColor: selectedColor}}
+                       onClick={()=>setPanelIsVisible(true)} /> }
 
         </div>
     )
