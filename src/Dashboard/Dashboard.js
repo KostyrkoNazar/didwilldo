@@ -121,10 +121,28 @@ function Dashboard({data}) {
                    handleCheckbox={handleCheckbox}
         />)
 
+    const searchGroupByColor =(searchColor, groupList)=> {
+
+        return groupList.map(group => {
+            const {color} = group;
+
+            if (searchColor === color) {
+                /*return {...group, color:searchColor}*/
+                return group
+            }
+
+        }).filter(groups => groups !== undefined)
+    }
 
 
     const setColor=(color)=>{
-        setSelectedColor(color)
+        if (color !== 'white') {
+            const updatedGroup = searchGroupByColor(color,data)
+            setTodoArray(updatedGroup)
+        } else {
+            setTodoArray(data)
+        }
+
     }
 
     const addNewGroup =(newGroup)=> {
