@@ -9,7 +9,6 @@ import AddGroup from "../AddGroup/AddGoup";
 function Dashboard({data}) {
     const [searchValue, setSearchValue] = useState('')
     const [todoGroupArray, setTodoArray] = useState([])
-    const [isFiltered, setIsFiltered] = useState(false)
 
 
     const onClear = () => setSearchValue('');
@@ -55,21 +54,21 @@ function Dashboard({data}) {
                 setTodoArray(searchResult);
 
             }
-        },[searchValue, isFiltered])
+        },[searchValue])
 
 
-     const filterByDone=(groupListArray)=>{
+     const filterByDone=(completed)=>{
 
-        return groupListArray.map(group => {
+        return todoGroupArray.map(group => {
             const {todoList} = group;
 
            const sortedListByDone = todoList.map(item => {
                 const {done} = item;
 
-                if (done === false) {
+                if (done === false && completed === false) {
                     return {...item, filtered: false}
                 } else {
-                    return item
+                    return {...item, filtered: true}
                 }
             })
             return {...group, todoList: sortedListByDone};
@@ -78,9 +77,12 @@ function Dashboard({data}) {
     }
 
 
-    const setFiltered =(value)=> {
-        setIsFiltered(!value)
+    const showCompleted =(completed)=> {
+            const filteredTodos = filterByDone(completed)
+            setTodoArray(filteredTodos)
+
     }
+
 
 
     const addNewTodo = (id, newTodo) => {
@@ -166,8 +168,7 @@ function Dashboard({data}) {
                         <ColorPanel setColor={setColor}/>
                     </div>
 
-                    <TodoFilter isFiltered={isFiltered}
-                                setFiltered={setFiltered}
+                    <TodoFilter show={showCompleted}
                     />
 
                 </div>
