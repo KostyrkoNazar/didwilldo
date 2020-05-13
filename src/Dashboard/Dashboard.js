@@ -127,8 +127,7 @@ function Dashboard({data}) {
             const {color} = group;
 
             if (searchColor === color) {
-                /*return {...group, color:searchColor}*/
-                return group
+                return {...group, color:searchColor}
             }
 
         }).filter(groups => groups !== undefined)
