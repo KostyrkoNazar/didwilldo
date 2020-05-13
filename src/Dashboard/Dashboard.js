@@ -9,7 +9,6 @@ import AddGroup from "../AddGroup/AddGoup";
 function Dashboard({data}) {
     const [searchValue, setSearchValue] = useState('')
     const [todoGroupArray, setTodoArray] = useState([])
-    const [selectedColor, setSelectedColor]=useState('')
     const [isFiltered, setIsFiltered] = useState(false)
 
 
@@ -137,11 +136,6 @@ function Dashboard({data}) {
     return(
         <div className='dashboard'>
 
-            <div className = 'addGroup'>
-                <AddGroup addNewGroup={addNewGroup}
-                          nextGroupId={todoGroupArray.length + 1}/>
-            </div>
-
             <div className='dashboardHeader'>
 
                 <div className='dashboardTodoSearch'>
@@ -162,6 +156,9 @@ function Dashboard({data}) {
                 </div>
 
             </div>
+
+                <AddGroup addNewGroup={addNewGroup}
+                          nextGroupId={todoGroupArray.length + 1}/>
 
             <div className='dashboardTodoGroup'>
                 {todoListGroup}

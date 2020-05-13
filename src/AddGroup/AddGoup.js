@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import ColorPanel from "../ColorPanel/ColorPanel";
 import {COLOR_LIST} from "../appConfig";
-import {getCurrentDate} from "../utils"
+import {getCurrentDate} from "../utils";
+import './styles.css'
 
 function AddGroup({addNewGroup,nextGroupId}) {
 
@@ -31,17 +32,31 @@ function AddGroup({addNewGroup,nextGroupId}) {
     }
 
     return(
-        <div>
-            <input type = 'text'
-                   name = 'groupTitle'
-                   value = {title}
-                   onChange = {(e)=>setTitle(e.target.value)}
-            />
-            <ColorPanel setColor={setColor}/>
+        <div className='addGroup'>
 
-            <button name='submitNewGroup'
-                    onClick={createNewGroup}>Create</button>
+            <span>Add new group</span>
 
+            <div className='addGroupHeader'>
+
+                <div className='addGroupTitle'>
+                    <input type = 'text'
+                           name = 'groupTitle'
+                           placeholder='Group title...'
+                           value = {title}
+                           onChange = {(e)=>setTitle(e.target.value)}
+                    />
+                </div>
+
+                <div className='addGroupColorPanel'>
+                    <ColorPanel setColor={setColor}/>
+                </div>
+
+                <div className='createGroupButton'>
+                    <button name='submitNewGroup'
+                            onClick={createNewGroup}>Create</button>
+                </div>
+
+            </div>
         </div>
     )
 }

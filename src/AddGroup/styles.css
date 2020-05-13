@@ -1,0 +1,35 @@
+.addGroup {
+    display: flex;
+    flex-flow: column;
+    border: 1px solid gray;
+    background-color: lightgray;
+}
+
+.addGroup span {
+    padding: 10px 0  0 10px;
+}
+
+.addGroupHeader {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+}
+
+.addGroupTitle {
+    display: flex;
+    flex: 1;
+}
+
+.addGroupTitle input {
+    flex: 1;
+}
+
+.addGroupColorPanel {
+    display: flex;
+}
+
+.createGroupButton {
+    display: flex;
+}
+
