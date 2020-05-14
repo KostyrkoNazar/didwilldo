@@ -1,33 +1,21 @@
+// eslint-disable-next-line no-undef
 module.exports = {
-   settings: {
-      react: {
-         version: "detect"
-      }
+   env: {
+      browser: true,
+      es6: true,
    },
-   plugins: ["prettier", "react-hooks"],
-   extends: [
-      "plugin:@eslint/eslint-recommended",
-      "plugin:@eslint/recommended",
-      // "plugin:@typescript-eslint/recommended-requiring-type-checking",
-
-      "plugin:react/recommended",
-      "prettier",
-
-      //Todo enable
-      // "plugin:jsx-a11y/recommended",
-   ],
-   rules: {
-      "prettier/prettier": "error",
-      "react/prop-types": 0,
-
-      //Todo enable rules bellow
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": 0,
+   extends: ["eslint:recommended", "plugin:react/recommended"],
+   globals: {
+      Atomics: "readonly",
+      SharedArrayBuffer: "readonly",
    },
-   overrides: [
-      {
-         files: ["*.js", "*.jsx"],
-         excludedFiles: ["*.generated.md", "*.generated.tsx"]
-      }
-   ]
+   parserOptions: {
+      ecmaFeatures: {
+         jsx: true,
+      },
+      ecmaVersion: 11,
+      sourceType: "module",
+   },
+   plugins: ["react"],
+   rules: {},
 };
