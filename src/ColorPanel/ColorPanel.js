@@ -1,27 +1,39 @@
-import React, {useState} from "react";
-import {COLOR_LIST} from "../appConfig";
-import './styles.css'
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-function ColorPanel({setColor}){
+import { COLOR_LIST } from "../appConfig";
 
-    const [panelIsVisible, setPanelIsVisible] = useState(true)
-    const [selectedColor, setSelectedColor]=useState('white')
+import "./styles.css";
 
-    return(
-        <div className='colorPanel'>
-            { panelIsVisible === true ? COLOR_LIST.map((color,index)=>{
-                return <div style={{backgroundColor:color}}
-                            key={index}
-                            onClick={()=>{ setColor(color)
-                                            setSelectedColor(color)
-                                            setPanelIsVisible(false) }
-                            }
-                />
-            }) :  <div style={{backgroundColor: selectedColor}}
-                       onClick={()=>setPanelIsVisible(true)} /> }
+function ColorPanel({ setColor }) {
+   const [panelIsVisible, setPanelIsVisible] = useState(true);
+   const [selectedColor, setSelectedColor] = useState("white");
 
-        </div>
-    )
+   return (
+      <div className="colorPanel">
+         {panelIsVisible === true ? (
+            COLOR_LIST.map((color, index) => {
+               return (
+                  <div
+                     style={{ backgroundColor: color }}
+                     key={index}
+                     onClick={() => {
+                        setColor(color);
+                        setSelectedColor(color);
+                        setPanelIsVisible(false);
+                     }}
+                  />
+               );
+            })
+         ) : (
+            <div style={{ backgroundColor: selectedColor }} onClick={() => setPanelIsVisible(true)} />
+         )}
+      </div>
+   );
 }
+
+ColorPanel.propTypes = {
+   setColor: PropTypes.func.isRequired,
+};
 
 export default ColorPanel;

@@ -1,25 +1,32 @@
 import React from "react";
-import './styles.css'
+import PropTypes from "prop-types";
 
-const TodoItem=({title, done, itemId, handleTodoCheckbox})=>{
+import "./styles.css";
 
-    return(
-        <div className='todoItem' >
+const TodoItem = ({ title, done, itemId, handleTodoCheckbox }) => {
+   return (
+      <div className="todoItem">
+         <div className="checkboxContainer">
+            <input
+               className="todoCheckbox"
+               type="checkbox"
+               checked={done}
+               onChange={() => handleTodoCheckbox(itemId, !done)}
+            />
+         </div>
 
-            <div className='checkboxContainer'>
-                <input className='todoCheckbox'
-                       type='checkbox'
-                       checked={done}
-                       onChange={()=>handleTodoCheckbox(itemId,!done)}
-                />
-            </div>
+         <div className="todoLabel">
+            <label>{title}</label>
+         </div>
+      </div>
+   );
+};
 
-            <div className='todoLabel'>
-                <label>{title}</label>
-            </div>
+TodoItem.propTypes = {
+   title: PropTypes.string,
+   done: PropTypes.bool,
+   itemId: PropTypes.number,
+   handleTodoCheckbox: PropTypes.func,
+};
 
-        </div>
-    )
-}
-
-export default TodoItem
+export default TodoItem;

@@ -1,45 +1,52 @@
 import React from "react";
+import PropTypes from "prop-types";
 import TodoItem from "../TodoItem/TodoItem";
 import AddTodo from "../AddTodo/AddTodo";
-import './styles.css'
+import "./styles.css";
 
-function TodoGroup({todoList, color, created, title, id, addTodo, handleCheckbox}){
+function TodoGroup({ todoList, color, created, title, id, addTodo, handleCheckbox }) {
+   const todoItems = todoList.map((item, index) => {
+      if (item["filtered"] && item.filtered !== false) {
+         return (
+            <TodoItem
+               key={index}
+               title={item.title}
+               done={item.done}
+               itemId={item.itemId}
+               handleTodoCheckbox={(todoId, done) => {
+                  handleCheckbox(id, todoId, done);
+               }}
+            />
+         );
+      }
 
-    const todoItems = todoList.map((item, index)=>{
+      return null;
+   });
 
-        if (item.hasOwnProperty('filtered')&& item.filtered !== false) {
-            return <TodoItem key={index}
-                             title={item.title}
-                             done={item.done}
-                             itemId={item.itemId}
-                             handleTodoCheckbox={(todoId, done)=>{handleCheckbox(id, todoId, done)}}
-            />}
+   return (
+      <div className="todoGroup">
+         <div className="titleDateContainer" style={{ borderTopColor: color }}>
+            <label className="groupTitle">{title}</label>
+            <label className="groupDate">{created}</label>
+         </div>
 
-        return null
-    })
+         <div className="itemsContainer">{todoItems}</div>
 
-    return(
-        <div className={'todoGroup'}>
-
-            <div className='titleDateContainer' style={{borderTopColor:color}}>
-                <label className='groupTitle' >{title}</label>
-                 <label className='groupDate'>{created}</label>
-            </div>
-
-            <div className='itemsContainer'>
-                {todoItems}
-            </div>
-
-            <div>
-                <AddTodo addNewTodo={addTodo}
-                         id={id}
-                         nextItemId={todoItems.length}
-                />
-            </div>
-
-        </div>
-    )
+         <div>
+            <AddTodo addNewTodo={addTodo} id={id} nextItemId={todoItems.length} />
+         </div>
+      </div>
+   );
 }
 
+TodoGroup.propTypes = {
+   todoList: PropTypes.array,
+   color: PropTypes.string,
+   created: PropTypes.string,
+   title: PropTypes.string,
+   id: PropTypes.number,
+   addTodo: PropTypes.func,
+   handleCheckbox: PropTypes.func,
+};
 
 export default TodoGroup;
