@@ -23,8 +23,8 @@ const TodoItem = ({ title, done, itemId, handleTodoCheckbox }) => {
 };
 
 TodoItem.propTypes = {
-   title: PropTypes.bool,
-   done: PropTypes.func,
+   title: PropTypes.string,
+   done: PropTypes.bool,
    itemId: PropTypes.number,
    handleTodoCheckbox: PropTypes.func,
 };

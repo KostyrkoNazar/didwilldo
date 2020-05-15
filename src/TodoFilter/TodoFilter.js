@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-function TodoFilter({ isFiltered, setFiltered }) {
+function TodoFilter({ show }) {
+   const [isFiltered, setIsFiltered] = useState(false);
+
+   const setFiltered = (value) => {
+      setIsFiltered(value);
+      show(value);
+   };
+
    return (
       <div>
-         <input type="checkbox" value={isFiltered} onChange={(e) => setFiltered(e.target.value)} />
+         <input type="checkbox" checked={isFiltered} onChange={() => setFiltered(!isFiltered)} />
 
          <label>Show done</label>
       </div>
    );
 }
-TodoFilter.propTypes = { isFiltered: PropTypes.bool, setFiltered: PropTypes.func };
 
 TodoFilter.propTypes = {
-   isFiltered: PropTypes.bool,
-   setFiltered: PropTypes.func,
+   show: PropTypes.func,
 };
 
 export default TodoFilter;
