@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+
 import TodoGroup from "../TodoGroup/TodoGroup";
 import TodoSearch from "../TodoSearch/TodoSearch";
 import ColorPanel from "../ColorPanel/ColorPanel";
@@ -52,6 +54,7 @@ function Dashboard({ data }) {
       }
    }, [searchValue, isFiltered]);
 
+   // eslint-disable-next-line no-unused-vars
    const filterByDone = (groupListArray) => {
       return groupListArray.map((group) => {
          const { todoList } = group;
@@ -156,5 +159,9 @@ function Dashboard({ data }) {
       </div>
    );
 }
+
+Dashboard.propTypes = {
+   data: PropTypes.array,
+};
 
 export default Dashboard;
