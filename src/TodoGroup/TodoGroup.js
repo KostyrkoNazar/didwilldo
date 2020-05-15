@@ -1,8 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import TodoItem from "../TodoItem/TodoItem";
 import AddTodo from "../AddTodo/AddTodo";
 import "./styles.css";
-import PropTypes from "prop-types";
 
 function TodoGroup({ todoList, color, created, title, id, addTodo, handleCheckbox }) {
    const todoItems = todoList.map((item, index) => {
@@ -20,16 +20,15 @@ function TodoGroup({ todoList, color, created, title, id, addTodo, handleCheckbo
          );
       }
 
-        return null
-    });
+      return null;
+   });
 
-    return(
-        <div className={'todoGroup'}>
-
-            <div className='titleDateContainer' style={{borderTopColor:color}}>
-                <label className='groupTitle' >{title}</label>
-                 <label className='groupDate'>{created}</label>
-            </div>
+   return (
+      <div className="todoGroup">
+         <div className="titleDateContainer" style={{ borderTopColor: color }}>
+            <label className="groupTitle">{title}</label>
+            <label className="groupDate">{created}</label>
+         </div>
 
          <div className="itemsContainer">{todoItems}</div>
 

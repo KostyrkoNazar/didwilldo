@@ -170,7 +170,7 @@ function Dashboard({ data }) {
 }
 
 Dashboard.propTypes = {
-   data: PropTypes.object,
+   data: PropTypes.array,
 };
 
 export default Dashboard;
