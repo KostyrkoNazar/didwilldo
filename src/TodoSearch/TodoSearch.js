@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import "./styles.css";
 
 function TodoSearch({ onClear, onChange, value }) {
@@ -17,5 +19,11 @@ function TodoSearch({ onClear, onChange, value }) {
       </div>
    );
 }
+
+TodoSearch.propTypes = {
+   onClear: PropTypes.func.isRequired,
+   onChange: PropTypes.func.isRequired,
+   value: PropTypes.string,
+};
 
 export default TodoSearch;

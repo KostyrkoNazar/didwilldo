@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+
 import "./styles.css";
 
 function AddTodo({ addNewTodo, id, nextItemId }) {
@@ -36,5 +38,11 @@ function AddTodo({ addNewTodo, id, nextItemId }) {
       </div>
    );
 }
+
+AddTodo.propTypes = {
+   addNewTodo: PropTypes.func,
+   id: PropTypes.number,
+   nextItemId: PropTypes.number,
+};
 
 export default AddTodo;

@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+
 import ColorPanel from "../ColorPanel/ColorPanel";
-import { COLOR_LIST } from "../appConfig";
+
 import { getCurrentDate } from "../utils";
+
+import { COLOR_LIST } from "../appConfig";
+
 import "./styles.css";
 
 function AddGroup({ addNewGroup, nextGroupId }) {
@@ -56,5 +61,10 @@ function AddGroup({ addNewGroup, nextGroupId }) {
       </div>
    );
 }
+
+AddGroup.propTypes = {
+   nextGroupId: PropTypes.number,
+   addNewGroup: PropTypes.func,
+};
 
 export default AddGroup;

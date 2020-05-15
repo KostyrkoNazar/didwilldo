@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import "./styles.css";
 
 const TodoItem = ({ title, done, itemId, handleTodoCheckbox }) => {
@@ -18,6 +20,13 @@ const TodoItem = ({ title, done, itemId, handleTodoCheckbox }) => {
          </div>
       </div>
    );
+};
+
+TodoItem.propTypes = {
+   title: PropTypes.bool,
+   done: PropTypes.func,
+   itemId: PropTypes.number,
+   handleTodoCheckbox: PropTypes.func,
 };
 
 export default TodoItem;

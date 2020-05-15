@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function TodoFilter({ isFiltered, setFiltered }) {
    return (
@@ -9,5 +10,10 @@ function TodoFilter({ isFiltered, setFiltered }) {
       </div>
    );
 }
+
+TodoFilter.propTypes = {
+   isFiltered: PropTypes.bool,
+   setFiltered: PropTypes.func,
+};
 
 export default TodoFilter;
