@@ -12,4 +12,9 @@ function TodoFilter({ isFiltered, setFiltered }) {
 }
 TodoFilter.propTypes = { isFiltered: PropTypes.bool, setFiltered: PropTypes.func };
 
+TodoFilter.propTypes = {
+   isFiltered: PropTypes.bool,
+   setFiltered: PropTypes.func,
+};
+
 export default TodoFilter;

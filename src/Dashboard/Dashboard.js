@@ -1,17 +1,45 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
+import AddGroup from "../AddGroup/AddGoup";
 import TodoGroup from "../TodoGroup/TodoGroup";
 import TodoSearch from "../TodoSearch/TodoSearch";
 import ColorPanel from "../ColorPanel/ColorPanel";
-import "./styles.css";
+
 import TodoFilter from "../TodoFilter/TodoFilter";
-import AddGroup from "../AddGroup/AddGoup";
+
+import "./styles.css";
 
 function Dashboard({ data }) {
    const [searchValue, setSearchValue] = useState("");
    const [todoGroupArray, setTodoArray] = useState([]);
    const [isFiltered, setIsFiltered] = useState(false);
+
+   useEffect(() => {
+      if (searchValue.length === 0) {
+         setTodoArray(data);
+      } else {
+         const search = (searchTitle, groupList) => {
+            return groupList
+               .map((obj) => {
+                  const { todoList } = obj;
+
+                  const searchResult = searchTodosByTitle(todoList, searchTitle);
+
+                  if (searchResult.length !== 0) {
+                     return { ...obj, todoList: searchResult };
+                  } else {
+                     return undefined;
+                  }
+               })
+               .filter((groups) => groups !== undefined);
+         };
+
+         const searchResult = search(searchValue, data);
+
+         setTodoArray(searchResult);
+      }
+   }, [searchValue, isFiltered, data]);
 
    const onClear = () => setSearchValue("");
 
@@ -26,33 +54,12 @@ function Dashboard({ data }) {
 
             if (title.startsWith(searchTitle)) {
                return todos;
+            } else {
+               return undefined;
             }
          })
          .filter((item) => item !== undefined);
    };
-
-   const search = (searchTitle, groupList) => {
-      return groupList
-         .map((obj) => {
-            const { todoList } = obj;
-
-            const searchResult = searchTodosByTitle(todoList, searchTitle);
-
-            if (searchResult.length !== 0) {
-               return { ...obj, todoList: searchResult };
-            }
-         })
-         .filter((groups) => groups !== undefined);
-   };
-
-   useEffect(() => {
-      if (searchValue.length === 0) {
-         setTodoArray(data);
-      } else {
-         const searchResult = search(searchValue, data);
-         setTodoArray(searchResult);
-      }
-   }, [searchValue, isFiltered]);
 
    // eslint-disable-next-line no-unused-vars
    const filterByDone = (groupListArray) => {
@@ -119,6 +126,8 @@ function Dashboard({ data }) {
 
             if (searchColor === color) {
                return { ...group, color: searchColor };
+            } else {
+               return undefined;
             }
          })
          .filter((groups) => groups !== undefined);
@@ -161,7 +170,7 @@ function Dashboard({ data }) {
 }
 
 Dashboard.propTypes = {
-   data: PropTypes.array,
+   data: PropTypes.object,
 };
 
 export default Dashboard;

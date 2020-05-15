@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+
 import { COLOR_LIST } from "../appConfig";
+
 import "./styles.css";
 
 function ColorPanel({ setColor }) {
@@ -31,7 +33,7 @@ function ColorPanel({ setColor }) {
 }
 
 ColorPanel.propTypes = {
-   setColor: PropTypes.func,
+   setColor: PropTypes.func.isRequired,
 };
 
 export default ColorPanel;
