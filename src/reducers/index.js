@@ -1,4 +1,4 @@
-import todos from "./addTodoReducer";
+import todos from "./todoReducer";
 import { combineReducers } from "redux";
 
 const allTodoReducers = combineReducers({
