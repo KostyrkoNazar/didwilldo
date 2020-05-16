@@ -80,8 +80,6 @@ function Dashboard({ data }) {
 
    const showCompleted = (completed) => {
       const filteredTodos = filterByDone(completed);
-      console.log(filteredTodos);
-
       setTodoArray(filteredTodos);
    };
 
