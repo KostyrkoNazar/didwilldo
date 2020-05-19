@@ -6,8 +6,7 @@ import { addNewTodo } from "../actions";
 
 import "./styles.css";
 
-function AddTodo(props) {
-   const { id, addNewTodo } = props;
+function AddTodo({ id, addNewTodo }) {
    const [title, setTitle] = useState("");
 
    const createNewTodoItem = (event) => {

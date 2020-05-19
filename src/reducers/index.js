@@ -1,8 +1,11 @@
 import todoReducer from "./todoReducer";
+import groupReducer from "./groupReducer";
 import { combineReducers } from "redux";
 
-const allTodoReducers = combineReducers({
+export const allTodoReducers = combineReducers({
    todoList: todoReducer,
 });
 
-export default allTodoReducers;
+export const reducers = combineReducers({
+   groupList: groupReducer,
+});
