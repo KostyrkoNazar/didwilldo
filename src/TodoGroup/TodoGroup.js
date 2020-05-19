@@ -51,6 +51,7 @@ TodoGroup.propTypes = {
 };
 
 const mapStateToProps = (state) => {
+   // return { todoList: state.todoList };
    return state;
 };
 

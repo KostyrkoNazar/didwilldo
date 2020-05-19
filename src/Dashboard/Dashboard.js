@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { searchGroupByColor } from "../actions";
 
 import AddGroup from "../AddGroup/AddGoup";
 import TodoGroup from "../TodoGroup/TodoGroup";
@@ -107,7 +108,7 @@ function Dashboard({ data }) {
       setTodoArray(updatedGroupArray);
    };
 
-   const searchGroupByColor = (searchColor, groupList) => {
+   /*const searchGroupByColor = (searchColor, groupList) => {
       return groupList
          .map((group) => {
             const { color } = group;
@@ -119,7 +120,7 @@ function Dashboard({ data }) {
             }
          })
          .filter((groups) => groups !== undefined);
-   };
+   };*/
 
    const setColor = (color) => {
       if (color !== "white") {
@@ -129,11 +130,11 @@ function Dashboard({ data }) {
          setTodoArray(data);
       }
    };
-
+   /*
    const addNewGroup = (newGroup) => {
       const updatedGroupArray = [...todoGroupArray];
       setTodoArray([...updatedGroupArray, newGroup]);
-   };
+   };*/
 
    return (
       <div className="dashboard">
@@ -147,17 +148,19 @@ function Dashboard({ data }) {
             </div>
          </div>
 
-         <AddGroup addNewGroup={addNewGroup} nextGroupId={todoGroupArray.length + 1} />
+         <AddGroup nextGroupId={todoGroupArray.length + 1} />
 
          <div className="dashboardTodoGroup">
-            <TodoGroup
-               key={1}
-               color={"red"}
-               title={"Hello"}
-               created={"16-04-2020"}
-               id={1}
-               handleCheckbox={handleCheckbox}
-            />
+            {todoGroupArray.map((groups, index) => (
+               <TodoGroup
+                  key={index + groups.id}
+                  color={groups.color}
+                  title={groups.title}
+                  created={groups.created}
+                  id={groups.id}
+                  handleCheckbox={handleCheckbox}
+               />
+            ))}
          </div>
       </div>
    );
@@ -168,8 +171,10 @@ Dashboard.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-   console.log(state);
    return state;
 };
 
-export default connect(mapStateToProps)(Dashboard);
+const mapDispatchToProps = (dispatch) => ({
+   searchGroupByColor: (searchColor, groupList) => dispatch(searchGroupByColor(searchColor, groupList)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
