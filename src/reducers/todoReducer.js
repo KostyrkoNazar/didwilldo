@@ -1,18 +1,18 @@
-import { ADD_NEW_TODO } from "../actions";
-import { IS_COMPLETED } from "../actions";
+import * as actions from "../actions";
 // state = todoList;
 
 const todoReducer = (state = [], action) => {
    const { type, payLoad } = action;
 
    switch (type) {
-      case ADD_NEW_TODO:
+      case actions.ADD_NEW_TODO:
          return [...state, payLoad.newTodo];
-      case IS_COMPLETED: {
+      case actions.IS_COMPLETED: {
          const todoList = [...state];
-         const todoIndex = state.findIndex((todo) => todo.itemId === payLoad.itemId);
 
+         const todoIndex = state.findIndex((todo) => todo.itemId === payLoad.itemId);
          todoList[todoIndex].done = payLoad.done;
+
          return todoList;
       }
 
