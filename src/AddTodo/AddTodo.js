@@ -5,7 +5,7 @@ import { addNewTodo } from "../actions";
 import "./styles.css";
 import connect from "react-redux/lib/connect/connect";
 
-function AddTodo({ id, nextItemId }, props) {
+function AddTodo({ id, nextItemId, addNewTodo }) {
    const [title, setTitle] = useState("");
 
    const createNewTodoItem = (event) => {
@@ -17,7 +17,7 @@ function AddTodo({ id, nextItemId }, props) {
             filtered: true,
          };
 
-         props.addNewTodo(id, item);
+         addNewTodo(id, item);
          setTitle("");
       }
 
@@ -41,18 +41,9 @@ function AddTodo({ id, nextItemId }, props) {
    );
 }
 
-const mapStateToProps = (state) => {
-   return {
-      title: state.title,
-      itemId: state.itemId,
-      done: false,
-      filtered: true,
-   };
-};
-
 const mapDispatchToProps = (dispatch) => {
    return {
-      addNewTodo: dispatch(addNewTodo()),
+      addNewTodo: (id, item) => dispatch(addNewTodo(id, item)),
    };
 };
 
@@ -62,4 +53,4 @@ AddTodo.propTypes = {
    nextItemId: PropTypes.number,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddTodo);
+export default connect(null, mapDispatchToProps)(AddTodo);

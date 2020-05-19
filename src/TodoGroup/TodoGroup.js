@@ -4,7 +4,7 @@ import TodoItem from "../TodoItem/TodoItem";
 import AddTodo from "../AddTodo/AddTodo";
 import "./styles.css";
 
-function TodoGroup({ todoList, color, created, title, id, addTodo, handleCheckbox }) {
+function TodoGroup({ todoList, color, created, title, id, handleCheckbox }) {
    const todoItems = todoList.map((item, index) => {
       if (item["filtered"] && item.filtered !== false) {
          return (
@@ -33,7 +33,7 @@ function TodoGroup({ todoList, color, created, title, id, addTodo, handleCheckbo
          <div className="itemsContainer">{todoItems}</div>
 
          <div>
-            <AddTodo addNewTodo={addTodo} id={id} nextItemId={todoItems.length} />
+            <AddTodo id={id} nextItemId={todoItems.length} />
          </div>
       </div>
    );

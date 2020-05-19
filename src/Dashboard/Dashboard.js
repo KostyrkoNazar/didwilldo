@@ -83,7 +83,7 @@ function Dashboard({ data }) {
       setTodoArray(filteredTodos);
    };
 
-   const addNewTodo = (id, newTodo) => {
+   /*const addNewTodo = (id, newTodo) => {
       const updatedGroupArray = [...todoGroupArray];
 
       const index = updatedGroupArray.findIndex((group) => group.id === id);
@@ -91,7 +91,7 @@ function Dashboard({ data }) {
       updatedGroupArray[index].todoList.push(newTodo);
 
       setTodoArray(updatedGroupArray);
-   };
+   };*/
 
    const handleCheckbox = (groupId, todoId, done) => {
       const updatedGroupArray = [...todoGroupArray];
@@ -156,7 +156,7 @@ function Dashboard({ data }) {
                   title={obj.title}
                   created={obj.created}
                   todoList={obj.todoList}
-                  addTodo={addNewTodo}
+                  /*addTodo={addNewTodo}*/
                   id={obj.id}
                   handleCheckbox={handleCheckbox}
                />
