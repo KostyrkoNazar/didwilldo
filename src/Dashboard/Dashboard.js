@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import AddGroup from "../AddGroup/AddGoup";
 import TodoGroup from "../TodoGroup/TodoGroup";
@@ -83,15 +84,15 @@ function Dashboard({ data }) {
       setTodoArray(filteredTodos);
    };
 
-   const addNewTodo = (id, newTodo) => {
-      const updatedGroupArray = [...todoGroupArray];
-
-      const index = updatedGroupArray.findIndex((group) => group.id === id);
-
-      updatedGroupArray[index].todoList.push(newTodo);
-
-      setTodoArray(updatedGroupArray);
-   };
+   // const addNewTodo = (id, newTodo) => {
+   //    const updatedGroupArray = [...todoGroupArray];
+   //
+   //    const index = updatedGroupArray.findIndex((group) => group.id === id);
+   //
+   //    updatedGroupArray[index].todoList.push(newTodo);
+   //
+   //    setTodoArray(updatedGroupArray);
+   // };
 
    const handleCheckbox = (groupId, todoId, done) => {
       const updatedGroupArray = [...todoGroupArray];
@@ -149,18 +150,14 @@ function Dashboard({ data }) {
          <AddGroup addNewGroup={addNewGroup} nextGroupId={todoGroupArray.length + 1} />
 
          <div className="dashboardTodoGroup">
-            {todoGroupArray.map((obj, index) => (
-               <TodoGroup
-                  key={index + obj.id}
-                  color={obj.color}
-                  title={obj.title}
-                  created={obj.created}
-                  todoList={obj.todoList}
-                  addTodo={addNewTodo}
-                  id={obj.id}
-                  handleCheckbox={handleCheckbox}
-               />
-            ))}
+            <TodoGroup
+               key={1}
+               color={"red"}
+               title={"Hello"}
+               created={"16-04-2020"}
+               id={1}
+               handleCheckbox={handleCheckbox}
+            />
          </div>
       </div>
    );
@@ -170,4 +167,8 @@ Dashboard.propTypes = {
    data: PropTypes.array,
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+   return state;
+};
+
+export default connect(mapStateToProps)(Dashboard);

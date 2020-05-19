@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import TodoItem from "../TodoItem/TodoItem";
-import AddTodo from "../AddTodo/AddTodo";
-import "./styles.css";
 
-function TodoGroup({ todoList, color, created, title, id, addTodo, handleCheckbox }) {
+import "./styles.css";
+import AddTodo from "../AddTodo/AddTodo";
+
+function TodoGroup(props) {
+   const { todoList, color, created, title, id, handleCheckbox } = props;
    const todoItems = todoList.map((item, index) => {
       if (item["filtered"] && item.filtered !== false) {
          return (
@@ -32,9 +35,7 @@ function TodoGroup({ todoList, color, created, title, id, addTodo, handleCheckbo
 
          <div className="itemsContainer">{todoItems}</div>
 
-         <div>
-            <AddTodo addNewTodo={addTodo} id={id} nextItemId={todoItems.length} />
-         </div>
+         <AddTodo />
       </div>
    );
 }
@@ -49,4 +50,8 @@ TodoGroup.propTypes = {
    handleCheckbox: PropTypes.func,
 };
 
-export default TodoGroup;
+const mapStateToProps = (state) => {
+   return state;
+};
+
+export default connect(mapStateToProps)(TodoGroup);

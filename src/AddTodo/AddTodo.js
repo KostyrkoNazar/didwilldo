@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
 import { addNewTodo } from "../actions";
 
 import "./styles.css";
-import connect from "react-redux/lib/connect/connect";
 
-function AddTodo({ id, nextItemId }, props) {
+function AddTodo(props) {
+   const { id, addNewTodo } = props;
    const [title, setTitle] = useState("");
 
    const createNewTodoItem = (event) => {
       if (title.length > 0) {
          const item = {
-            itemId: nextItemId,
+            itemId: 2,
             title: title,
             done: false,
             filtered: true,
          };
-
-         props.addNewTodo(id, item);
+         addNewTodo(id, item);
          setTitle("");
       }
 
@@ -41,25 +42,14 @@ function AddTodo({ id, nextItemId }, props) {
    );
 }
 
-const mapStateToProps = (state) => {
-   return {
-      title: state.title,
-      itemId: state.itemId,
-      done: false,
-      filtered: true,
-   };
-};
-
-const mapDispatchToProps = (dispatch) => {
-   return {
-      addNewTodo: dispatch(addNewTodo()),
-   };
-};
-
 AddTodo.propTypes = {
    addNewTodo: PropTypes.func,
    id: PropTypes.number,
    nextItemId: PropTypes.number,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddTodo);
+const mapDispatchToProps = (dispatch) => ({
+   addNewTodo: (id, newTodo) => dispatch(addNewTodo(id, newTodo)),
+});
+
+export default connect(null, mapDispatchToProps)(AddTodo);
