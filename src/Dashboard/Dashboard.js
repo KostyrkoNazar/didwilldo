@@ -12,9 +12,9 @@ import TodoFilter from "../TodoFilter/TodoFilter";
 
 import "./styles.css";
 
-function Dashboard({ data }) {
+function Dashboard({ data, state }) {
    const [searchValue, setSearchValue] = useState("");
-   const [todoGroupArray, setTodoArray] = useState([]);
+   const [todoGroupArray, setTodoArray] = useState(state);
 
    useEffect(() => {
       if (searchValue.length === 0) {
@@ -168,9 +168,11 @@ function Dashboard({ data }) {
 
 Dashboard.propTypes = {
    data: PropTypes.array,
+   state: PropTypes.array,
 };
 
 const mapStateToProps = (state) => {
+   console.log(state);
    return state;
 };
 

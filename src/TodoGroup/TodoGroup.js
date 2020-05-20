@@ -51,8 +51,8 @@ TodoGroup.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-   // return { todoList: state.todoList };
-   return state;
+   return { todoList: state.todoList };
+   //return state;
 };
 
 export default connect(mapStateToProps)(TodoGroup);
