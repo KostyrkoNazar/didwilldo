@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import TodoItem from "../TodoItem/TodoItem";
+/*import TodoItem from "../TodoItem/TodoItem";*/
 
 import "./styles.css";
 import AddTodo from "../AddTodo/AddTodo";
 
 function TodoGroup(props) {
-   const { todoList, color, created, title, id, handleCheckbox } = props;
-   const todoItems = todoList.map((item, index) => {
+   const { color, created, title } = props;
+   /*const todoItems = todoList.map((item, index) => {
       if (item["filtered"] && item.filtered !== false) {
          return (
             <TodoItem
@@ -25,7 +25,7 @@ function TodoGroup(props) {
 
       return null;
    });
-
+*/
    return (
       <div className="todoGroup">
          <div className="titleDateContainer" style={{ borderTopColor: color }}>
@@ -33,7 +33,7 @@ function TodoGroup(props) {
             <label className="groupDate">{created}</label>
          </div>
 
-         <div className="itemsContainer">{todoItems}</div>
+         {/* <div className="itemsContainer">{todoItems}</div>*/}
 
          <AddTodo />
       </div>

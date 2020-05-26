@@ -24,9 +24,9 @@ export const addNewGroup = (newGroup) => {
    };
 };
 
-export const searchGroupByColor = (searchColor, groupList) => {
+export const searchGroupByColor = (searchColor) => {
    return {
       type: SEARCH_GROUP_BY_COLOR,
-      payLoad: { searchColor, groupList },
+      payLoad: { searchColor },
    };
 };
