@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-
 import ColorPanel from "../ColorPanel/ColorPanel";
-
 import { getCurrentDate } from "../utils";
 
 import { COLOR_LIST } from "../appConfig";
