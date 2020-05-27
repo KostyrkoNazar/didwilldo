@@ -159,13 +159,14 @@ function Dashboard(props) {
 
          <div className="dashboardTodoGroup">
             {groupList.map((groups, index) => (
-               //console.log(groups.id, index)
                <TodoGroup
                   key={index + " " + groups.id}
                   color={groups.color}
                   title={groups.title}
                   created={groups.created}
                   id={groups.id}
+                  todoItems={groups.todoList}
+                  nextItemId={groups.todoList.length + 1}
                   /* handleCheckbox={handleCheckbox}*/
                />
             ))}

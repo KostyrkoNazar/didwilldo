@@ -7,14 +7,13 @@ import { addNewTodo } from "../actions";
 import "./styles.css";
 
 function AddTodo(props) {
-   const { id, addNewTodo } = props;
-   console.log(id);
+   const { id, addNewTodo, nextItemId } = props;
    const [title, setTitle] = useState("");
 
    const createNewTodoItem = (event) => {
       if (title.length > 0) {
          const item = {
-            itemId: 1,
+            itemId: nextItemId,
             title: title,
             done: false,
             filtered: true,
@@ -52,7 +51,6 @@ AddTodo.propTypes = {
 const mapStateToProps = (state) => {
    return state;
 };
-// eslint-disable-next-line no-debugger
 
 const mapDispatchToProps = (dispatch) => ({
    addNewTodo: (id, newTodo) => dispatch(addNewTodo(id, newTodo)),

@@ -5,8 +5,6 @@ const todoReducer = (state = [], action) => {
    const { type, payLoad } = action;
 
    switch (type) {
-      case actions.ADD_NEW_TODO:
-         return [...state, payLoad.newTodo];
       case actions.IS_COMPLETED: {
          const todoList = [...state];
 
