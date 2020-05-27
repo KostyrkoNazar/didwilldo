@@ -19,6 +19,13 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
                }
             })
             .filter((groups) => groups !== undefined);
+      case actions.ADD_NEW_TODO: {
+         const index = state.findIndex((group) => group.id === payLoad.id);
+         console.log(index);
+         //state[index].todoList.push(payLoad.newTodo);
+
+         return state;
+      }
 
       default:
          return state;

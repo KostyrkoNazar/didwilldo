@@ -6,13 +6,15 @@ import { addNewTodo } from "../actions";
 
 import "./styles.css";
 
-function AddTodo({ id, addNewTodo }) {
+function AddTodo(props) {
+   const { id, addNewTodo } = props;
+   console.log(id);
    const [title, setTitle] = useState("");
 
    const createNewTodoItem = (event) => {
       if (title.length > 0) {
          const item = {
-            itemId: 2,
+            itemId: 1,
             title: title,
             done: false,
             filtered: true,
@@ -47,8 +49,13 @@ AddTodo.propTypes = {
    nextItemId: PropTypes.number,
 };
 
+const mapStateToProps = (state) => {
+   return state;
+};
+// eslint-disable-next-line no-debugger
+
 const mapDispatchToProps = (dispatch) => ({
    addNewTodo: (id, newTodo) => dispatch(addNewTodo(id, newTodo)),
 });
 
-export default connect(null, mapDispatchToProps)(AddTodo);
+export default connect(mapStateToProps, mapDispatchToProps)(AddTodo);

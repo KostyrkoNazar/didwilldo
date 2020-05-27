@@ -155,12 +155,13 @@ function Dashboard(props) {
             </div>
          </div>
 
-         <AddGroup nextGroupId={groupList.length + 1} />
+         <AddGroup />
 
          <div className="dashboardTodoGroup">
             {groupList.map((groups, index) => (
+               //console.log(groups.id, index)
                <TodoGroup
-                  key={index + groups.id}
+                  key={index + " " + groups.id}
                   color={groups.color}
                   title={groups.title}
                   created={groups.created}
@@ -174,7 +175,6 @@ function Dashboard(props) {
 }
 
 Dashboard.propTypes = {
-   data: PropTypes.array,
    groupList: PropTypes.array,
    searchGroupByColor: PropTypes.func,
 };
