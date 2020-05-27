@@ -7,7 +7,8 @@ import "./styles.css";
 import AddTodo from "../AddTodo/AddTodo";
 
 function TodoGroup(props) {
-   const { color, created, title, id, todoItems, nextItemId } = props;
+   const { color, created, title, id, todoItems, nextItemId, todoCheckBox } = props;
+
    const todos = todoItems.map((item) => {
       if (item["filtered"] && item.filtered !== false) {
          return (
@@ -16,9 +17,9 @@ function TodoGroup(props) {
                title={item.title}
                done={item.done}
                itemId={nextItemId}
-               /* handleTodoCheckbox={(todoId, done) => {
-                  handleCheckbox(id, todoId, done);
-               }}*/
+               handleTodoCheckbox={(todoId, done) => {
+                  todoCheckBox(id, todoId, done);
+               }}
             />
          );
       }
@@ -47,11 +48,10 @@ TodoGroup.propTypes = {
    id: PropTypes.number,
    todoItems: PropTypes.array,
    nextItemId: PropTypes.number,
-   /* handleCheckbox: PropTypes.func,*/
+   todoCheckBox: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
-   //console.log(state);
    return state;
 };
 

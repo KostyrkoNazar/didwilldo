@@ -2,23 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { searchGroupByColor } from "../actions";
+import { todoCheckBox } from "../actions";
+import { filterTodoByDone } from "../actions";
 
 import AddGroup from "../AddGroup/AddGoup";
 import TodoGroup from "../TodoGroup/TodoGroup";
 /*import TodoSearch from "../TodoSearch/TodoSearch";*/
 import ColorPanel from "../ColorPanel/ColorPanel";
 
-/*import TodoFilter from "../TodoFilter/TodoFilter";*/
+import TodoFilter from "../TodoFilter/TodoFilter";
 
 import "./styles.css";
 
 function Dashboard(props) {
-   const { groupList, searchGroupByColor } = props;
-   /*  console.log(groupList, props);*/
+   const { groupList, searchGroupByColor, todoCheckBox, filterTodoByDone } = props;
 
-   /*const [searchValue, setSearchValue] = useState("");
-   const [todoGroupArray, setTodoArray] = useState([]);
-*/
    /*useEffect(() => {
       if (searchValue.length === 0) {
          setTodoArray(data);
@@ -64,80 +62,7 @@ function Dashboard(props) {
          })
          .filter((item) => item !== undefined);
    };
-
-   const filterByDone = (completed) => {
-      return todoGroupArray.map((group) => {
-         const { todoList } = group;
-
-         const sortedListByDone = todoList.map((item) => {
-            const { done } = item;
-
-            if (!done) {
-               return { ...item, filtered: !completed };
-            } else {
-               return { ...item };
-            }
-         });
-
-         return { ...group, todoList: sortedListByDone };
-      });
-   };
-
-   const showCompleted = (completed) => {
-      const filteredTodos = filterByDone(completed);
-      setTodoArray(filteredTodos);
-   };
-
-   // const addNewTodo = (id, newTodo) => {
-   //    const updatedGroupArray = [...todoGroupArray];
-   //
-   //    const index = updatedGroupArray.findIndex((group) => group.id === id);
-   //
-   //    updatedGroupArray[index].todoList.push(newTodo);
-   //
-   //    setTodoArray(updatedGroupArray);
-   // };
-
-   const handleCheckbox = (groupId, todoId, done) => {
-      const updatedGroupArray = [...todoGroupArray];
-
-      const groupIndex = updatedGroupArray.findIndex((value) => value.id === groupId);
-      const { todoList } = updatedGroupArray[groupIndex];
-
-      const todoIndex = todoList.findIndex((todo) => todo.itemId === todoId);
-
-      updatedGroupArray[groupIndex].todoList[todoIndex].done = done;
-
-      setTodoArray(updatedGroupArray);
-   };*/
-
-   /*const searchGroupByColor = (searchColor, groupList) => {
-      return groupList
-         .map((group) => {
-            const { color } = group;
-
-            if (searchColor === color) {
-               return { ...group, color: searchColor };
-            } else {
-               return undefined;
-            }
-         })
-         .filter((groups) => groups !== undefined);
-   };*/
-
-   /*const setColor = (color) => {
-      if (color !== "white") {
-         const updatedGroup = searchGroupByColor(color, data);
-         setTodoArray(updatedGroup);
-      } else {
-         setTodoArray(data);
-      }
-   };*/
-   /*
-   const addNewGroup = (newGroup) => {
-      const updatedGroupArray = [...todoGroupArray];
-      setTodoArray([...updatedGroupArray, newGroup]);
-   };*/
+*/
 
    return (
       <div className="dashboard">
@@ -146,12 +71,12 @@ function Dashboard(props) {
                {/*
                <TodoSearch onClear={onClear} onChange={onChange} value={searchValue} />
 */}
+
                <div className="dashboardColorPanel">
                   <ColorPanel setColor={searchGroupByColor} />
                </div>
-               {/*
-               <TodoFilter show={showCompleted} />
-*/}
+
+               <TodoFilter show={filterTodoByDone} />
             </div>
          </div>
 
@@ -166,8 +91,8 @@ function Dashboard(props) {
                   created={groups.created}
                   id={groups.id}
                   todoItems={groups.todoList}
-                  nextItemId={groups.todoList.length + 1}
-                  /* handleCheckbox={handleCheckbox}*/
+                  nextItemId={groups.todoList.length}
+                  todoCheckBox={todoCheckBox}
                />
             ))}
          </div>
@@ -178,6 +103,8 @@ function Dashboard(props) {
 Dashboard.propTypes = {
    groupList: PropTypes.array,
    searchGroupByColor: PropTypes.func,
+   todoCheckBox: PropTypes.func,
+   filterTodoByDone: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
@@ -186,5 +113,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
    searchGroupByColor: (searchColor) => dispatch(searchGroupByColor(searchColor)),
+   todoCheckBox: (groupId, todoId, done) => dispatch(todoCheckBox(groupId, todoId, done)),
+   filterTodoByDone: (completed) => dispatch(filterTodoByDone(completed)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
