@@ -13,6 +13,18 @@ const todoReducer = (state = [], action) => {
 
          return todoList;
       }
+      case actions.SEARCH_TODO_BY_TITLE:
+         return state
+            .map((todos) => {
+               const { title } = todos;
+
+               if (title.startsWith(payLoad.searchTitle)) {
+                  return todos;
+               } else {
+                  return undefined;
+               }
+            })
+            .filter((item) => item !== undefined);
 
       default:
          return state;

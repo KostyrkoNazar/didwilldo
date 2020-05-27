@@ -55,6 +55,31 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
             return { ...group, todoList: sortedListByDone };
          });
 
+      case actions.SEARCH_TODO_BY_TITLE:
+         return state
+            .map((obj) => {
+               const { todoList } = obj;
+
+               const searchResult = todoList
+                  .map((todos) => {
+                     const { title } = todos;
+
+                     if (title.startsWith(payLoad.searchTitle)) {
+                        return todos;
+                     } else {
+                        return undefined;
+                     }
+                  })
+                  .filter((item) => item !== undefined);
+
+               if (searchResult.length !== 0) {
+                  return { ...obj, todoList: searchResult };
+               } else {
+                  return undefined;
+               }
+            })
+            .filter((groups) => groups !== undefined);
+
       default:
          return state;
    }
