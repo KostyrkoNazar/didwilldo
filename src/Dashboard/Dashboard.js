@@ -39,7 +39,7 @@ function Dashboard(props) {
             </div>
          </div>
 
-         <AddGroup />
+         <AddGroup nextGroupId={groupList.length + 1} />
 
          <div className="dashboardTodoGroup">
             {groupList.map((groups, index) => (
