@@ -49,16 +49,6 @@ const searchGroupByColor = (group, color) => {
    return group.color === color ? { ...group, color: group.color } : undefined;
 };
 
-/*
-state
-  .map((group) => {
-     const { color } = group;
-
-     return payLoad.searchColor === color ? { ...group, color: payLoad.searchColor } : undefined;
-  })
-  .filter((groups) => groups !== undefined);
-*/
-
 const groupReducer = (state = DEFAULT_DATA, action) => {
    const { type, payLoad } = action;
 
