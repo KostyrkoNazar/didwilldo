@@ -7,6 +7,7 @@ import TodoSearch from "../TodoSearch/TodoSearch";
 import ColorPanel from "../ColorPanel/ColorPanel";
 
 import TodoFilter from "../TodoFilter/TodoFilter";
+import FilterByDate from "../FilterByDate/FilterByDate";
 
 import "./styles.css";
 
@@ -145,6 +146,9 @@ function Dashboard({ data }) {
                   <ColorPanel setColor={setColor} />
                </div>
                <TodoFilter show={showCompleted} />
+            </div>
+            <div className="dashboardFilterByDate">
+               <FilterByDate />
             </div>
          </div>
 
