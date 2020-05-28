@@ -2,6 +2,43 @@ import { DEFAULT_DATA } from "../appConfig";
 import * as actions from "../actions";
 // state = todoGroups;
 
+/*
+   Фільтр по даті повинен мати окремий компонент. В якому ти зможеш обрати дату по якій ти хочеш фільтрувати.
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
+
+   how to get data values
+   const now = moment(); //create new data object (time is now)
+   const min = now.add(1, "d").format("YYYY-MM-DD");
+   const max = now
+      .add(3, "M")
+      .subtract(1, "d")
+      .format("YYYY-MM-DD");
+
+      від сьогодні і максимум 3 місяці вперед
+ */
+
+const todoListFilterFunction = (filterArray, filter, payload) => {
+   return filterArray
+      .map((arrayItem) => {
+         const { todoList } = arrayItem;
+
+         const sortedTodoList = todoList
+            .map((todoItem) => filter(todoItem, payload))
+            .filter((item) => item !== undefined);
+
+         return sortedTodoList.length !== 0 ? { ...arrayItem, todoList: sortedTodoList } : undefined;
+      })
+      .filter((groups) => groups !== undefined);
+};
+
+const filterTodoByDone = (todoListItem, completed) => {
+   return { ...todoListItem, filtered: !todoListItem.done ? !completed : todoListItem.done };
+};
+
+const searchTodoByTitle = (todos, searchTitle) => {
+   return todos.title.startsWith(searchTitle) ? todos : undefined;
+};
+
 const groupReducer = (state = DEFAULT_DATA, action) => {
    const { type, payLoad } = action;
 
@@ -39,47 +76,9 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
          return [...state];
       }
       case actions.FILTER_TODO_BY_DONE:
-         return state.map((group) => {
-            const { todoList } = group;
-
-            const sortedListByDone = todoList.map((item) => {
-               const { done } = item;
-
-               if (!done) {
-                  return { ...item, filtered: !payLoad.completed };
-               } else {
-                  return { ...item };
-               }
-            });
-
-            return { ...group, todoList: sortedListByDone };
-         });
-
+         return todoListFilterFunction(state, filterTodoByDone, payLoad.completed);
       case actions.SEARCH_TODO_BY_TITLE:
-         return state
-            .map((obj) => {
-               const { todoList } = obj;
-
-               const searchResult = todoList
-                  .map((todos) => {
-                     const { title } = todos;
-
-                     if (title.startsWith(payLoad.searchTitle)) {
-                        return todos;
-                     } else {
-                        return undefined;
-                     }
-                  })
-                  .filter((item) => item !== undefined);
-
-               if (searchResult.length !== 0) {
-                  return { ...obj, todoList: searchResult };
-               } else {
-                  return undefined;
-               }
-            })
-            .filter((groups) => groups !== undefined);
-
+         return todoListFilterFunction(state, searchTodoByTitle, payLoad.searchTitle);
       default:
          return state;
    }
