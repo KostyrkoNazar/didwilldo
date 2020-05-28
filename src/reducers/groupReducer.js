@@ -1,21 +1,5 @@
 import { DEFAULT_DATA } from "../appConfig";
 import * as actions from "../actions";
-// state = todoGroups;
-
-/*
-   Фільтр по даті повинен мати окремий компонент. В якому ти зможеш обрати дату по якій ти хочеш фільтрувати.
-https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
-
-   how to get data values
-   const now = moment(); //create new data object (time is now)
-   const min = now.add(1, "d").format("YYYY-MM-DD");
-   const max = now
-      .add(3, "M")
-      .subtract(1, "d")
-      .format("YYYY-MM-DD");
-
-      від сьогодні і максимум 3 місяці вперед
- */
 
 const todoListFilterFunction = (filterArray, filter, payload) => {
    return filterArray
