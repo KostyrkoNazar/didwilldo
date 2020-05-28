@@ -39,6 +39,26 @@ const searchTodoByTitle = (todos, searchTitle) => {
    return todos.title.startsWith(searchTitle) ? todos : undefined;
 };
 
+const groupListFilterFunction = (filterArray, filter, payload) => {
+   return filterArray.map((group) => {
+      return filter(group, payload.searchColor).filter((groups) => groups !== undefined);
+   });
+};
+
+const searchGroupByColor = (group, color) => {
+   return group.color === color ? { ...group, color: group.color } : undefined;
+};
+
+/*
+state
+  .map((group) => {
+     const { color } = group;
+
+     return payLoad.searchColor === color ? { ...group, color: payLoad.searchColor } : undefined;
+  })
+  .filter((groups) => groups !== undefined);
+*/
+
 const groupReducer = (state = DEFAULT_DATA, action) => {
    const { type, payLoad } = action;
 
@@ -47,17 +67,7 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
          return [...state, payLoad.newGroup];
 
       case actions.SEARCH_GROUP_BY_COLOR:
-         return state
-            .map((group) => {
-               const { color } = group;
-
-               if (payLoad.searchColor === color) {
-                  return { ...group, color: payLoad.searchColor };
-               } else {
-                  return undefined;
-               }
-            })
-            .filter((groups) => groups !== undefined);
+         return groupListFilterFunction(state, searchGroupByColor, payLoad);
 
       case actions.ADD_NEW_TODO: {
          const index = state.findIndex((group) => group.id === payLoad.id);
