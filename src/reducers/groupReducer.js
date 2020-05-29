@@ -64,13 +64,14 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
          // return groupListFilterFunction(state, searchGroupByProperty, payLoad.selectedDate)
          return state
             .map((group) => {
+               console.log(payLoad.selectedDate);
                if (group.created.localeCompare(payLoad.selectedDate) === 0) {
                   return group;
                } else {
                   return null;
                }
             })
-            .filter((value) => value !== undefined);
+            .filter((value) => value !== null);
       default:
          return state;
    }

@@ -5,6 +5,7 @@ import TodoItem from "../TodoItem/TodoItem";
 
 import "./styles.css";
 import AddTodo from "../AddTodo/AddTodo";
+import FilterByDate from "../FilterByDate/FilterByDate";
 
 function TodoGroup(props) {
    const { color, created, title, id, todoItems, nextItemId, todoCheckBox } = props;

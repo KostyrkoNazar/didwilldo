@@ -10,7 +10,7 @@ const max = now.add(3, "M").subtract(1, "d").format("YYYY-MM-DD");*/
 
 const FilterByDate = () => {
    const currentDate = moment().format("DD-MM-YYYY");
-
+   console.log(currentDate);
    const [selectedDate, setSelectedDate] = useState(currentDate);
    const [filterEnabled, setFilterEnabled] = useState(false);
 
