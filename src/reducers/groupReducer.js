@@ -1,13 +1,13 @@
 import { DEFAULT_DATA } from "../appConfig";
 import * as actions from "../actions";
 
-const todoListFilterFunction = (filterArray, filter, payload) => {
+const todoListFilterFunction = (filterArray, callFilter, payload) => {
    return filterArray
       .map((arrayItem) => {
          const { todoList } = arrayItem;
 
          const sortedTodoList = todoList
-            .map((todoItem) => filter(todoItem, payload))
+            .map((todoItem) => callFilter(todoItem, payload))
             .filter((item) => item !== undefined);
 
          return sortedTodoList.length !== 0 ? { ...arrayItem, todoList: sortedTodoList } : undefined;
@@ -23,14 +23,12 @@ const searchTodoByTitle = (todos, searchTitle) => {
    return todos.title.startsWith(searchTitle) ? todos : undefined;
 };
 
-const groupListFilterFunction = (filterArray, filter, payload) => {
-   return filterArray.map((group) => {
-      return filter(group, payload.searchColor).filter((groups) => groups !== undefined);
-   });
+const groupListFilterFunction = (filterArray, callFilter, payload) => {
+   return filterArray.map((group) => callFilter(group, payload.searchColor)).filter((groups) => groups !== undefined);
 };
 
-const searchGroupByColor = (group, color) => {
-   return group.color === color ? { ...group, color: group.color } : undefined;
+const searchGroupByProperty = (group, property) => {
+   return group.color === property ? { ...group, color: group.color } : undefined;
 };
 
 const groupReducer = (state = DEFAULT_DATA, action) => {
@@ -41,8 +39,7 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
          return [...state, payLoad.newGroup];
 
       case actions.SEARCH_GROUP_BY_COLOR:
-         return groupListFilterFunction(state, searchGroupByColor, payLoad);
-
+         return groupListFilterFunction(state, searchGroupByProperty, payLoad);
       case actions.ADD_NEW_TODO: {
          const index = state.findIndex((group) => group.id === payLoad.id);
          state[index].todoList.push(payLoad.newTodo);
