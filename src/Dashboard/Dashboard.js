@@ -5,6 +5,7 @@ import { searchGroupByColor } from "../actions";
 import { todoCheckBox } from "../actions";
 import { filterTodoByDone } from "../actions";
 
+import FilterByDate from "../FilterByDate/FilterByDate";
 import AddGroup from "../AddGroup/AddGoup";
 import TodoGroup from "../TodoGroup/TodoGroup";
 import TodoSearch from "../TodoSearch/TodoSearch";
@@ -36,6 +37,9 @@ function Dashboard(props) {
                </div>
 
                <TodoFilter show={filterTodoByDone} />
+            </div>
+            <div>
+               <FilterByDate />
             </div>
          </div>
 

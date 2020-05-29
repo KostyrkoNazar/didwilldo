@@ -60,6 +60,17 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
          return todoListFilterFunction(state, filterTodoByDone, payLoad.completed);
       case actions.SEARCH_TODO_BY_TITLE:
          return todoListFilterFunction(state, searchTodoByTitle, payLoad.searchTitle);
+      case actions.FILTER_BY_DATE:
+         // return groupListFilterFunction(state, searchGroupByProperty, payLoad.selectedDate)
+         return state
+            .map((group) => {
+               if (group.created.localeCompare(payLoad.selectedDate) === 0) {
+                  return group;
+               } else {
+                  return null;
+               }
+            })
+            .filter((value) => value !== undefined);
       default:
          return state;
    }
