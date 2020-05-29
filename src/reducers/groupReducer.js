@@ -24,11 +24,11 @@ const searchTodoByTitle = (todos, searchTitle) => {
 };
 
 const groupListFilterFunction = (filterArray, callFilter, payload) => {
-   return filterArray.map((group) => callFilter(group, payload.searchColor)).filter((groups) => groups !== undefined);
+   return filterArray.map((group) => callFilter(group, payload)).filter((groups) => groups !== undefined);
 };
 
-const searchGroupByProperty = (group, property) => {
-   return group.color === property ? { ...group, color: group.color } : undefined;
+const searchGroupByColor = (group, payload) => {
+   return group.color === payload.searchColor ? { ...group, color: group.color } : undefined;
 };
 
 const groupReducer = (state = DEFAULT_DATA, action) => {
@@ -39,7 +39,7 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
          return [...state, payLoad.newGroup];
 
       case actions.SEARCH_GROUP_BY_COLOR:
-         return groupListFilterFunction(state, searchGroupByProperty, payLoad);
+         return groupListFilterFunction(state, searchGroupByColor, payLoad);
       case actions.ADD_NEW_TODO: {
          const index = state.findIndex((group) => group.id === payLoad.id);
          state[index].todoList.push(payLoad.newTodo);
@@ -75,5 +75,10 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
          return state;
    }
 };
+
+/*When checkbox is checked and user change Input type date value (using date picker),
+filterByDate Action called with updated 'selectedData' value.
+Use useEffect to subscribe on state 'selectedData' and 'filterEnabled'
+property to call actions only after 'selectedData' and 'filterEnabled' has changed.*/
 
 export default groupReducer;

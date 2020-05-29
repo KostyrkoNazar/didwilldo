@@ -5,12 +5,12 @@ import { connect } from "react-redux";
 
 import { filterByDate } from "../actions";
 
-const currentDate = moment().format("DD-MM-YYYY");
-
 /*const min = now.add(1, "d").format("YYYY-MM-DD");
 const max = now.add(3, "M").subtract(1, "d").format("YYYY-MM-DD");*/
 
 const FilterByDate = () => {
+   const currentDate = moment().format("DD-MM-YYYY");
+
    const [selectedDate, setSelectedDate] = useState(currentDate);
    const [filterEnabled, setFilterEnabled] = useState(false);
 
