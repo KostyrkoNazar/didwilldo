@@ -8,19 +8,19 @@ import { filterByDate } from "../actions";
 /*const min = now.add(1, "d").format("YYYY-MM-DD");
 const max = now.add(3, "M").subtract(1, "d").format("YYYY-MM-DD");*/
 
-const FilterByDate = () => {
-   const currentDate = moment().format("DD-MM-YYYY");
-   console.log(currentDate);
+const FilterByDate = ({ filterByDate }) => {
+   const currentDate = moment().format("YYYY-MM-DD");
+
    const [selectedDate, setSelectedDate] = useState(currentDate);
    const [filterEnabled, setFilterEnabled] = useState(false);
 
    useEffect(() => {
       if (filterEnabled === true) {
-         filterByDate(selectedDate);
+         filterByDate(moment(selectedDate).format("DD-MM-YYYY"));
       } else {
-         filterByDate("");
+         filterByDate(null);
       }
-   }, [selectedDate, filterEnabled]);
+   }, [selectedDate, filterEnabled, filterByDate, currentDate]);
 
    return (
       <div>

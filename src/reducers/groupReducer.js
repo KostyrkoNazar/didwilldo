@@ -24,11 +24,15 @@ const searchTodoByTitle = (todos, searchTitle) => {
 };
 
 const groupListFilterFunction = (filterArray, callFilter, payload) => {
-   return filterArray.map((group) => callFilter(group, payload)).filter((groups) => groups !== undefined);
+   return filterArray.map((group) => callFilter(group, payload)); /*.filter((groups) => groups !== undefined);*/
 };
 
 const searchGroupByColor = (group, payload) => {
    return group.color === payload.searchColor ? { ...group, color: group.color } : undefined;
+};
+
+const searchGroupByCreated = (group, payload) => {
+   return group.created === payload.selectedDate ? { ...group, created: group.created } : undefined;
 };
 
 const groupReducer = (state = DEFAULT_DATA, action) => {
@@ -61,17 +65,20 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
       case actions.SEARCH_TODO_BY_TITLE:
          return todoListFilterFunction(state, searchTodoByTitle, payLoad.searchTitle);
       case actions.FILTER_BY_DATE:
-         // return groupListFilterFunction(state, searchGroupByProperty, payLoad.selectedDate)
-         return state
-            .map((group) => {
-               console.log(payLoad.selectedDate);
-               if (group.created.localeCompare(payLoad.selectedDate) === 0) {
-                  return group;
-               } else {
-                  return null;
-               }
-            })
-            .filter((value) => value !== null);
+         if (payLoad.selectedDate === null) {
+            return state; // or return [...state]
+         } else {
+            //return groupListFilterFunction(state, searchGroupByCreated, payLoad.selectedDate);
+            return state
+               .map((group) => {
+                  const { created } = group;
+                  if (created === payLoad.selectedDate) {
+                     return { ...group, created: group.created };
+                  }
+               })
+               .filter((value) => value !== undefined);
+         }
+
       default:
          return state;
    }
