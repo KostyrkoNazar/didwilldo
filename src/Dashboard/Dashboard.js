@@ -47,7 +47,7 @@ function Dashboard(props) {
 
          <div className="dashboardTodoGroup">
             {groupList.map((groups, index) => {
-               if (groups["filtered"] && groups.filtered !== false) {
+               if (groups.filtered !== false) {
                   return (
                      <TodoGroup
                         key={index + " " + groups.id}

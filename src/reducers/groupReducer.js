@@ -16,11 +16,15 @@ const filterTodoByDone = (todoListItem, completed) => {
    }
 };
 
-const searchTodoByTitle = (todos, searchTitle) => {
-   return {
-      ...todos,
-      filtered: searchTitle.length ? todos.title.startsWith(searchTitle) : todos.filtered,
-   };
+const filterTodoByTitle = (todoListItem, searchTitle) => {
+   if (searchTitle.length > 0) {
+      return { ...todoListItem, sortByTitle: todoListItem.title.startsWith(searchTitle) };
+   } else {
+      return {
+         ...todoListItem,
+         sortByTitle: null,
+      };
+   }
 };
 
 const groupListFilterFunction = (filterArray, callFilter, payload) => {
@@ -69,7 +73,7 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
       case actions.FILTER_TODO_BY_DONE:
          return todoListFilterFunction(state, filterTodoByDone, payLoad.completed);
       case actions.SEARCH_TODO_BY_TITLE:
-         return todoListFilterFunction(state, searchTodoByTitle, payLoad.searchTitle);
+         return todoListFilterFunction(state, filterTodoByTitle, payLoad.searchTitle);
       case actions.FILTER_BY_DATE:
          return groupListFilterFunction(state, searchGroupByCreated, payLoad.selectedDate);
 

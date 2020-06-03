@@ -10,7 +10,10 @@ function TodoGroup(props) {
    const { color, created, title, id, todoItems, nextItemId, todoCheckBox } = props;
 
    const todos = todoItems.map((item) => {
-      if (item.sortByDone === true || item.sortByDone === null) {
+      if (
+         (item.sortByDone === true || item.sortByDone === null) &&
+         (item.sortByTitle === null || item.sortByTitle === true)
+      ) {
          return (
             <TodoItem
                key={item.itemId}

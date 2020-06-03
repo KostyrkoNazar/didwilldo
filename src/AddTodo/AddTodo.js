@@ -13,6 +13,7 @@ function AddTodo(props) {
    const createNewTodoItem = (event) => {
       if (title.length > 0) {
          const item = {
+            sortByTitle: null,
             sortByDone: null,
             itemId: nextItemId,
             title: title,
