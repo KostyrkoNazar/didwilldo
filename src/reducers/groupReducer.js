@@ -32,17 +32,25 @@ const groupListFilterFunction = (filterArray, callFilter, payload) => {
 };
 
 const searchGroupByColor = (group, searchColor) => {
-   return {
-      ...group,
-      filtered: searchColor === "white" ? true : group.color === searchColor,
-   };
+   if (searchColor === "white") {
+      return { ...group, sortByColor: true };
+   } else {
+      return {
+         ...group,
+         sortByColor: group.color === searchColor,
+      };
+   }
 };
 
 const searchGroupByCreated = (group, selectedDate) => {
-   return {
-      ...group,
-      filtered: selectedDate === null ? group.filtered : group.created === selectedDate,
-   };
+   if (selectedDate === null) {
+      return { ...group, sortByCreated: true };
+   } else {
+      return {
+         ...group,
+         sortByCreated: group.created === selectedDate,
+      };
+   }
 };
 
 const groupReducer = (state = DEFAULT_DATA, action) => {

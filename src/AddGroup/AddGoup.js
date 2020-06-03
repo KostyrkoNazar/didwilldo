@@ -17,11 +17,12 @@ function AddGroup({ addNewGroup, nextGroupId }) {
    const createNewGroup = (e) => {
       if (title.length > 0) {
          const newGroup = {
+            sortByColor: null,
+            sortByCreated: null,
             id: nextGroupId,
             color: color === "white" ? randomColor : color,
             title: title,
             created: getCurrentDate(),
-            filtered: false,
             todoList: [],
          };
 
