@@ -1,16 +1,19 @@
 import { DEFAULT_DATA } from "../appConfig";
 import * as actions from "../actions";
 
-const todoListFilterFunction = (filterArray, callFilter, payload) => {
-   return filterArray.map((arrayItem) => {
-      const { todoList } = arrayItem;
-
-      return todoList.map((todoItem) => callFilter(todoItem, payload));
+const todoListFilterFunction = (todoGroups, todoListFilter, payload) => {
+   return todoGroups.map((groupItem) => {
+      const todoList = groupItem.todoList.map((todoItem) => todoListFilter(todoItem, payload));
+      return { ...groupItem, todoList };
    });
 };
 
 const filterTodoByDone = (todoListItem, completed) => {
-   return { ...todoListItem, filtered: !todoListItem.done ? !completed : todoListItem.done };
+   if (completed === true) {
+      return { ...todoListItem, sortByDone: todoListItem.done };
+   } else {
+      return { ...todoListItem, sortByDone: null };
+   }
 };
 
 const searchTodoByTitle = (todos, searchTitle) => {
