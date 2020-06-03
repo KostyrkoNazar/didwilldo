@@ -46,18 +46,22 @@ function Dashboard(props) {
          <AddGroup nextGroupId={groupList.length + 1} />
 
          <div className="dashboardTodoGroup">
-            {groupList.map((groups, index) => (
-               <TodoGroup
-                  key={index + " " + groups.id}
-                  color={groups.color}
-                  title={groups.title}
-                  created={groups.created}
-                  id={groups.id}
-                  todoItems={groups.todoList}
-                  nextItemId={groups.todoList.length}
-                  todoCheckBox={todoCheckBox}
-               />
-            ))}
+            {groupList.map((groups, index) => {
+               if (groups["filtered"] && groups.filtered !== false) {
+                  return (
+                     <TodoGroup
+                        key={index + " " + groups.id}
+                        color={groups.color}
+                        title={groups.title}
+                        created={groups.created}
+                        id={groups.id}
+                        todoItems={groups.todoList}
+                        nextItemId={groups.todoList.length}
+                        todoCheckBox={todoCheckBox}
+                     />
+                  );
+               }
+            })}
          </div>
       </div>
    );

@@ -6,7 +6,7 @@ export const DEFAULT_DATA = [
       color: "yellow",
       title: "Home todo's",
       created: "16-04-2020",
-      filter: true,
+      filtered: true,
       todoList: [],
    },
    {
@@ -14,7 +14,7 @@ export const DEFAULT_DATA = [
       color: "green",
       title: "Work todo's",
       created: "15-04-2020",
-      filter: true,
+      filtered: true,
       todoList: [],
    },
    {
@@ -22,7 +22,7 @@ export const DEFAULT_DATA = [
       color: "orange",
       title: "Shop todo's",
       created: "12-04-2020",
-      filter: true,
+      filtered: true,
       todoList: [],
    },
    {
@@ -30,7 +30,7 @@ export const DEFAULT_DATA = [
       color: "blue",
       title: "Work out todo's",
       created: "16-04-2020",
-      filter: true,
+      filtered: true,
       todoList: [],
    },
    {
@@ -38,7 +38,7 @@ export const DEFAULT_DATA = [
       color: "red",
       title: "reading",
       created: "15-04-2020",
-      filter: true,
+      filtered: true,
       todoList: [],
    },
    {
@@ -46,7 +46,7 @@ export const DEFAULT_DATA = [
       color: "black",
       title: "Cooking",
       created: "12-04-2020",
-      filter: true,
+      filtered: true,
       todoList: [],
    },
 ];

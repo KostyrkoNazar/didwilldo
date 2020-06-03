@@ -21,6 +21,7 @@ function AddGroup({ addNewGroup, nextGroupId }) {
             color: color === "white" ? randomColor : color,
             title: title,
             created: getCurrentDate(),
+            filtered: false,
             todoList: [],
          };
 

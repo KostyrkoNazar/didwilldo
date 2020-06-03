@@ -2,17 +2,11 @@ import { DEFAULT_DATA } from "../appConfig";
 import * as actions from "../actions";
 
 const todoListFilterFunction = (filterArray, callFilter, payload) => {
-   return filterArray
-      .map((arrayItem) => {
-         const { todoList } = arrayItem;
+   return filterArray.map((arrayItem) => {
+      const { todoList } = arrayItem;
 
-         const sortedTodoList = todoList
-            .map((todoItem) => callFilter(todoItem, payload))
-            .filter((item) => item !== undefined);
-
-         return sortedTodoList.length !== 0 ? { ...arrayItem, todoList: sortedTodoList } : undefined;
-      })
-      .filter((groups) => groups !== undefined);
+      return todoList.map((todoItem) => callFilter(todoItem, payload));
+   });
 };
 
 const filterTodoByDone = (todoListItem, completed) => {
@@ -20,19 +14,28 @@ const filterTodoByDone = (todoListItem, completed) => {
 };
 
 const searchTodoByTitle = (todos, searchTitle) => {
-   return todos.title.startsWith(searchTitle) ? todos : undefined;
+   return {
+      ...todos,
+      filtered: searchTitle.length ? todos.title.startsWith(searchTitle) : todos.filtered,
+   };
 };
 
 const groupListFilterFunction = (filterArray, callFilter, payload) => {
-   return filterArray.map((group) => callFilter(group, payload)); /*.filter((groups) => groups !== undefined);*/
+   return filterArray.map((group) => callFilter(group, payload));
 };
 
-const searchGroupByColor = (group, payload) => {
-   return group.color === payload.searchColor ? { ...group, color: group.color } : undefined;
+const searchGroupByColor = (group, searchColor) => {
+   return {
+      ...group,
+      filtered: searchColor === "white" ? true : group.color === searchColor,
+   };
 };
 
-const searchGroupByCreated = (group, payload) => {
-   return group.created === payload.selectedDate ? { ...group, created: group.created } : undefined;
+const searchGroupByCreated = (group, selectedDate) => {
+   return {
+      ...group,
+      filtered: selectedDate === null ? group.filtered : group.created === selectedDate,
+   };
 };
 
 const groupReducer = (state = DEFAULT_DATA, action) => {
@@ -43,7 +46,7 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
          return [...state, payLoad.newGroup];
 
       case actions.SEARCH_GROUP_BY_COLOR:
-         return groupListFilterFunction(state, searchGroupByColor, payLoad);
+         return groupListFilterFunction(state, searchGroupByColor, payLoad.searchColor);
       case actions.ADD_NEW_TODO: {
          const index = state.findIndex((group) => group.id === payLoad.id);
          state[index].todoList.push(payLoad.newTodo);
@@ -65,19 +68,7 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
       case actions.SEARCH_TODO_BY_TITLE:
          return todoListFilterFunction(state, searchTodoByTitle, payLoad.searchTitle);
       case actions.FILTER_BY_DATE:
-         if (payLoad.selectedDate === null) {
-            return state; // or return [...state]
-         } else {
-            //return groupListFilterFunction(state, searchGroupByCreated, payLoad.selectedDate);
-            return state
-               .map((group) => {
-                  const { created } = group;
-                  if (created === payLoad.selectedDate) {
-                     return { ...group, created: group.created };
-                  }
-               })
-               .filter((value) => value !== undefined);
-         }
+         return groupListFilterFunction(state, searchGroupByCreated, payLoad.selectedDate);
 
       default:
          return state;
