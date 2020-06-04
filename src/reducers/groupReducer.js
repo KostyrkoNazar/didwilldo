@@ -33,7 +33,7 @@ const groupListFilterFunction = (filterArray, callFilter, payload) => {
 
 const searchGroupByColor = (group, searchColor) => {
    if (searchColor === "white") {
-      return { ...group, sortByColor: true };
+      return { ...group, sortByColor: null };
    } else {
       return {
          ...group,
@@ -44,7 +44,7 @@ const searchGroupByColor = (group, searchColor) => {
 
 const searchGroupByCreated = (group, selectedDate) => {
    if (selectedDate === null) {
-      return { ...group, sortByCreated: true };
+      return { ...group, sortByCreated: null };
    } else {
       return {
          ...group,
@@ -72,8 +72,7 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
          const groupIndex = state.findIndex((groups) => groups.id === payLoad.groupId);
          const { todoList } = state[groupIndex];
 
-         const todoIndex = todoList.findIndex((todo) => todo.itemId === payLoad.todoId);
-
+         const todoIndex = todoList.findIndex((todo) => todo.id === payLoad.todoId);
          state[groupIndex].todoList[todoIndex].done = payLoad.done;
 
          return [...state];
@@ -89,10 +88,5 @@ const groupReducer = (state = DEFAULT_DATA, action) => {
          return state;
    }
 };
-
-/*When checkbox is checked and user change Input type date value (using date picker),
-filterByDate Action called with updated 'selectedData' value.
-Use useEffect to subscribe on state 'selectedData' and 'filterEnabled'
-property to call actions only after 'selectedData' and 'filterEnabled' has changed.*/
 
 export default groupReducer;

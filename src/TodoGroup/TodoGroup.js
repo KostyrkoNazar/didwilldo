@@ -16,10 +16,10 @@ function TodoGroup(props) {
       ) {
          return (
             <TodoItem
-               key={item.itemId}
+               key={item.id}
                title={item.title}
                done={item.done}
-               itemId={item.itemId}
+               itemId={item.id}
                handleTodoCheckbox={(todoId, done) => {
                   todoCheckBox(id, todoId, done);
                }}

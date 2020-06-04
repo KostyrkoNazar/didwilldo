@@ -15,7 +15,7 @@ function AddTodo(props) {
          const item = {
             sortByTitle: null,
             sortByDone: null,
-            itemId: nextItemId,
+            id: nextItemId,
             title: title,
             done: false,
          };

@@ -46,20 +46,17 @@ function Dashboard(props) {
          <AddGroup nextGroupId={groupList.length + 1} />
 
          <div className="dashboardTodoGroup">
-            {groupList.map((groups, index) => {
+            {groupList.map((group, index) => {
                if (
-                  (groups.sortByColor === null || groups.sortByColor === true) &&
-                  (groups.sortByCreated === null || groups.sortByCreated === true)
+                  (group.sortByColor === null || group.sortByColor === true) &&
+                  (group.sortByCreated === null || group.sortByCreated === true)
                ) {
                   return (
                      <TodoGroup
-                        key={index + " " + groups.id}
-                        color={groups.color}
-                        title={groups.title}
-                        created={groups.created}
-                        id={groups.id}
-                        todoItems={groups.todoList}
-                        nextItemId={groups.todoList.length}
+                        key={index + " " + group.id}
+                        {...group}
+                        todoItems={group.todoList}
+                        nextItemId={group.todoList.length}
                         todoCheckBox={todoCheckBox}
                      />
                   );
