@@ -1,0 +1,7 @@
+
+.submitButton{
+    display: flex;
+    align-self: flex-end;
+    width: 100px;
+
+}
