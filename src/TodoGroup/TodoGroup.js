@@ -1,20 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import TodoItem from "../TodoItem/TodoItem";
-import AddTodo from "../AddTodo/AddTodo";
-import "./styles.css";
 
-function TodoGroup({ todoList, color, created, title, id, addTodo, handleCheckbox }) {
-   const todoItems = todoList.map((item, index) => {
-      if (item["filtered"] && item.filtered !== false) {
+import "./styles.css";
+import AddTodo from "../AddTodo/AddTodo";
+
+function TodoGroup(props) {
+   const { color, created, title, id, todoItems, nextItemId, todoCheckBox } = props;
+
+   const todos = todoItems.map((item) => {
+      if (
+         (item.sortByDone === true || item.sortByDone === null) &&
+         (item.sortByTitle === null || item.sortByTitle === true)
+      ) {
          return (
             <TodoItem
-               key={index}
+               key={item.id}
                title={item.title}
                done={item.done}
-               itemId={item.itemId}
+               itemId={item.id}
                handleTodoCheckbox={(todoId, done) => {
-                  handleCheckbox(id, todoId, done);
+                  todoCheckBox(id, todoId, done);
                }}
             />
          );
@@ -30,23 +37,25 @@ function TodoGroup({ todoList, color, created, title, id, addTodo, handleCheckbo
             <label className="groupDate">{created}</label>
          </div>
 
-         <div className="itemsContainer">{todoItems}</div>
+         <div className="itemsContainer">{todos}</div>
 
-         <div>
-            <AddTodo addNewTodo={addTodo} id={id} nextItemId={todoItems.length} />
-         </div>
+         <AddTodo id={id} nextItemId={nextItemId} />
       </div>
    );
 }
 
 TodoGroup.propTypes = {
-   todoList: PropTypes.array,
    color: PropTypes.string,
    created: PropTypes.string,
    title: PropTypes.string,
    id: PropTypes.number,
-   addTodo: PropTypes.func,
-   handleCheckbox: PropTypes.func,
+   todoItems: PropTypes.array,
+   nextItemId: PropTypes.number,
+   todoCheckBox: PropTypes.func,
 };
 
-export default TodoGroup;
+const mapStateToProps = (state) => {
+   return state;
+};
+
+export default connect(mapStateToProps)(TodoGroup);

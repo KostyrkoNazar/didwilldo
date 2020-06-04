@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-
 import ColorPanel from "../ColorPanel/ColorPanel";
-
 import { getCurrentDate } from "../utils";
 
 import { COLOR_LIST } from "../appConfig";
-
+import { addNewGroup } from "../actions";
+import { connect } from "react-redux";
 import "./styles.css";
 
 function AddGroup({ addNewGroup, nextGroupId }) {
@@ -18,6 +17,8 @@ function AddGroup({ addNewGroup, nextGroupId }) {
    const createNewGroup = (e) => {
       if (title.length > 0) {
          const newGroup = {
+            sortByColor: null,
+            sortByCreated: null,
             id: nextGroupId,
             color: color === "white" ? randomColor : color,
             title: title,
@@ -67,4 +68,8 @@ AddGroup.propTypes = {
    addNewGroup: PropTypes.func,
 };
 
-export default AddGroup;
+const mapDispatchToProps = (dispatch) => ({
+   addNewGroup: (newGroup) => dispatch(addNewGroup(newGroup)),
+});
+
+export default connect(null, mapDispatchToProps)(AddGroup);
