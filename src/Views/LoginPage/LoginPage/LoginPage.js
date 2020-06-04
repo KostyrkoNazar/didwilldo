@@ -43,6 +43,7 @@ function LoginPage({ loginUser }) {
 
 LoginPage.propTypes = {
    loginUser: PropTypes.func,
+   logoutUser: PropTypes.func,
 };
 
 export default LoginPage;

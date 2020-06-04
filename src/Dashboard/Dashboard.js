@@ -7,10 +7,11 @@ import TodoSearch from "../TodoSearch/TodoSearch";
 import ColorPanel from "../ColorPanel/ColorPanel";
 
 import TodoFilter from "../TodoFilter/TodoFilter";
+import LogoutButton from "../Views/LoginPage/components/LoguoutButton/LogoutButton";
 
 import "./styles.css";
 
-function Dashboard({ data }) {
+function Dashboard({ data, logoutUser }) {
    const [searchValue, setSearchValue] = useState("");
    const [todoGroupArray, setTodoArray] = useState([]);
 
@@ -139,6 +140,9 @@ function Dashboard({ data }) {
    return (
       <div className="dashboard">
          <div className="dashboardHeader">
+            <div className="dashboardLougoutButton">
+               <LogoutButton onSubmit={logoutUser} />
+            </div>
             <div className="dashboardTodoSearch">
                <TodoSearch onClear={onClear} onChange={onChange} value={searchValue} />
                <div className="dashboardColorPanel">
@@ -170,6 +174,7 @@ function Dashboard({ data }) {
 
 Dashboard.propTypes = {
    data: PropTypes.array,
+   logoutUser: PropTypes.func,
 };
 
 export default Dashboard;

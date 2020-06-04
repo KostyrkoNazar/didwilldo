@@ -4,6 +4,7 @@ import { DEFAULT_DATA } from "./appConfig";
 import "./App.css";
 import LoginPage from "./Views/LoginPage/LoginPage/LoginPage";
 import { login } from "./api";
+import { logout } from "./api";
 
 function App() {
    const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,8 +14,15 @@ function App() {
       setIsLoggedIn(loginState);
    };
 
+   const logoutUser = () => {
+      const logoutState = logout("");
+      setIsLoggedIn(logoutState);
+   };
+
    return (
-      <div className="App">{isLoggedIn ? <Dashboard data={DEFAULT_DATA} /> : <LoginPage loginUser={loginUser} />}</div>
+      <div className="App">
+         {isLoggedIn ? <Dashboard data={DEFAULT_DATA} logoutUser={logoutUser} /> : <LoginPage loginUser={loginUser} />}
+      </div>
    );
 }
 
