@@ -4,14 +4,14 @@ import TabBar from "../components/TabBar/TabBar";
 import "./styles.css";
 import PropTypes from "prop-types";
 
-function LoginPage({ loginIn }) {
+function LoginPage({ loginUser }) {
    const [login, setLogin] = useState({ email: "", password: "" });
    const [signUp, setSingUp] = useState({ email: "", password: "" });
    const [tabBarButtonId, setTabBarButtonId] = useState("login");
 
    const handleLogin = (email, password) => {
       setLogin({ email, password });
-      loginIn({ email, password });
+      loginUser(email, password);
    };
 
    const handleSignUp = (email, password) => {
@@ -27,7 +27,7 @@ function LoginPage({ loginIn }) {
       }
    };
 
-   useEffect(() => {}, [tabBarButtonId, login, signUp]);
+   useEffect(() => {}, [tabBarButtonId]);
 
    return (
       <div className="loginPage">
@@ -42,7 +42,7 @@ function LoginPage({ loginIn }) {
 }
 
 LoginPage.propTypes = {
-   loginIn: PropTypes.func,
+   loginUser: PropTypes.func,
 };
 
 export default LoginPage;

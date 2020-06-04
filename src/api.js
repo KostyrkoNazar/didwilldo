@@ -1,5 +1,6 @@
 import { getTestUserToken } from "./utils";
 
-export const loginIn = (email, password) => {
-   return getTestUserToken(10);
+export const login = (email, password) => {
+   getTestUserToken();
+   return true;
 };

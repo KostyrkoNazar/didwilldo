@@ -11,12 +11,14 @@ export const updateUserToken = (userToken) => {
    userToken.length > 0 ? localStorage.setItem("token", userToken) : localStorage.setItem("token", "");
 };
 
-export const getTestUserToken = (length) => {
+export const getTestUserToken = () => {
    let result = "";
    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
    const charactersLength = characters.length;
-   for (let i = 0; i < length; i++) {
+   for (let i = 0; i < 10; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
    }
-   return updateUserToken(result);
+   updateUserToken(result);
+
+   return result;
 };

@@ -3,15 +3,18 @@ import Dashboard from "./Dashboard/Dashboard";
 import { DEFAULT_DATA } from "./appConfig";
 import "./App.css";
 import LoginPage from "./Views/LoginPage/LoginPage/LoginPage";
-import { loginIn } from "./api";
+import { login } from "./api";
 
 function App() {
-   const [initialLoginPageState, setInitialLoginPageState] = useState(false);
+   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+   const loginUser = (email, password) => {
+      const loginState = login(email, password);
+      setIsLoggedIn(loginState);
+   };
 
    return (
-      <div className="App">
-         {initialLoginPageState ? <Dashboard data={DEFAULT_DATA} /> : <LoginPage loginIn={loginIn} />}
-      </div>
+      <div className="App">{isLoggedIn ? <Dashboard data={DEFAULT_DATA} /> : <LoginPage loginUser={loginUser} />}</div>
    );
 }
 
