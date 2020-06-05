@@ -42,7 +42,7 @@ function Dashboard(props) {
 
                <TodoFilter show={filterTodoByDone} />
             </div>
-            <div>
+            <div className="dashboardFilterByDate">
                <FilterByDate />
             </div>
          </div>
