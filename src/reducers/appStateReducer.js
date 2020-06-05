@@ -5,14 +5,14 @@ const appStateReducer = (state = { isLoggedIn: false }, action) => {
    const { type, payLoad } = action;
 
    switch (type) {
-      case actions.LOG_IN: {
+      case actions.LOGIN: {
          login(payLoad.email, payLoad.password);
-         return { ...state, isLoggedIn: false };
+         return { ...state, isLoggedIn: true };
       }
 
-      case actions.LOG_OUT: {
+      case actions.LOGOUT: {
          logout();
-         return { ...state, isLoggedIn: true };
+         return { ...state, isLoggedIn: false };
       }
 
       case actions.REGISTER: {
