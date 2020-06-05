@@ -5,6 +5,29 @@ export const CHECK_TODO = "CHECK_TODO";
 export const FILTER_TODO_BY_DONE = "FILTER_TODO_BY_DONE";
 export const SEARCH_TODO_BY_TITLE = "SEARCH_TODO_BY_TITLE";
 export const FILTER_BY_DATE = "FILTER_BY_DATE";
+export const LOG_IN = "LOG_IN";
+export const LOG_OUT = "LOG_OUT";
+export const REGISTER = "REGISTER";
+
+export const register = (email, password) => {
+   return {
+      type: REGISTER,
+      payLoad: { email, password },
+   };
+};
+
+export const login = (email, password) => {
+   return {
+      type: LOG_IN,
+      payLoad: { email, password },
+   };
+};
+
+export const logout = () => {
+   return {
+      type: LOG_OUT,
+   };
+};
 
 export const filterByDate = (selectedDate) => {
    return {

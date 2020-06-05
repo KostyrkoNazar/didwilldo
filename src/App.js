@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React /*, { useState }*/ from "react";
 import Dashboard from "./Dashboard/Dashboard";
-import { DEFAULT_DATA } from "./appConfig";
+//import { DEFAULT_DATA } from "./appConfig";
 import "./App.css";
 import LoginPage from "./Views/LoginPage/LoginPage/LoginPage";
-import { login } from "./api";
-import { logout } from "./api";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import { store } from "./store/store";
-import { Provider } from "react-redux";
+//import { store } from "./store/store";
+//import { Provider } from "react-redux";
 
-function App() {
-   const [isLoggedIn, setIsLoggedIn] = useState(false);
+function App({ appState }) {
+   /*const [isLoggedIn, setIsLoggedIn] = useState(false);
 
    const loginUser = (email, password) => {
       const loginState = login(email, password);
@@ -20,15 +20,18 @@ function App() {
    const logoutUser = () => {
       const logoutState = logout("");
       setIsLoggedIn(logoutState);
-   };
+   };*/
 
-   return (
-      <Provider store={store}>
-         <div className="App">
-           {isLoggedIn ? <Dashboard data={DEFAULT_DATA} logoutUser={logoutUser} /> : <LoginPage loginUser={loginUser} />}
-         </div>
-      </Provider>
-   );
+   console.log(appState);
+   return <div className="App">{appState ? <Dashboard /> : <LoginPage />}</div>;
 }
 
-export default App;
+const mapStateToProps = (state) => {
+   return state;
+};
+
+App.propTypes = {
+   appState: PropTypes.object,
+};
+
+export default connect(mapStateToProps)(App);

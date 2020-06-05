@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { searchGroupByColor } from "../actions";
 import { todoCheckBox } from "../actions";
 import { filterTodoByDone } from "../actions";
+import { logout } from "../actions";
 
 import FilterByDate from "../FilterByDate/FilterByDate";
 import AddGroup from "../AddGroup/AddGoup";
@@ -17,7 +18,7 @@ import LogoutButton from "../Views/LoginPage/components/LoguoutButton/LogoutButt
 import "./styles.css";
 
 function Dashboard(props) {
-   const { logoutUser, groupList, searchGroupByColor, todoCheckBox, filterTodoByDone } = props;
+   const { logout, groupList, searchGroupByColor, todoCheckBox, filterTodoByDone } = props;
 
    const [searchValue, setSearchValue] = useState("");
 
@@ -31,7 +32,7 @@ function Dashboard(props) {
       <div className="dashboard">
          <div className="dashboardHeader">
             <div className="dashboardLougoutButton">
-               <LogoutButton onSubmit={logoutUser} />
+               <LogoutButton onSubmit={logout} />
             </div>
             <div className="dashboardTodoSearch">
                <TodoSearch value={searchValue} onChange={onChange} onClear={onClear} />
@@ -76,7 +77,7 @@ Dashboard.propTypes = {
    searchGroupByColor: PropTypes.func,
    todoCheckBox: PropTypes.func,
    filterTodoByDone: PropTypes.func,
-   logoutUser: PropTypes.func,
+   logout: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
@@ -87,5 +88,6 @@ const mapDispatchToProps = (dispatch) => ({
    searchGroupByColor: (searchColor) => dispatch(searchGroupByColor(searchColor)),
    todoCheckBox: (groupId, todoId, done) => dispatch(todoCheckBox(groupId, todoId, done)),
    filterTodoByDone: (completed) => dispatch(filterTodoByDone(completed)),
+   logout: () => dispatch(logout()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
