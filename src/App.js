@@ -6,6 +6,9 @@ import LoginPage from "./Views/LoginPage/LoginPage/LoginPage";
 import { login } from "./api";
 import { logout } from "./api";
 
+import { store } from "./store/store";
+import { Provider } from "react-redux";
+
 function App() {
    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -20,9 +23,11 @@ function App() {
    };
 
    return (
-      <div className="App">
-         {isLoggedIn ? <Dashboard data={DEFAULT_DATA} logoutUser={logoutUser} /> : <LoginPage loginUser={loginUser} />}
-      </div>
+      <Provider store={store}>
+         <div className="App">
+           {isLoggedIn ? <Dashboard data={DEFAULT_DATA} logoutUser={logoutUser} /> : <LoginPage loginUser={loginUser} />}
+         </div>
+      </Provider>
    );
 }
 
