@@ -12,11 +12,12 @@ import TodoSearch from "../TodoSearch/TodoSearch";
 import ColorPanel from "../ColorPanel/ColorPanel";
 
 import TodoFilter from "../TodoFilter/TodoFilter";
+import LogoutButton from "../Views/LoginPage/components/LoguoutButton/LogoutButton";
 
 import "./styles.css";
 
 function Dashboard(props) {
-   const { groupList, searchGroupByColor, todoCheckBox, filterTodoByDone } = props;
+   const { logoutUser, groupList, searchGroupByColor, todoCheckBox, filterTodoByDone } = props;
 
    const [searchValue, setSearchValue] = useState("");
 
@@ -29,6 +30,9 @@ function Dashboard(props) {
    return (
       <div className="dashboard">
          <div className="dashboardHeader">
+            <div className="dashboardLougoutButton">
+               <LogoutButton onSubmit={logoutUser} />
+            </div>
             <div className="dashboardTodoSearch">
                <TodoSearch value={searchValue} onChange={onChange} onClear={onClear} />
 
@@ -38,7 +42,7 @@ function Dashboard(props) {
 
                <TodoFilter show={filterTodoByDone} />
             </div>
-            <div>
+            <div className="dashboardFilterByDateContainer">
                <FilterByDate />
             </div>
          </div>
@@ -72,6 +76,7 @@ Dashboard.propTypes = {
    searchGroupByColor: PropTypes.func,
    todoCheckBox: PropTypes.func,
    filterTodoByDone: PropTypes.func,
+   logoutUser: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

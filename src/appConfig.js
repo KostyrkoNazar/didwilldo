@@ -1,4 +1,5 @@
 export const COLOR_LIST = ["yellow", "red", "green", "blue", "white"];
+export const USER_TOKEN = "userToken";
 
 export const DEFAULT_DATA = [
    {

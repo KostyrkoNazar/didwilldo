@@ -5,9 +5,6 @@ import { connect } from "react-redux";
 
 import { filterByDate } from "../actions";
 
-/*const min = now.add(1, "d").format("YYYY-MM-DD");
-const max = now.add(3, "M").subtract(1, "d").format("YYYY-MM-DD");*/
-
 const FilterByDate = ({ filterByDate }) => {
    const currentDate = moment().format("YYYY-MM-DD");
 
