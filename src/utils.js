@@ -22,9 +22,3 @@ export const getTestUserToken = () => {
 
    return result;
 };
-
-export const setUserToken = (userToken) => {
-   if (userToken === "") {
-      localStorage.setItem("token", userToken);
-   }
-};

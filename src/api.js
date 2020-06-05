@@ -1,12 +1,11 @@
-import { getTestUserToken } from "./utils";
-import { setUserToken } from "./utils";
+import { getTestUserToken, updateUserToken } from "./utils";
 
 export const login = (email, password) => {
    getTestUserToken();
    return true;
 };
 
-export const logout = (emptyString) => {
-   setUserToken(emptyString);
+export const logout = () => {
+   updateUserToken("");
    return false;
 };
