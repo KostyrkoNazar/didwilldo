@@ -5,16 +5,18 @@ import LoginPage from "./Views/LoginPage/LoginPage/LoginPage";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-function App({ appState }) {
-   return <div className="App">{appState.isLoggedIn ? <Dashboard /> : <LoginPage />}</div>;
+function App({ isLoggedIn }) {
+   console.log(isLoggedIn)
+   return <div className="App">{isLoggedIn? <Dashboard /> : <LoginPage />}</div>;
 }
 
-const mapStateToProps = (appState) => {
-   return appState;
+const mapStateToProps = (state) => {
+   const {appState} = state;
+   return {...appState, isLoggedIn: appState.isLoggedIn};
 };
 
 App.propTypes = {
-   appState: PropTypes.object,
+   isLoggedIn: PropTypes.bool,
 };
 
 export default connect(mapStateToProps)(App);

@@ -12,12 +12,10 @@ function LoginPage({ login, register }) {
    const [tabBarButtonId, setTabBarButtonId] = useState("login");
 
    const handleLogin = (email, password) => {
-      setLoginValues({ email, password });
       login(email, password);
    };
 
    const handleSignUp = (email, password) => {
-      setSingUpValues({ email, password });
       register({ email, password });
    };
 
