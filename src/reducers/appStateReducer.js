@@ -1,13 +1,15 @@
 import * as actions from "../actions";
 import { login, logout } from "../api";
+import { getTestUserToken } from "../utils";
 
-const appStateReducer = (state = { isLoggedIn: false }, action) => {
+const appStateReducer = (state = { isLoggedIn: getTestUserToken() }, action) => {
    const { type, payLoad } = action;
 
    switch (type) {
       case actions.LOGIN: {
-         login(payLoad.email, payLoad.password);
-         return { ...state, isLoggedIn: true };
+         return state.isLoggedIn.length > 0 ?
+           { ...state, isLoggedIn: login(payLoad.email, payLoad.password) } : { ...state, isLoggedIn:false};
+         
       }
 
       case actions.LOGOUT: {
