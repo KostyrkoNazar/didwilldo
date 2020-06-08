@@ -22,3 +22,8 @@ export const getTestUserToken = () => {
 
    return result;
 };
+
+export const getUserToken =() => {
+   const localData = localStorage.getItem('token');
+   return !!localData.length;
+}
