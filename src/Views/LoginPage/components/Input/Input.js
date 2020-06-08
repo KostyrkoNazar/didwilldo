@@ -1,10 +1,20 @@
 import React from 'react';
+import ErrorMessage from "../Form/ErrorMessage/ErrorMessage";
+import PropTypes from 'prop-types';
 import './styles.css'
 
 function Input(props) {
     return(
-        <input {...props} className='defaultInput'/>
+      <div>
+        <input {...props} onClick={()=>props.onFocus} className='defaultInput'/>
+        <ErrorMessage message={props.message}/>
+      </div>
     )
+}
+
+Input.propTypes = {
+  onFocus: PropTypes.func,
+  message: PropTypes.string,
 }
 
 export default Input

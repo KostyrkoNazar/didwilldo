@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../Input/Input";
 import SubmitButton from "../SubmitButton/SubmitButton";
 import "./styles.css";
 import PropTypes from "prop-types";
+import {emailValidation} from "./validation/emailValidation";
 
 function Form(props) {
+
+  const [validationError, setValidationError] = useState({fieldName:null, errorMessage:null})
+
    const onPreSubmit = () => {
       props.onSubmit(props.initValues.email, props.initValues.password);
    };
 
-   const getValue = (inputData, name) => {
+   const setValue = (inputData, name) => {
       props.handleChanges(inputData, name);
    };
 
@@ -19,9 +23,11 @@ function Form(props) {
             type="email"
             autoComplete=""
             placeholder="email"
-            name="email"
+            name='email'
             value={props.initValues.email}
-            onChange={(e) => getValue(e.target.value, "email")}
+            onChange={(e) => setValue(e.target.value, "email")}
+            onFocus={(e) => setValidationError({ ...validationError, errorMessage:  emailValidation(e.target.value) })}
+            message={validationError.errorMessage}
          />
          <Input
             type="password"
@@ -29,7 +35,7 @@ function Form(props) {
             autoComplete=""
             name="password"
             value={props.initValues.password}
-            onChange={(e) => getValue(e.target.value, "password")}
+            onChange={(e) => setValue(e.target.value, "password")}
          />
          <SubmitButton label="Submit" />
       </form>

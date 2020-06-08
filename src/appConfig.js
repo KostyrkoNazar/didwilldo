@@ -1,5 +1,7 @@
 export const COLOR_LIST = ["yellow", "red", "green", "blue", "white"];
 export const USER_TOKEN = "userToken";
+export const INVALID_EMAIL = "Entered value is not email address";
+export const ENTER_EMAIL = "Please, enter email address";
 
 export const DEFAULT_DATA = [
    {
