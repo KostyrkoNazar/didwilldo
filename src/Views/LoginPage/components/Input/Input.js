@@ -6,7 +6,7 @@ import './styles.css'
 function Input(props) {
     return(
       <div>
-        <input {...props} onClick={()=>props.onFocus} className='defaultInput'/>
+        <input {...props} onFocus={props.onFocus} className='defaultInput'/>
         <ErrorMessage message={props.message}/>
       </div>
     )
