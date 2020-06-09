@@ -7,14 +7,14 @@ function Input(props) {
     return(
       <div>
         <input {...props} onFocus={props.onFocus} className='defaultInput'/>
-        <ErrorMessage message={props.message}/>
+        <ErrorMessage message={props.errorMessage}/>
       </div>
     )
 }
 
 Input.propTypes = {
   onFocus: PropTypes.func,
-  message: PropTypes.string,
+  errorMessage: PropTypes.string,
   onBlur: PropTypes.func,
 }
 

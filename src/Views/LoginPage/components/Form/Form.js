@@ -8,7 +8,7 @@ import {emailValidation} from "../Form/validation"
 function Form(props) {
 
   const [validationError, setValidationError] = useState({fieldName:null, errorMessage:null});
-
+const errorMessage = validationError.errorMessage;
   const onPreSubmit = (e) => {
     e.preventDefault()
       props.onSubmit(props.initValues.email, props.initValues.password);
@@ -28,7 +28,7 @@ function Form(props) {
             value={props.initValues.email}
             onChange={(e) => setValue(e.target.value, "email")}
             onFocus={(e) => setValidationError({ ...validationError, errorMessage: emailValidation(e.target.value) })}
-            message={validationError.errorMessage}
+            message={errorMessage}
 
          />
          <Input
