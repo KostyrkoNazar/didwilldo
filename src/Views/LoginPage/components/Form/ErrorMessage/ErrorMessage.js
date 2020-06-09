@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./styles.css"
 
 const ErrorMessage = ({message}) => {
 
   return(
-    <div>
-      {message ? <span style={{color : "red"}}>{message}</span> : null}
+    <div className="errorMessage">
+      {message ? <span>{message}</span> : null}
     </div>
   )
 }

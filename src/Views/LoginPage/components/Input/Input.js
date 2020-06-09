@@ -15,6 +15,7 @@ function Input(props) {
 Input.propTypes = {
   onFocus: PropTypes.func,
   message: PropTypes.string,
+  onBlur: PropTypes.func,
 }
 
 export default Input

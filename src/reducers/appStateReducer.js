@@ -24,7 +24,7 @@ const appStateReducer = (state = { isLoggedIn: getUserToken() }, action) => {
       }
 
       case actions.REGISTER: {
-         return { ...state, isLoggedIn: false };
+         return { ...state, isLoggedIn: login(payLoad.email, payLoad.password) };
 
       }
       default:
