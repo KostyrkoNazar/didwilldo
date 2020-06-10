@@ -7,15 +7,14 @@ function Input(props) {
     return(
       <div>
         <input {...props} onFocus={props.onFocus} className='defaultInput'/>
-        <ErrorMessage message={props.errorMessage}/>
+        <ErrorMessage error={props.error}/>
       </div>
     )
 }
 
 Input.propTypes = {
   onFocus: PropTypes.func,
-  errorMessage: PropTypes.string,
-  onBlur: PropTypes.func,
+  error: PropTypes.string,
 }
 
 export default Input

@@ -40,6 +40,7 @@ function LoginPage({ login, register }) {
                onSubmit={handleLogin}
                initValues={loginValues}
                name="Logged"
+               submitEnabled={loginValues.email.length === 0 && loginValues.password.length < 6}
             />
          ) : (
             <Form
@@ -48,6 +49,7 @@ function LoginPage({ login, register }) {
                onSubmit={handleSignUp}
                initValues={signUpValues}
                name="new"
+               submitEnabled={loginValues.email.length === 0 && loginValues.password.length < 6}
             />
          )}
       </div>
