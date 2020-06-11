@@ -7,7 +7,7 @@ import {emailValidation,passwordValidation} from "./validation"
 
 function Form(props) {
 
-  const [validationError, setValidationError] = useState({fieldName:null, errorMessage: null});
+  const [validationError, setValidationError] = useState({fieldName:"", errorMessage: ""});
 
 
   const onPreSubmit = (e) => {
