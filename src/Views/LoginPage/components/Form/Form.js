@@ -3,12 +3,12 @@ import Input from "../Input/Input";
 import SubmitButton from "../SubmitButton/SubmitButton";
 import "./styles.css";
 import PropTypes from "prop-types";
-import {emailValidation,passwordValidation} from "../Form/validation"
-import {INVALID_EMAIL,ENTER_EMAIL,ENTER_PASSWORD,INVALID_PASSWORD} from "../Form/validation";
+import {emailValidation,passwordValidation} from "./validation"
 
 function Form(props) {
 
-  const [validationError, setValidationError] = useState({fieldName:null, errormessage:""});
+  const [validationError, setValidationError] = useState({fieldName:null, errorMessage: null});
+
 
   const onPreSubmit = (e) => {
     e.preventDefault()
@@ -19,17 +19,33 @@ function Form(props) {
       props.handleChanges(inputData, name);
    };
 
+   const setValidation = (e) => {
+     if (e.target.name === "email") {
+       setValidationError(
+         { ...validationError,
+           errorMessage: emailValidation(e.target.value),
+           fieldName: "email" })
+     } else {
+       setValidationError(
+         { ...validationError,
+           errorMessage: passwordValidation(e.target.value),
+           fieldName: "password"})
+     }
+   }
+
+   const {fieldName, errorMessage} = validationError;
+
    return (
       <form className="loginForm" onSubmit={onPreSubmit} name={props.name}>
          <Input
             type="email"
             autoComplete=""
             placeholder="email"
-            name='email'
+            name="email"
             value={props.initValues.email}
             onChange={(e) => setValue(e.target.value, "email")}
-            onFocus={(e) => setValidationEmail({ ...validationEmail, errorMessage: emailValidation(e.target.value) })}
-            error={validationEmail.errorMessage}
+            onFocus={(e) => setValidation(e) }
+            error={ fieldName === "email" ? errorMessage : null}
 
          />
          <Input
@@ -39,10 +55,10 @@ function Form(props) {
             name="password"
             value={props.initValues.password}
             onChange={(e) => setValue(e.target.value, "password")}
-            onFocus={(e) => setValidationPassword({ ...validationPassword, errorMessage: passwordValidation(e.target.value)})}
-            error={validationPassword.errorMessage}
+            onFocus={(e) => setValidation(e)}
+            error={ fieldName === "password" ? errorMessage : null}
          />
-         <SubmitButton label="Submit" />
+         <SubmitButton disabled={!props.submitEnabled || errorMessage } label="Submit" />
       </form>
    );
 }

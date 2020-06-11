@@ -2,17 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./styles.css"
 
-const ErrorMessage = ({errorMessage}) => {
+const ErrorMessage = ({error}) => {
 
   return(
     <div className="errorMessage">
-      {errorMessage ? <span>{errorMessage}</span> : null}
+      {error ? <span>{error}</span> : null}
     </div>
   )
 }
 
 ErrorMessage.propTypes = {
-  errorMessage: PropTypes.string,
+  error: PropTypes.string,
 }
 
 export default ErrorMessage;
