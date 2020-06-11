@@ -10,11 +10,11 @@ module.exports = {
       sourceType: "module",
       ecmaFeatures: {
          modules: true,
-         jsx: true,
-      },
+         jsx: true
+      }
    },
    plugins: ["react-hooks", "prettier"],
-   extends: ["eslint:recommended", "plugin:react/recommended", "prettier"],
+   extends: ["eslint:recommended", "plugin:react/recommended", "prettier", ],
    rules: {
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",

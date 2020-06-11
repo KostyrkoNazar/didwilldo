@@ -3,27 +3,28 @@ import Form from "../components/Form/Form";
 import TabBar from "../components/TabBar/TabBar";
 import "./styles.css";
 import PropTypes from "prop-types";
+import { login, register } from "../../../actions";
+import { connect } from "react-redux";
 
-function LoginPage({ loginUser }) {
-   const [login, setLogin] = useState({ email: "", password: "" });
-   const [signUp, setSingUp] = useState({ email: "", password: "" });
+function LoginPage({ login, register }) {
+   const [loginValues, setLoginValues] = useState({ email: "", password: "" });
+   const [signUpValues, setSingUpValues] = useState({ email: "", password: "" });
    const [tabBarButtonId, setTabBarButtonId] = useState("login");
 
    const handleLogin = (email, password) => {
-      setLogin({ email, password });
-      loginUser(email, password);
+      login(email, password);
    };
 
    const handleSignUp = (email, password) => {
-      setSingUp({ email, password });
+      register({ email, password });
    };
 
    const handleChanges = (inputData, name) => {
       if (tabBarButtonId === "login") {
-         setLogin({ ...login, [name]: inputData });
+         setLoginValues({ ...loginValues, [name]: inputData });
       }
       if (tabBarButtonId === "register") {
-         setSingUp({ ...signUp, [name]: inputData });
+         setSingUpValues({ ...signUpValues, [name]: inputData });
       }
    };
 
@@ -33,16 +34,35 @@ function LoginPage({ loginUser }) {
       <div className="loginPage">
          <TabBar tabBarButtonId={tabBarButtonId} setTabBarButtonId={setTabBarButtonId} />
          {tabBarButtonId === "login" ? (
-            <Form key="login" handleChanges={handleChanges} onSubmit={handleLogin} initValues={login} name="Logged" />
+            <Form
+               key="login"
+               handleChanges={handleChanges}
+               onSubmit={handleLogin}
+               initValues={loginValues}
+               name="Logged"
+               submitEnabled={loginValues.email.length > 0 && loginValues.password.length}
+            />
          ) : (
-            <Form key="register" handleChanges={handleChanges} onSubmit={handleSignUp} initValues={signUp} name="new" />
+            <Form
+               key="register"
+               handleChanges={handleChanges}
+               onSubmit={handleSignUp}
+               initValues={signUpValues}
+               name="new"
+            />
          )}
       </div>
    );
 }
 
+const mapDispatchToProps = (dispatch) => ({
+   login: (email, password) => dispatch(login(email, password)),
+   register: (email, password) => dispatch(register(email, password)),
+});
+
 LoginPage.propTypes = {
-   loginUser: PropTypes.func,
+   login: PropTypes.func,
+   register: PropTypes.func,
 };
 
-export default LoginPage;
+export default connect(null, mapDispatchToProps)(LoginPage);
