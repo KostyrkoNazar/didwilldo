@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import PropTypes from "prop-types";
 import ColorPanel from "../ColorPanel/ColorPanel";
 import { getCurrentDate } from "../utils";
@@ -8,7 +8,7 @@ import { addNewGroup } from "../actions";
 import { connect } from "react-redux";
 import "./styles.css";
 
-function AddGroup({ addNewGroup, nextGroupId }) {
+function AddGroup ({ addNewGroup, nextGroupId }) {
    const [color, setColor] = useState("white");
    const [title, setTitle] = useState("");
 
