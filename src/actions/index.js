@@ -1,3 +1,5 @@
+/*import 'babel-polyfill';*/
+import fetch from 'cross-fetch';
 export const ADD_NEW_TODO = "ADD_NEW_TODO";
 export const ADD_NEW_GROUP = "ADD_NEW_GROUP";
 export const SEARCH_GROUP_BY_COLOR = "SEARCH_GROUP_BY_COLOR";
@@ -20,16 +22,25 @@ export const requestGroups = () => {
    }
 }
 
-export const receiveGroups = (groups) => {
+export const receiveGroups = (groups,json) => {
    return {
       type: RECEIVE_GROUPS,
-      payLoad: groups,
+      payLoad: {groups,json}
    }
 }
 
 export const receiveGroupsError = () => {
    return {
       type: RECEIVE_GROUPS_ERROR,
+   }
+}
+
+export function fetchGroups(groups) {
+   return function(dispatch) {
+      dispatch(requestGroups(groups))
+      return fetch( 'http://localhost/groupList')
+        .then(response => response.json())
+        .then(json => dispatch(receiveGroups(groups,json)))
    }
 }
 
