@@ -7,7 +7,7 @@ import { filterTodoByDone } from "../actions";
 import { logout } from "../actions";
 
 import FilterByDate from "../FilterByDate/FilterByDate";
-import AddGroup from "../AddGroup/AddGoup";
+import AddGroup from "../AddGroup/AddGroup";
 import TodoGroup from "../TodoGroup/TodoGroup";
 import TodoSearch from "../TodoSearch/TodoSearch";
 import ColorPanel from "../ColorPanel/ColorPanel";
@@ -66,7 +66,7 @@ function Dashboard(props) {
                      />
                   );
                }
-               return null
+               return null;
             })}
          </div>
       </div>

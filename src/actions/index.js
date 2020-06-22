@@ -1,5 +1,3 @@
-/*import 'babel-polyfill';*/
-import fetch from 'cross-fetch';
 export const ADD_NEW_TODO = "ADD_NEW_TODO";
 export const ADD_NEW_GROUP = "ADD_NEW_GROUP";
 export const SEARCH_GROUP_BY_COLOR = "SEARCH_GROUP_BY_COLOR";
@@ -10,39 +8,6 @@ export const FILTER_BY_DATE = "FILTER_BY_DATE";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const REGISTER = "REGISTER";
-
-//async actions
-export const REQUEST_GROUPS = "REQUEST_GROUPS";
-export const RECEIVE_GROUPS = "RECEIVE_GROUPS";
-export const RECEIVE_GROUPS_ERROR = "RECEIVE_GROUPS_ERROR";
-
-export const requestGroups = () => {
-   return {
-      type: REQUEST_GROUPS,
-   }
-}
-
-export const receiveGroups = (groups,json) => {
-   return {
-      type: RECEIVE_GROUPS,
-      payLoad: {groups,json}
-   }
-}
-
-export const receiveGroupsError = () => {
-   return {
-      type: RECEIVE_GROUPS_ERROR,
-   }
-}
-
-export function fetchGroups(groups) {
-   return function(dispatch) {
-      dispatch(requestGroups(groups))
-      return fetch( 'http://localhost/groupList')
-        .then(response => response.json())
-        .then(json => dispatch(receiveGroups(groups,json)))
-   }
-}
 
 export const register = (email, password) => {
    return {
