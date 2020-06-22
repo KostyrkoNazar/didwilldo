@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { searchGroupByColor } from "../actions";
-import { todoCheckBox } from "../actions";
-import { filterTodoByDone } from "../actions";
-import { logout } from "../actions";
+import { logout, todoCheckBox, filterTodoByDone, searchGroupByColor } from "../actions";
+import { requestGroups } from "../actions/async";
 
 import FilterByDate from "../FilterByDate/FilterByDate";
 import AddGroup from "../AddGroup/AddGroup";
@@ -14,11 +12,12 @@ import ColorPanel from "../ColorPanel/ColorPanel";
 
 import TodoFilter from "../TodoFilter/TodoFilter";
 import LogoutButton from "../Views/LoginPage/components/LoguoutButton/LogoutButton";
+import { fetchGroups } from "../api";
 
 import "./styles.css";
 
 function Dashboard(props) {
-   const { logout, groupList, searchGroupByColor, todoCheckBox, filterTodoByDone } = props;
+   const { requestGroups, logout, groupList, searchGroupByColor, todoCheckBox, filterTodoByDone } = props;
 
    const [searchValue, setSearchValue] = useState("");
 
@@ -28,11 +27,15 @@ function Dashboard(props) {
       setSearchValue(str);
    };
 
+   useEffect(() => {
+      fetchGroups();
+   }, []);
+
    return (
       <div className="dashboard">
          <div className="dashboardHeader">
             <div className="dashboardLougoutButton">
-               <LogoutButton onSubmit={logout} />
+               <LogoutButton onSubmit={requestGroups} />
             </div>
             <div className="dashboardTodoSearch">
                <TodoSearch value={searchValue} onChange={onChange} onClear={onClear} />
@@ -79,6 +82,7 @@ Dashboard.propTypes = {
    todoCheckBox: PropTypes.func,
    filterTodoByDone: PropTypes.func,
    logout: PropTypes.func,
+   requestGroups: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
@@ -86,6 +90,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+   requestGroups: () => dispatch(requestGroups()),
    searchGroupByColor: (searchColor) => dispatch(searchGroupByColor(searchColor)),
    todoCheckBox: (groupId, todoId, done) => dispatch(todoCheckBox(groupId, todoId, done)),
    filterTodoByDone: (completed) => dispatch(filterTodoByDone(completed)),

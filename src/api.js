@@ -21,7 +21,7 @@ export const logout = () => {
    return false;
 };
 
-export function fetchGroups() {
+export async function fetchGroups() {
    const initParams = {
       method: "GET",
       headers: {
@@ -33,18 +33,18 @@ export function fetchGroups() {
 }
 
 export function fetchFromApi(url, param, requestCallback, successCallback, errorCallback) {
-   return function (dispatch) {
+   return async function (dispatch) {
       dispatch(requestCallback());
-      return fetch(url, param)
-         .then((response) => {
-            if (response.ok) {
-               return response.json();
-            } else {
-               throw new Error("Network response was not ok");
-            }
-         })
-         .then((json) => dispatch(successCallback(json)))
-
-         .catch((error) => errorCallback(error));
+      try {
+         let response = await fetch(url, param);
+         let data = await response.json();
+         if (data["error"] === "serverError") {
+            dispatch(errorCallback("serverError"));
+         } else {
+            dispatch(successCallback(data));
+         }
+      } catch (error) {
+         dispatch(errorCallback(error));
+      }
    };
 }
