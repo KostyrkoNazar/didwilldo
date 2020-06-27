@@ -11,7 +11,8 @@ function App({ isLoggedIn }) {
 
 const mapStateToProps = (state) => {
    const { appState } = state;
-   return { ...appState, isLoggedIn: appState.isLoggedIn };
+
+   return { isLoggedIn: appState.isLoggedIn };
 };
 
 App.propTypes = {

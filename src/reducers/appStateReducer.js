@@ -1,9 +1,8 @@
 import * as actions from "../actions";
 import { login, logout } from "../api";
-import { getUserToken } from "../utils";
+import { isLoggedIn } from "../utils";
 
-
-const appStateReducer = (state = { isLoggedIn: getUserToken() }, action) => {
+const appStateReducer = (state = { isLoggedIn: isLoggedIn() }, action) => {
    const { type, payLoad } = action;
 
    switch (type) {
@@ -14,18 +13,14 @@ const appStateReducer = (state = { isLoggedIn: getUserToken() }, action) => {
 
       case actions.LOGIN: {
          if (!state.isLoggedIn) {
-
-            return{ ...state, isLoggedIn: login(payLoad.email, payLoad.password) }
-
+            return { ...state, isLoggedIn: login(payLoad.email, payLoad.password) };
          } else {
-            return { ...state, isLoggedIn: false};
+            return { ...state, isLoggedIn: false };
          }
-
       }
 
       case actions.REGISTER: {
          return { ...state, isLoggedIn: login(payLoad.email, payLoad.password) };
-
       }
       default:
          return state;

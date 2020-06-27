@@ -39,8 +39,8 @@ function LoginPage({ login, register }) {
                handleChanges={handleChanges}
                onSubmit={handleLogin}
                initValues={loginValues}
-               name="Logged"
-               submitEnabled={loginValues.email.length > 0 && loginValues.password.length}
+               name="login"
+               submitEnabled={loginValues.email.length > 0 && loginValues.password.length > 0}
             />
          ) : (
             <Form
