@@ -1,4 +1,3 @@
-import { DEFAULT_DATA } from "../appConfig";
 import * as actions from "../actions";
 
 const todoListFilterFunction = (todoGroups, todoListFilter, payload) => {
@@ -53,7 +52,7 @@ const searchGroupByCreated = (group, selectedDate) => {
    }
 };
 
-const groupReducer = (state = DEFAULT_DATA, action) => {
+const groupReducer = (state = [], action) => {
    const { type, payLoad } = action;
 
    switch (type) {

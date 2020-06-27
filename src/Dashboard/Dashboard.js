@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logout, todoCheckBox, filterTodoByDone, searchGroupByColor } from "../actions";
-import { requestGroups } from "../actions/async";
 
 import FilterByDate from "../FilterByDate/FilterByDate";
 import AddGroup from "../AddGroup/AddGroup";
@@ -28,14 +27,14 @@ function Dashboard(props) {
    };
 
    useEffect(() => {
-      fetchGroups();
+      requestGroups();
    }, []);
 
    return (
       <div className="dashboard">
          <div className="dashboardHeader">
             <div className="dashboardLougoutButton">
-               <LogoutButton onSubmit={requestGroups} />
+               <LogoutButton onSubmit={logout} />
             </div>
             <div className="dashboardTodoSearch">
                <TodoSearch value={searchValue} onChange={onChange} onClear={onClear} />
@@ -86,11 +85,11 @@ Dashboard.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-   return state;
+   return { ...state, groupList: state.asyncState.groups };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-   requestGroups: () => dispatch(requestGroups()),
+   requestGroups: () => dispatch(fetchGroups()),
    searchGroupByColor: (searchColor) => dispatch(searchGroupByColor(searchColor)),
    todoCheckBox: (groupId, todoId, done) => dispatch(todoCheckBox(groupId, todoId, done)),
    filterTodoByDone: (completed) => dispatch(filterTodoByDone(completed)),

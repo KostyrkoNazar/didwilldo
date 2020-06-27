@@ -3,25 +3,22 @@ import { receiveGroups, receiveGroupsError, requestGroups } from "./actions/asyn
 
 const BASE_URL = "http://localhost:3000";
 const GROUPS_ENDPOINT = "/groupList";
-const TODO_LIST_ENDPOINT = "/todoList";
-const SORT_BY_COLOR_ENDPOINT = "/sortByColor";
-const SORT_BY_CREATED_ENDPOINT = "/sortByCreated";
-const COLOR_ENDPOINT = "/color";
-const TITLE_ENDPOINT = "/title";
-const CREATED_ENDPOINT = "/created";
-const ID_ENDPOINT = "/id";
 
+// eslint-disable-next-line no-unused-vars
 export const login = (email, password) => {
-   getTestUserToken();
+   const testToken = getTestUserToken();
+   updateUserToken(testToken);
+
    return true;
 };
 
 export const logout = () => {
    updateUserToken("");
+
    return false;
 };
 
-export async function fetchGroups() {
+export function fetchGroups() {
    const initParams = {
       method: "GET",
       headers: {
@@ -29,17 +26,18 @@ export async function fetchGroups() {
       },
    };
 
-   fetchFromApi(BASE_URL + GROUPS_ENDPOINT, initParams, requestGroups, receiveGroups, receiveGroupsError);
+   return fetchFromApi(BASE_URL + GROUPS_ENDPOINT, initParams, requestGroups, receiveGroups, receiveGroupsError);
 }
 
 export function fetchFromApi(url, param, requestCallback, successCallback, errorCallback) {
-   return async function (dispatch) {
+   return async (dispatch) => {
       dispatch(requestCallback());
       try {
          let response = await fetch(url, param);
          let data = await response.json();
-         if (data["error"] === "serverError") {
-            dispatch(errorCallback("serverError"));
+
+         if (data["error"]) {
+            dispatch(errorCallback(data.error));
          } else {
             dispatch(successCallback(data));
          }
