@@ -4,8 +4,8 @@
       "id": 1,
       "sortByColor": null,
       "sortByCreated": null,
-      "color": "yellow",
-      "title": "Home todo's",
+      "color": "aqua",
+      "title": "Loaded from JSON server!",
       "created": "16-04-2020",
       "todoList": []
     },

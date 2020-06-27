@@ -1,7 +1,8 @@
 import { getTestUserToken, updateUserToken } from "./utils";
 import { receiveGroups, receiveGroupsError, requestGroups } from "./actions/async";
 
-const BASE_URL = "http://localhost:3000";
+const JSON_SERVER_PORT = "3100";
+const BASE_URL = `http://localhost:${JSON_SERVER_PORT}`;
 const GROUPS_ENDPOINT = "/groupList";
 
 // eslint-disable-next-line no-unused-vars
