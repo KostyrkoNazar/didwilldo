@@ -16,7 +16,7 @@ import { fetchGroups } from "../api";
 import "./styles.css";
 
 function Dashboard(props) {
-   const { requestGroups, logout, groupList, searchGroupByColor, todoCheckBox, filterTodoByDone } = props;
+   const { requestGroups, logout, groups, searchGroupByColor, todoCheckBox, filterTodoByDone } = props;
 
    const [searchValue, setSearchValue] = useState("");
 
@@ -28,12 +28,12 @@ function Dashboard(props) {
 
    useEffect(() => {
       requestGroups();
-   }, []);
+   });
 
    return (
       <div className="dashboard">
          <div className="dashboardHeader">
-            <div className="dashboardLougoutButton">
+            <div className="dashboardLogoutButton">
                <LogoutButton onSubmit={logout} />
             </div>
             <div className="dashboardTodoSearch">
@@ -50,10 +50,10 @@ function Dashboard(props) {
             </div>
          </div>
 
-         <AddGroup nextGroupId={groupList.length + 1} />
+         <AddGroup nextGroupId={groups.length + 1} />
 
          <div className="dashboardTodoGroup">
-            {groupList.map((group, index) => {
+            {groups.map((group, index) => {
                if (
                   (group.sortByColor === null || group.sortByColor === true) &&
                   (group.sortByCreated === null || group.sortByCreated === true)
@@ -76,7 +76,7 @@ function Dashboard(props) {
 }
 
 Dashboard.propTypes = {
-   groupList: PropTypes.array,
+   groups: PropTypes.array,
    searchGroupByColor: PropTypes.func,
    todoCheckBox: PropTypes.func,
    filterTodoByDone: PropTypes.func,
@@ -85,7 +85,11 @@ Dashboard.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-   return { ...state, groupList: state.asyncState.groups };
+   const { groupReducer } = state;
+   console.log(groupReducer, "groupReducer");
+   const { groups } = groupReducer;
+   console.log(groups, "groups");
+   return { groups };
 };
 
 const mapDispatchToProps = (dispatch) => ({

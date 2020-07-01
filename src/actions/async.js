@@ -18,6 +18,6 @@ export const receiveGroups = (groups) => {
 export const receiveGroupsError = (error) => {
    return {
       type: RECEIVE_GROUPS_ERROR,
-      payLoad: error,
+      payLoad: { error },
    };
 };

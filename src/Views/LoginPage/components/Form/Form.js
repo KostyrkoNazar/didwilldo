@@ -3,15 +3,13 @@ import Input from "../Input/Input";
 import SubmitButton from "../SubmitButton/SubmitButton";
 import "./styles.css";
 import PropTypes from "prop-types";
-import {emailValidation,passwordValidation} from "./validation"
+import { emailValidation, passwordValidation } from "./validation";
 
 function Form(props) {
+   const [validationError, setValidationError] = useState({ fieldName: "", errorMessage: "" });
 
-  const [validationError, setValidationError] = useState({fieldName:"", errorMessage: ""});
-
-
-  const onPreSubmit = (e) => {
-    e.preventDefault()
+   const onPreSubmit = (e) => {
+      e.preventDefault();
       props.onSubmit(props.initValues.email, props.initValues.password);
    };
 
@@ -20,20 +18,18 @@ function Form(props) {
    };
 
    const setValidation = (e) => {
-     if (e.target.name === "email") {
-       setValidationError(
-         { ...validationError,
-           errorMessage: emailValidation(e.target.value),
-           fieldName: "email" })
-     } else {
-       setValidationError(
-         { ...validationError,
-           errorMessage: passwordValidation(e.target.value),
-           fieldName: "password"})
-     }
-   }
+      if (e.target.name === "email") {
+         setValidationError({ ...validationError, errorMessage: emailValidation(e.target.value), fieldName: "email" });
+      } else {
+         setValidationError({
+            ...validationError,
+            errorMessage: passwordValidation(e.target.value),
+            fieldName: "password",
+         });
+      }
+   };
 
-   const {fieldName, errorMessage} = validationError;
+   const { fieldName, errorMessage } = validationError;
 
    return (
       <form className="loginForm" onSubmit={onPreSubmit} name={props.name}>
@@ -44,9 +40,8 @@ function Form(props) {
             name="email"
             value={props.initValues.email}
             onChange={(e) => setValue(e.target.value, "email")}
-            onFocus={(e) => setValidation(e) }
-            error={ fieldName === "email" ? errorMessage : null}
-
+            onFocus={(e) => setValidation(e)}
+            error={fieldName === "email" ? errorMessage : null}
          />
          <Input
             type="password"
@@ -56,9 +51,9 @@ function Form(props) {
             value={props.initValues.password}
             onChange={(e) => setValue(e.target.value, "password")}
             onFocus={(e) => setValidation(e)}
-            error={ fieldName === "password" ? errorMessage : null}
+            error={fieldName === "password" ? errorMessage : null}
          />
-         <SubmitButton disabled={!props.submitEnabled || errorMessage } label="Submit" />
+         <SubmitButton disabled={!props.submitEnabled || errorMessage} label="Submit" />
       </form>
    );
 }
@@ -68,7 +63,7 @@ Form.propTypes = {
    initValues: PropTypes.object,
    handleChanges: PropTypes.func,
    name: PropTypes.string,
-  submitEnabled: PropTypes.bool,
+   submitEnabled: PropTypes.bool,
 };
 
 export default Form;

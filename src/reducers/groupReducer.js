@@ -1,4 +1,5 @@
 import * as actions from "../actions";
+import * as asyncActions from "../actions/async";
 
 const todoListFilterFunction = (todoGroups, todoListFilter, payload) => {
    return todoGroups.map((groupItem) => {
@@ -52,37 +53,54 @@ const searchGroupByCreated = (group, selectedDate) => {
    }
 };
 
-const groupReducer = (state = [], action) => {
+const groupReducer = (
+   state = {
+      error: null,
+      loading: false,
+      groups: [],
+   },
+   action
+) => {
    const { type, payLoad } = action;
+   const { groups } = state;
+   //console.log(groups);
 
    switch (type) {
       case actions.ADD_NEW_GROUP:
-         return [...state, payLoad.newGroup];
+         return [...groups, payLoad.newGroup];
 
       case actions.SEARCH_GROUP_BY_COLOR:
-         return groupListFilterFunction(state, searchGroupByColor, payLoad.searchColor);
+         return groupListFilterFunction(groups, searchGroupByColor, payLoad.searchColor);
       case actions.ADD_NEW_TODO: {
-         const index = state.findIndex((group) => group.id === payLoad.id);
-         state[index].todoList.push(payLoad.newTodo);
+         const index = groups.findIndex((group) => group.id === payLoad.id);
+         groups[index].todoList.push(payLoad.newTodo);
 
-         return [...state];
+         return [...groups];
       }
       case actions.CHECK_TODO: {
-         const groupIndex = state.findIndex((groups) => groups.id === payLoad.groupId);
-         const { todoList } = state[groupIndex];
+         const groupIndex = groups.findIndex((group) => group.id === payLoad.groupId);
+         const { todoList } = groups[groupIndex];
 
          const todoIndex = todoList.findIndex((todo) => todo.id === payLoad.todoId);
-         state[groupIndex].todoList[todoIndex].done = payLoad.done;
+         groups[groupIndex].todoList[todoIndex].done = payLoad.done;
 
-         return [...state];
+         return [...groups];
       }
       case actions.FILTER_TODO_BY_DONE:
-         return todoListFilterFunction(state, filterTodoByDone, payLoad.completed);
+         return todoListFilterFunction(groups, filterTodoByDone, payLoad.completed);
       case actions.SEARCH_TODO_BY_TITLE:
-         return todoListFilterFunction(state, filterTodoByTitle, payLoad.searchTitle);
+         return todoListFilterFunction(groups, filterTodoByTitle, payLoad.searchTitle);
       case actions.FILTER_BY_DATE:
-         return groupListFilterFunction(state, searchGroupByCreated, payLoad.selectedDate);
-
+         return groupListFilterFunction(groups, searchGroupByCreated, payLoad.selectedDate);
+      case asyncActions.RECEIVE_GROUPS: {
+         return { ...state, loading: false, groups: payLoad.groups };
+      }
+      case asyncActions.RECEIVE_GROUPS_ERROR: {
+         return { ...state, error: payLoad.error, loading: false };
+      }
+      case asyncActions.REQUEST_GROUPS: {
+         return { ...state, error: null, loading: true };
+      }
       default:
          return state;
    }
