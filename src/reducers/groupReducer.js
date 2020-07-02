@@ -86,9 +86,9 @@ const groupReducer = (
          return { ...state, groups: groups };
       }
       case actions.FILTER_TODO_BY_DONE:
-         return todoListFilterFunction(groups, filterTodoByDone, payLoad.completed);
+         return { ...state, groups: todoListFilterFunction(groups, filterTodoByDone, payLoad.completed) };
       case actions.SEARCH_TODO_BY_TITLE:
-         return todoListFilterFunction(groups, filterTodoByTitle, payLoad.searchTitle);
+         return { ...state, groups: todoListFilterFunction(groups, filterTodoByTitle, payLoad.searchTitle) };
       case actions.FILTER_BY_DATE:
          return { ...state, groups: groupListFilterFunction(groups, searchGroupByCreated, payLoad.selectedDate) };
       case asyncActions.REQUEST_GROUPS: {

@@ -8,6 +8,7 @@ import "./styles.css";
 
 function AddTodo(props) {
    const { id, addNewTodo, nextItemId } = props;
+   console.log(id, "todo id");
    const [title, setTitle] = useState("");
 
    const createNewTodoItem = (event) => {
