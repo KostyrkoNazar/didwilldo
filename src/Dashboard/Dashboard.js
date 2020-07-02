@@ -86,9 +86,7 @@ Dashboard.propTypes = {
 
 const mapStateToProps = (state) => {
    const { groupReducer } = state;
-   console.log(groupReducer, "groupReducer");
    const { groups } = groupReducer;
-   console.log(groups, "groups");
    return { groups };
 };
 
