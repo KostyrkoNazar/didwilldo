@@ -67,15 +67,14 @@ const groupReducer = (
 
    switch (type) {
       case actions.ADD_NEW_GROUP:
-         return [...groups, payLoad.newGroup];
-
+         return { ...state, groups: payLoad.newGroup };
       case actions.SEARCH_GROUP_BY_COLOR:
          return groupListFilterFunction(groups, searchGroupByColor, payLoad.searchColor);
       case actions.ADD_NEW_TODO: {
          const index = groups.findIndex((group) => group.id === payLoad.id);
          groups[index].todoList.push(payLoad.newTodo);
 
-         return [...groups];
+         return { ...state, groups: groups };
       }
       case actions.CHECK_TODO: {
          const groupIndex = groups.findIndex((group) => group.id === payLoad.groupId);
@@ -84,22 +83,22 @@ const groupReducer = (
          const todoIndex = todoList.findIndex((todo) => todo.id === payLoad.todoId);
          groups[groupIndex].todoList[todoIndex].done = payLoad.done;
 
-         return [...groups];
+         return { ...state, groups: groups };
       }
       case actions.FILTER_TODO_BY_DONE:
          return todoListFilterFunction(groups, filterTodoByDone, payLoad.completed);
       case actions.SEARCH_TODO_BY_TITLE:
          return todoListFilterFunction(groups, filterTodoByTitle, payLoad.searchTitle);
       case actions.FILTER_BY_DATE:
-         return groupListFilterFunction(groups, searchGroupByCreated, payLoad.selectedDate);
+         return { ...state, groups: groupListFilterFunction(groups, searchGroupByCreated, payLoad.selectedDate) };
+      case asyncActions.REQUEST_GROUPS: {
+         return { ...state, error: null, loading: true };
+      }
       case asyncActions.RECEIVE_GROUPS: {
          return { ...state, loading: false, groups: payLoad.groups };
       }
       case asyncActions.RECEIVE_GROUPS_ERROR: {
          return { ...state, error: payLoad.error, loading: false };
-      }
-      case asyncActions.REQUEST_GROUPS: {
-         return { ...state, error: null, loading: true };
       }
       default:
          return state;

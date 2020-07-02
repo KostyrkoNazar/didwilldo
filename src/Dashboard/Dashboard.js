@@ -28,7 +28,7 @@ function Dashboard(props) {
 
    useEffect(() => {
       requestGroups();
-   });
+   }, []);
 
    return (
       <div className="dashboard">
