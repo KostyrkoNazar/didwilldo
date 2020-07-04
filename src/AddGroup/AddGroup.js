@@ -4,9 +4,9 @@ import ColorPanel from "../ColorPanel/ColorPanel";
 import { getCurrentDate } from "../utils";
 
 import { COLOR_LIST } from "../appConfig";
-import { addNewGroup } from "../actions";
 import { connect } from "react-redux";
 import "./styles.css";
+import { postGroup } from "../api";
 
 function AddGroup({ addNewGroup, nextGroupId }) {
    const [color, setColor] = useState("white");
@@ -69,7 +69,7 @@ AddGroup.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-   addNewGroup: (newGroup) => dispatch(addNewGroup(newGroup)),
+   addNewGroup: (newGroup) => dispatch(postGroup(newGroup)),
 });
 
 export default connect(null, mapDispatchToProps)(AddGroup);

@@ -1,5 +1,5 @@
 import { getTestUserToken, updateUserToken } from "./utils";
-import { receiveGroups, receiveGroupsError, requestGroups } from "./actions/async";
+import { receiveGroups, receiveGroupsError, requestGroups, addNewGroup } from "./actions/async";
 
 const JSON_SERVER_PORT = "3100";
 const BASE_URL = `http://localhost:${JSON_SERVER_PORT}`;
@@ -28,6 +28,18 @@ export function fetchGroups() {
    };
 
    return fetchFromApi(BASE_URL + GROUPS_ENDPOINT, initParams, requestGroups, receiveGroups, receiveGroupsError);
+}
+
+export function postGroup(object) {
+   const initParams = {
+      method: "POST",
+      headers: {
+         "Content-Type": "application/json",
+      },
+      body: JSON.stringify(object),
+   };
+
+   return fetchFromApi(BASE_URL + GROUPS_ENDPOINT, initParams, requestGroups, addNewGroup, receiveGroupsError);
 }
 
 export function fetchFromApi(url, param, requestCallback, successCallback, errorCallback) {

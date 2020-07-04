@@ -65,7 +65,7 @@ const groupReducer = (
    const { groups } = state;
 
    switch (type) {
-      case actions.ADD_NEW_GROUP:
+      case asyncActions.ADD_NEW_GROUP:
          return { ...state, groups: [...groups, payLoad.newGroup] };
       case actions.SEARCH_GROUP_BY_COLOR:
          return { ...state, groups: groupListFilterFunction(groups, searchGroupByColor, payLoad.searchColor) };
