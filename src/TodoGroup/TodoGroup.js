@@ -9,14 +9,14 @@ import AddTodo from "../AddTodo/AddTodo";
 function TodoGroup(props) {
    const { color, created, title, id, todoItems, nextItemId, todoCheckBox } = props;
 
-   const todos = todoItems.map((item) => {
+   const todos = todoItems.map((item, index) => {
       if (
          (item.sortByDone === true || item.sortByDone === null) &&
          (item.sortByTitle === null || item.sortByTitle === true)
       ) {
          return (
             <TodoItem
-               key={item.id}
+               key={item.id + " " + index}
                title={item.title}
                done={item.done}
                itemId={item.id}

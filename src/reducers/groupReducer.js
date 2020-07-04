@@ -3,7 +3,7 @@ import * as asyncActions from "../actions/async";
 
 const todoListFilterFunction = (todoGroups, todoListFilter, payload) => {
    return todoGroups.map((groupItem) => {
-      const todoList = groupItem.todoList.map((todoItem) => todoListFilter(todoItem, payload));
+      const todoList = groupItem["todoList"].map((todoItem) => todoListFilter(todoItem, payload));
       return { ...groupItem, todoList };
    });
 };
@@ -63,18 +63,17 @@ const groupReducer = (
 ) => {
    const { type, payLoad } = action;
    const { groups } = state;
-   //console.log(groups);
 
    switch (type) {
       case actions.ADD_NEW_GROUP:
-         return { ...state, groups: payLoad.newGroup };
+         return { ...state, groups: [...groups, payLoad.newGroup] };
       case actions.SEARCH_GROUP_BY_COLOR:
-         return groupListFilterFunction(groups, searchGroupByColor, payLoad.searchColor);
+         return { ...state, groups: groupListFilterFunction(groups, searchGroupByColor, payLoad.searchColor) };
       case actions.ADD_NEW_TODO: {
          const index = groups.findIndex((group) => group.id === payLoad.id);
          groups[index].todoList.push(payLoad.newTodo);
 
-         return { ...state, groups: groups };
+         return { ...state, groups };
       }
       case actions.CHECK_TODO: {
          const groupIndex = groups.findIndex((group) => group.id === payLoad.groupId);
@@ -83,7 +82,7 @@ const groupReducer = (
          const todoIndex = todoList.findIndex((todo) => todo.id === payLoad.todoId);
          groups[groupIndex].todoList[todoIndex].done = payLoad.done;
 
-         return { ...state, groups: groups };
+         return { ...state };
       }
       case actions.FILTER_TODO_BY_DONE:
          return { ...state, groups: todoListFilterFunction(groups, filterTodoByDone, payLoad.completed) };
