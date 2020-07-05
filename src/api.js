@@ -1,5 +1,5 @@
 import { getTestUserToken, updateUserToken } from "./utils";
-import { receiveGroups, receiveGroupsError, requestGroups, addNewGroup } from "./actions/async";
+import { receiveGroups, receiveGroupsError, requestGroups, addNewGroup, addNewTodo } from "./actions/async";
 
 const JSON_SERVER_PORT = "3100";
 const BASE_URL = `http://localhost:${JSON_SERVER_PORT}`;
@@ -30,13 +30,25 @@ export function fetchGroups() {
    return fetchFromApi(BASE_URL + GROUPS_ENDPOINT, initParams, requestGroups, receiveGroups, receiveGroupsError);
 }
 
-export function postGroup(object) {
+export function postGroup(group) {
    const initParams = {
       method: "POST",
       headers: {
          "Content-Type": "application/json",
       },
-      body: JSON.stringify(object),
+      body: JSON.stringify(group),
+   };
+
+   return fetchFromApi(BASE_URL + GROUPS_ENDPOINT, initParams, requestGroups, addNewGroup, receiveGroupsError);
+}
+
+export function postTodo(id, group) {
+   const initParams = {
+      method: "PUT",
+      headers: {
+         "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id, todoList: group }),
    };
 
    return fetchFromApi(BASE_URL + GROUPS_ENDPOINT, initParams, requestGroups, addNewGroup, receiveGroupsError);

@@ -50,7 +50,7 @@ function Dashboard(props) {
             </div>
          </div>
 
-         <AddGroup nextGroupId={groups.length} />
+         <AddGroup nextGroupId={groups.length + 1} />
 
          <div className="dashboardTodoGroup">
             {groups.map((group, index) => {

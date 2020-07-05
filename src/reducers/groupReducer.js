@@ -69,7 +69,7 @@ const groupReducer = (
          return { ...state, groups: [...groups, payLoad.newGroup] };
       case actions.SEARCH_GROUP_BY_COLOR:
          return { ...state, groups: groupListFilterFunction(groups, searchGroupByColor, payLoad.searchColor) };
-      case actions.ADD_NEW_TODO: {
+      case asyncActions.ADD_NEW_TODO: {
          const index = groups.findIndex((group) => group.id === payLoad.id);
          groups[index].todoList.push(payLoad.newTodo);
 

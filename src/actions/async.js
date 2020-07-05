@@ -2,6 +2,7 @@ export const REQUEST_GROUPS = "REQUEST_GROUPS";
 export const RECEIVE_GROUPS = "RECEIVE_GROUPS";
 export const RECEIVE_GROUPS_ERROR = "RECEIVE_GROUPS_ERROR";
 export const ADD_NEW_GROUP = "ADD_NEW_GROUP";
+export const ADD_NEW_TODO = "ADD_NEW_TODO";
 
 export const requestGroups = () => {
    return {
@@ -27,5 +28,11 @@ export const addNewGroup = (newGroup) => {
    return {
       type: ADD_NEW_GROUP,
       payLoad: { newGroup },
+   };
+};
+export const addNewTodo = (id, newTodo) => {
+   return {
+      type: ADD_NEW_TODO,
+      payLoad: { id, newTodo },
    };
 };

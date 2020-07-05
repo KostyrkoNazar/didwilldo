@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { addNewTodo } from "../actions";
-
 import "./styles.css";
+import { postTodo } from "../api";
 
 function AddTodo(props) {
    const { id, addNewTodo, nextItemId } = props;
@@ -55,7 +54,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-   addNewTodo: (id, newTodo) => dispatch(addNewTodo(id, newTodo)),
+   addNewTodo: (id, newTodo) => dispatch(postTodo(id, newTodo)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTodo);
