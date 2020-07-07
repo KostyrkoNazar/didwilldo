@@ -5,9 +5,10 @@ import TodoItem from "../TodoItem/TodoItem";
 
 import "./styles.css";
 import AddTodo from "../AddTodo/AddTodo";
+import { postTodo } from "../api";
 
 function TodoGroup(props) {
-   const { color, created, title, id, todoItems, nextItemId, todoCheckBox } = props;
+   const { postTodo, color, created, title, id, todoItems, todoList, nextItemId, todoCheckBox } = props;
 
    const todos = todoItems.map((item, index) => {
       if (
@@ -30,6 +31,24 @@ function TodoGroup(props) {
       return null;
    });
 
+   const apiPostTodo = (groupId, item) => {
+      const group = {
+         id: id,
+         sortByColor: null,
+         sortByCreated: null,
+         color: color,
+         title: title,
+         created: created,
+         todoList: todoList,
+      };
+
+      if (group.id === groupId) {
+         const { todoList } = group;
+         const updatedGroup = { ...group, todoList: [...todoList, item] };
+         postTodo(group.id, updatedGroup);
+      }
+   };
+
    return (
       <div className="todoGroup">
          <div className="titleDateContainer" style={{ borderTopColor: color }}>
@@ -39,7 +58,7 @@ function TodoGroup(props) {
 
          <div className="itemsContainer">{todos}</div>
 
-         <AddTodo id={id} nextItemId={nextItemId} />
+         <AddTodo id={id} nextItemId={nextItemId} apiPostTodo={apiPostTodo} />
       </div>
    );
 }
@@ -50,12 +69,18 @@ TodoGroup.propTypes = {
    title: PropTypes.string,
    id: PropTypes.number,
    todoItems: PropTypes.array,
+   todoList: PropTypes.array,
    nextItemId: PropTypes.number,
    todoCheckBox: PropTypes.func,
+   postTodo: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
    return state;
 };
 
-export default connect(mapStateToProps)(TodoGroup);
+const mapDispatchToProps = (dispatch) => ({
+   postTodo: (id, group) => dispatch(postTodo(id, group)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoGroup);

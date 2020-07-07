@@ -42,16 +42,22 @@ export function postGroup(group) {
    return fetchFromApi(BASE_URL + GROUPS_ENDPOINT, initParams, requestGroups, addNewGroup, receiveGroupsError);
 }
 
-export function postTodo(id, group) {
+export function postTodo(id, todo) {
    const initParams = {
       method: "PUT",
       headers: {
          "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: id, todoList: group }),
+      body: JSON.stringify(todo),
    };
 
-   return fetchFromApi(BASE_URL + GROUPS_ENDPOINT, initParams, requestGroups, addNewGroup, receiveGroupsError);
+   return fetchFromApi(
+      BASE_URL + GROUPS_ENDPOINT + `/${id}`,
+      initParams,
+      requestGroups,
+      addNewGroup,
+      receiveGroupsError
+   );
 }
 
 export function fetchFromApi(url, param, requestCallback, successCallback, errorCallback) {
