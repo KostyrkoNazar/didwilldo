@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logout, todoCheckBox, filterTodoByDone, searchGroupByColor } from "../actions";
+import { logout, filterTodoByDone, searchGroupByColor } from "../actions";
 
 import FilterByDate from "../FilterByDate/FilterByDate";
 import AddGroup from "../AddGroup/AddGroup";
@@ -16,7 +16,7 @@ import { fetchGroups } from "../api";
 import "./styles.css";
 
 function Dashboard(props) {
-   const { requestGroups, logout, groups, searchGroupByColor, todoCheckBox, filterTodoByDone } = props;
+   const { requestGroups, logout, groups, searchGroupByColor, filterTodoByDone } = props;
 
    const [searchValue, setSearchValue] = useState("");
 
@@ -53,20 +53,12 @@ function Dashboard(props) {
          <AddGroup nextGroupId={groups.length + 1} />
 
          <div className="dashboardTodoGroup">
-            {groups.map((group, index) => {
+            {groups.map((group) => {
                if (
                   (group.sortByColor === null || group.sortByColor === true) &&
                   (group.sortByCreated === null || group.sortByCreated === true)
                ) {
-                  return (
-                     <TodoGroup
-                        key={index + " " + group.id}
-                        {...group}
-                        todoItems={group.todoList}
-                        nextItemId={group.todoList.length + 1}
-                        todoCheckBox={todoCheckBox}
-                     />
-                  );
+                  return <TodoGroup key={group.id} {...group} />;
                }
                return null;
             })}
@@ -93,7 +85,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
    requestGroups: () => dispatch(fetchGroups()),
    searchGroupByColor: (searchColor) => dispatch(searchGroupByColor(searchColor)),
-   todoCheckBox: (groupId, todoId, done) => dispatch(todoCheckBox(groupId, todoId, done)),
    filterTodoByDone: (completed) => dispatch(filterTodoByDone(completed)),
    logout: () => dispatch(logout()),
 });

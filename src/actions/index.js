@@ -48,7 +48,7 @@ export const filterTodoByDone = (completed) => {
    };
 };
 
-export const todoCheckBox = (groupId, todoId, done) => {
+export const checkTodo = (groupId, todoId, done) => {
    return {
       type: CHECK_TODO,
       payLoad: { groupId, todoId, done },

@@ -1,5 +1,12 @@
 import { getTestUserToken, updateUserToken } from "./utils";
-import { receiveGroups, receiveGroupsError, requestGroups, addNewGroup, addNewTodo } from "./actions/async";
+import {
+   receiveGroups,
+   receiveGroupsError,
+   requestGroups,
+   addNewGroup,
+   addNewTodo,
+   updateGroupById,
+} from "./actions/async";
 
 const JSON_SERVER_PORT = "3100";
 const BASE_URL = `http://localhost:${JSON_SERVER_PORT}`;
@@ -54,7 +61,7 @@ export function postTodo(id, todo) {
    return fetchFromApi(
       BASE_URL + GROUPS_ENDPOINT + `/${id}`,
       initParams,
-      requestGroups,
+      updateGroupById,
       addNewTodo,
       receiveGroupsError
    );

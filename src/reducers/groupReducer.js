@@ -70,10 +70,11 @@ const groupReducer = (
       case actions.SEARCH_GROUP_BY_COLOR:
          return { ...state, groups: groupListFilterFunction(groups, searchGroupByColor, payLoad.searchColor) };
       case asyncActions.ADD_NEW_TODO: {
-         const index = groups.findIndex((group) => group.id === payLoad.id);
-         groups[index].todoList.push(payLoad.newTodo);
-
-         return { ...state };
+         const { updatedGroup } = payLoad;
+         const index = groups.findIndex((group) => group.id === updatedGroup.id);
+         groups[index].todoList = updatedGroup.todoList;
+         debugger;
+         return { ...state, groups };
       }
       case actions.CHECK_TODO: {
          const groupIndex = groups.findIndex((group) => group.id === payLoad.groupId);
@@ -98,6 +99,9 @@ const groupReducer = (
       }
       case asyncActions.RECEIVE_GROUPS_ERROR: {
          return { ...state, error: payLoad.error, loading: false };
+      }
+      case asyncActions.UPDATE_GROUP_BY_ID: {
+         return { ...state, loading: true };
       }
       default:
          return state;

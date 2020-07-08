@@ -3,11 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import "./styles.css";
-import { addNewTodo } from "../actions/async";
-//import { postTodo } from "../api";
 
 function AddTodo(props) {
-   const { id, addNewTodo, nextItemId, apiPostTodo } = props;
+   const { id, nextItemId, apiPostTodo } = props;
 
    const [title, setTitle] = useState("");
 
@@ -20,7 +18,7 @@ function AddTodo(props) {
             title: title,
             done: false,
          };
-         addNewTodo(id, item);
+
          apiPostTodo(id, item);
          setTitle("");
       }
@@ -46,7 +44,6 @@ function AddTodo(props) {
 }
 
 AddTodo.propTypes = {
-   addNewTodo: PropTypes.func,
    id: PropTypes.number,
    nextItemId: PropTypes.number,
    apiPostTodo: PropTypes.func,
@@ -56,8 +53,4 @@ const mapStateToProps = (state) => {
    return state;
 };
 
-const mapDispatchToProps = (dispatch) => ({
-   addNewTodo: (id, newTodo) => dispatch(addNewTodo(id, newTodo)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddTodo);
+export default connect(mapStateToProps)(AddTodo);

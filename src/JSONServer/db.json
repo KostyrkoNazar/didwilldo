@@ -34,7 +34,29 @@
       "color": "orange",
       "title": "Family trip",
       "created": "05-07-2020",
-      "todoList": []
+      "todoList": [
+        {
+          "sortByTitle": null,
+          "sortByDone": null,
+          "id": 0,
+          "title": "New Todo",
+          "done": false
+        },
+        {
+          "sortByTitle": null,
+          "sortByDone": null,
+          "id": 1,
+          "title": "Newer TOdo",
+          "done": false
+        },
+        {
+          "sortByTitle": null,
+          "sortByDone": null,
+          "id": 2,
+          "title": "123",
+          "done": false
+        }
+      ]
     },
     {
       "sortByTitle": null,
