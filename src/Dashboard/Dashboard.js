@@ -28,7 +28,7 @@ function Dashboard(props) {
 
    useEffect(() => {
       requestGroups();
-   }, []);
+   }, [requestGroups]);
 
    return (
       <div className="dashboard">
@@ -63,7 +63,7 @@ function Dashboard(props) {
                         key={index + " " + group.id}
                         {...group}
                         todoItems={group.todoList}
-                        nextItemId={group.todoList.length}
+                        nextItemId={group.todoList.length + 1}
                         todoCheckBox={todoCheckBox}
                      />
                   );

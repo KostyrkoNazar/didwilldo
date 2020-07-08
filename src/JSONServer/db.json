@@ -4,122 +4,44 @@
       "id": 1,
       "sortByColor": null,
       "sortByCreated": null,
-      "color": "aqua",
-      "title": "Loaded from JSON server!",
-      "created": "16-04-2020",
+      "color": "orange",
+      "title": "Family trip",
+      "created": "05-07-2020",
       "todoList": []
     },
     {
       "id": 2,
       "sortByColor": null,
       "sortByCreated": null,
-      "color": "aqua",
-      "title": "Shopping",
-      "created": "15-04-2020",
-      "todoList": [
-        {
-          "sortByTitle": null,
-          "sortByDone": null,
-          "id": 2,
-          "title": " vbn vbn vbnvbnvbnvbn",
-          "done": false
-        },
-        {
-          "sortByTitle": null,
-          "sortByDone": null,
-          "id": 1,
-          "title": "xcvbxcvbxc54645634",
-          "done": false
-        },
-        {
-          "sortByTitle": null,
-          "sortByDone": null,
-          "id": 2,
-          "title": "67567567",
-          "done": false
-        },
-        {
-          "sortByTitle": null,
-          "sortByDone": null,
-          "id": 2,
-          "title": "67567567",
-          "done": false
-        },
-        {
-          "sortByTitle": null,
-          "sortByDone": null,
-          "id": 4,
-          "title": "ghjlkghjkghj657846785673fghjfgh",
-          "done": false
-        },
-        {
-          "sortByTitle": null,
-          "sortByDone": null,
-          "id": 4,
-          "title": "ghjlkghjkghj657846785673fghjfgh",
-          "done": false
-        }
-      ]
+      "color": "orange",
+      "title": "Family trip",
+      "created": "05-07-2020",
+      "todoList": []
     },
     {
       "id": 3,
       "sortByColor": null,
       "sortByCreated": null,
       "color": "orange",
-      "title": "Shop todo's",
-      "created": "12-04-2020",
+      "title": "Family trip",
+      "created": "05-07-2020",
       "todoList": []
     },
     {
       "id": 4,
       "sortByColor": null,
       "sortByCreated": null,
-      "color": "blue",
-      "title": "Work out todo's",
-      "created": "16-04-2020",
-      "todoList": []
-    },
-    {
-      "id": 5,
-      "sortByColor": null,
-      "sortByCreated": null,
-      "color": "red",
-      "title": "reading",
-      "created": "15-04-2020",
-      "todoList": []
-    },
-    {
-      "id": 6,
-      "sortByColor": null,
-      "sortByCreated": null,
-      "color": "black",
-      "title": "Cooking",
-      "created": "12-04-2020",
-      "todoList": []
-    },
-    {
-      "id": 6,
-      "sortByColor": null,
-      "sortByCreated": null,
       "color": "orange",
       "title": "Family trip",
       "created": "05-07-2020",
-      "todoList": [
-        {
-          "sortByTitle": null,
-          "sortByDone": null,
-          "id": 0,
-          "title": "ghjkghjk89678967896789",
-          "done": false
-        },
-        {
-          "sortByTitle": null,
-          "sortByDone": null,
-          "id": 0,
-          "title": "ghjkghjk89678967896789",
-          "done": false
-        }
-      ]
+      "todoList": []
+    },
+    {
+      "sortByTitle": null,
+      "sortByDone": null,
+      "id": 5,
+      "title": "kl",
+      "done": false
     }
   ]
 }

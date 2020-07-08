@@ -9,7 +9,6 @@ import { postTodo } from "../api";
 
 function TodoGroup(props) {
    const { postTodo, color, created, title, id, todoItems, todoList, nextItemId, todoCheckBox } = props;
-
    const todos = todoItems.map((item, index) => {
       if (
          (item.sortByDone === true || item.sortByDone === null) &&
@@ -44,8 +43,9 @@ function TodoGroup(props) {
 
       if (group.id === groupId) {
          const { todoList } = group;
-         const updatedGroup = { ...group, todoList: [...todoList, item] };
-         postTodo(group.id, updatedGroup);
+         //const updatedGroup = { ...group, todoList: [...todoList, item] };
+         todoList.push(item);
+         postTodo(group.id, item);
       }
    };
 
@@ -80,7 +80,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-   postTodo: (id, group) => dispatch(postTodo(id, group)),
+   postTodo: (id, todo) => dispatch(postTodo(id, todo)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoGroup);

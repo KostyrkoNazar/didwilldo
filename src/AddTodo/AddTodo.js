@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import "./styles.css";
 import { addNewTodo } from "../actions/async";
+//import { postTodo } from "../api";
 
 function AddTodo(props) {
    const { id, addNewTodo, nextItemId, apiPostTodo } = props;

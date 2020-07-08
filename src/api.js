@@ -55,7 +55,7 @@ export function postTodo(id, todo) {
       BASE_URL + GROUPS_ENDPOINT + `/${id}`,
       initParams,
       requestGroups,
-      addNewGroup,
+      addNewTodo,
       receiveGroupsError
    );
 }

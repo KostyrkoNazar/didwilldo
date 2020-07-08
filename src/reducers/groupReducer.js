@@ -73,7 +73,7 @@ const groupReducer = (
          const index = groups.findIndex((group) => group.id === payLoad.id);
          groups[index].todoList.push(payLoad.newTodo);
 
-         return { ...state, groups };
+         return { ...state };
       }
       case actions.CHECK_TODO: {
          const groupIndex = groups.findIndex((group) => group.id === payLoad.groupId);
